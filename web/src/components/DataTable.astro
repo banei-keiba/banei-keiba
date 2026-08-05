@@ -1,0 +1,37 @@
+---
+/* すべての図版に付ける表ビュー。ツールチップだけで値を読ませない（値を閉じ込めない）。 */
+interface Column {
+  key: string;
+  label: string;
+  format?: (v: number) => string;
+}
+
+interface Props {
+  data: Record<string, number>[];
+  columns: Column[];
+  summary?: string;
+}
+
+const { data, columns, summary = '数値を表で見る' } = Astro.props;
+const fmt = (v: number) => (v === null || v === undefined ? '—' : v.toLocaleString('ja-JP'));
+---
+
+<details class="table">
+  <summary>{summary}</summary>
+  <table>
+    <thead>
+      <tr>{columns.map((c) => <th scope="col">{c.label}</th>)}</tr>
+    </thead>
+    <tbody>
+      {
+        data.map((row) => (
+          <tr>
+            {columns.map((c) => (
+              <td>{c.format ? c.format(row[c.key]) : fmt(row[c.key])}</td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</details>

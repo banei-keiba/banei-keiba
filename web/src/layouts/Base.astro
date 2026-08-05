@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import summary from '../data/summary.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /* MDX からレイアウトとして使うとき、frontmatter はこのキーにまとめて渡ってくる。
+     .astro から直接 props で渡す場合と両方を受けられるようにしている。 */
+  frontmatter?: { title?: string; description?: string };
+}
+
+const { frontmatter } = Astro.props;
+const title = Astro.props.title ?? frontmatter?.title ?? '';
+const description = Astro.props.description ?? frontmatter?.description;
+const siteName = 'ばんえいデータノート';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {/* 独自ドメインが決まるまでは検索避け。pages.dev が先にインデックスされると
+        移行後に重複コンテンツ扱いになるため。ドメイン確定時にこの行を外す。 */}
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/">{siteName}</a>
+        <nav>
+          <a href="/">ホーム</a>
+          <a href="/data/">データについて</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <slot />
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <p>
+          ばんえい競馬（帯広）の公開データを集計したものです。個別レースの着順表や
+          オッズ一覧は掲載していません。出典と免責は
+          <a href="/data/">データについて</a> を参照してください。
+        </p>
+        <p>
+          集計期間 {summary.period_start} 〜 {summary.period_end} ／
+          {summary.n_races.toLocaleString('ja-JP')} レース
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

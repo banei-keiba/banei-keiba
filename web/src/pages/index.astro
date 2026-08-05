@@ -1,0 +1,115 @@
+---
+import ColumnChart from '../components/ColumnChart.astro';
+import DataTable from '../components/DataTable.astro';
+import LineChart from '../components/LineChart.astro';
+import Base from '../layouts/Base.astro';
+import moisture from '../data/moisture_vs_time.json';
+import popularity from '../data/popularity_performance.json';
+import summary from '../data/summary.json';
+
+const n = (v: number) => v.toLocaleString('ja-JP');
+const driest = moisture[0];
+const wettest = moisture[moisture.length - 1];
+const spread = (driest.avg_win_sec - wettest.avg_win_sec).toFixed(1);
+---
+
+<Base
+  title="ばんえいデータノート"
+  description="ばんえい競馬（帯広）の19年分のレースデータを集計し、分かったことを記事にしています。"
+>
+  <h1>ばんえいデータノート</h1>
+  <p class="lede">
+    ばんえい競馬（帯広）の {summary.period_start.slice(0, 4)} 年以降のレース記録を集計して、
+    データから読み取れることを記事にしています。
+  </p>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">レース数</div>
+      <div class="value">{n(summary.n_races)}</div>
+    </div>
+    <div class="tile">
+      <div class="label">出走記録</div>
+      <div class="value">{n(summary.n_runs)}</div>
+    </div>
+    <div class="tile">
+      <div class="label">登場する馬</div>
+      <div class="value">{n(summary.n_horses)}<span class="unit">頭</span></div>
+    </div>
+    <div class="tile">
+      <div class="label">集計期間</div>
+      <div class="value" style="font-size:1rem">
+        {summary.period_start}<br />〜 {summary.period_end}
+      </div>
+    </div>
+  </div>
+
+  <h2>馬場水分でタイムが 40 秒変わる</h2>
+  <p>
+    ばんえい競馬は 1 頭ずつソリを曳いて 200m の直線を進みます。砂に水分が多いほど
+    馬場は締まってソリが滑りやすくなり、勝ちタイムは大きく短くなります。
+    水分 {driest.moisture} の日と {wettest.moisture} の日では平均 {spread} 秒の差があります。
+  </p>
+
+  <LineChart
+    data={moisture}
+    xKey="moisture"
+    yKey="avg_win_sec"
+    title="馬場水分ごとの平均勝ちタイム"
+    subtitle={`勝ち馬 ${n(moisture.reduce((s, d) => s + d.n_wins, 0))} 頭ぶんの平均`}
+    xUnit="馬場水分（%）"
+    yUnit="秒"
+    tooltip={(d) => `水分 ${d.moisture}%：平均 ${d.avg_win_sec} 秒（${n(d.n_wins)} 頭）`}
+    caption="水分が上がるほど平均勝ちタイムは短くなる。両端のみ数値を表示。"
+  />
+  <DataTable
+    data={moisture}
+    columns={[
+      { key: 'moisture', label: '馬場水分（%）' },
+      { key: 'n_wins', label: '勝ち馬数' },
+      { key: 'avg_win_sec', label: '平均勝ちタイム（秒）' },
+      { key: 'fastest_sec', label: '最速（秒）' },
+    ]}
+  />
+  <p><a href="/articles/moisture-and-time/">詳しく読む →</a></p>
+
+  <h2>人気は素直に当たる</h2>
+  <p>
+    1 番人気の勝率は {popularity[0].win_rate}% で、人気順にきれいに下がっていきます。
+    市場の評価はよく当たっているということです。
+  </p>
+
+  <ColumnChart
+    data={popularity}
+    xKey="popularity"
+    yKey="win_rate"
+    title="人気別の勝率"
+    subtitle={`${n(popularity.reduce((s, d) => s + d.n, 0))} 出走ぶん`}
+    xUnit="人気"
+    yUnit="勝率（%）"
+    tooltip={(d) => `${d.popularity}番人気：勝率 ${d.win_rate}%（${n(d.n)} 出走）`}
+    caption="両端のみ数値を表示。すべての値は表ビューにあります。"
+  />
+  <DataTable
+    data={popularity}
+    columns={[
+      { key: 'popularity', label: '人気' },
+      { key: 'n', label: '出走数' },
+      { key: 'win_rate', label: '勝率（%）' },
+      { key: 'roi', label: '単勝回収率（%）' },
+    ]}
+  />
+  <p><a href="/articles/popularity-and-return/">詳しく読む →</a></p>
+
+  <h2>記事</h2>
+  <ul class="articles">
+    <li>
+      <a href="/articles/moisture-and-time/">馬場水分と勝ちタイム</a>
+      <p>水分 {driest.moisture}% と {wettest.moisture}% で平均 {spread} 秒の差。なぜ水を撒くと速くなるのか。</p>
+    </li>
+    <li>
+      <a href="/articles/popularity-and-return/">人気と回収率</a>
+      <p>よく当たる市場なのに回収率が 100% を超えない理由を、19 年分の数字で確かめます。</p>
+    </li>
+  </ul>
+</Base>

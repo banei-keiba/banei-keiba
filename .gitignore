@@ -24,3 +24,6 @@ dist/
 
 # wrangler がカレントに作るキャッシュ（アカウント ID を含む）
 .wrangler/
+
+# Astro のビルド成果物
+web/dist/

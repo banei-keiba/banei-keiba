@@ -1,0 +1,88 @@
+---
+import DataTable from '../components/DataTable.astro';
+import LineChart from '../components/LineChart.astro';
+import Base from '../layouts/Base.astro';
+import activity from '../data/monthly_activity.json';
+import summary from '../data/summary.json';
+
+const n = (v: number) => v.toLocaleString('ja-JP');
+const generated = summary.generated_at.replace('T', ' ').replace('+00:00', ' UTC');
+---
+
+<Base title="データについて" description="集計に使ったデータの出典、集計方法、掲載方針、免責事項。">
+  <h1>データについて</h1>
+  <p class="lede">
+    このサイトに載っている数字が、どこから来て、何をしていないかを説明します。
+  </p>
+
+  <h2>出典</h2>
+  <p>
+    レース結果は<a href="https://www.keiba.go.jp/" rel="noopener">地方競馬情報サイト（keiba.go.jp）</a>、
+    確定オッズは<a href="https://www.oddspark.com/keiba/" rel="noopener">オッズパーク</a>で
+    公開されている情報を集計しています。対象はばんえい競馬（帯広）のみです。
+  </p>
+  <p>
+    データの取得は 1 秒あたり 1 リクエストを上限とし、取得済みのレースは再取得しません。
+  </p>
+
+  <h2>掲載方針</h2>
+  <p>
+    このサイトでは<strong>個別レースの着順表・オッズ一覧・払戻金一覧を掲載していません</strong>。
+    載せているのは集計値と、そこから読み取れることだけです。
+  </p>
+  <p>
+    判断の基準は「このサイトのページを全部集めたら、元のデータベースが復元できてしまうか」
+    です。復元できてしまうなら、それは集計ではなく生データの再配布にあたると考えています。
+  </p>
+  <div class="note">
+    <p>
+      この方針は運用でも担保しています。公開用の数値は集計処理を通ったものだけが出力される
+      仕組みになっていて、個体を特定できる列（レース日・レース番号・馬名など）が混ざった場合や、
+      集計の単位が小さすぎる場合は、書き出し自体が停止します。
+    </p>
+  </div>
+
+  <h2>データの厚み</h2>
+  <p>
+    {summary.period_start} から {summary.period_end} までの
+    {n(summary.n_races)} レース、{n(summary.n_runs)} 出走記録を集計しています。
+    登場する馬は {n(summary.n_horses)} 頭、騎手は {summary.n_jockeys} 人、
+    調教師は {summary.n_trainers} 人です。
+  </p>
+
+  <LineChart
+    data={activity}
+    xKey="year"
+    yKey="n_races"
+    title="年ごとのレース数"
+    subtitle="集計に含まれるレース数の推移"
+    xUnit="年"
+    yUnit="レース"
+    tooltip={(d) => `${d.year}年：${n(d.n_races)} レース`}
+    caption="最初と最後の年は年度途中のため少なくなっています。"
+  />
+  <DataTable
+    data={activity}
+    columns={[
+      { key: 'year', label: '年' },
+      { key: 'n_races', label: 'レース数' },
+    ]}
+  />
+
+  <h2>更新</h2>
+  <p>
+    レース結果は毎日自動で取り込んでいます。このページの数値は
+    <strong>{generated}</strong> 時点のものです。
+  </p>
+
+  <h2>免責</h2>
+  <p>
+    掲載している数値は過去の記録を集計したものであり、<strong>将来の結果を予測するもの
+    ではありません</strong>。馬券の的中や利益を保証するものでもありません。
+    馬券の購入はご自身の判断と責任で行ってください。
+  </p>
+  <p>
+    集計や表示に誤りが含まれる可能性があります。正確な情報は主催者の公式発表を
+    ご確認ください。
+  </p>
+</Base>

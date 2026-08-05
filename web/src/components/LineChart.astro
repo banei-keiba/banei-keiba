@@ -1,0 +1,108 @@
+---
+/* 順序のある数値軸に沿った推移を見せる単系列の折れ線。
+   単系列なので凡例は置かない（タイトルが何をプロットしているか言っている）。
+   値は端点だけ直接ラベルし、残りは軸と表ビューが担う。 */
+import { niceTicks } from '../lib/scale';
+
+interface Props {
+  data: Record<string, number>[];
+  xKey: string;
+  yKey: string;
+  title: string;
+  subtitle?: string;
+  caption?: string;
+  xUnit?: string;
+  yUnit?: string;
+  tooltip?: (row: Record<string, number>) => string;
+}
+
+const { data, xKey, yKey, title, subtitle, caption, xUnit = '', yUnit = '', tooltip } =
+  Astro.props;
+
+const W = 720;
+const H = 340;
+const M = { top: 36, right: 56, bottom: 44, left: 52 };
+const pw = W - M.left - M.right;
+const ph = H - M.top - M.bottom;
+
+const xs = data.map((d) => d[xKey]);
+const ys = data.map((d) => d[yKey]);
+const xMin = Math.min(...xs);
+const xMax = Math.max(...xs);
+const yTicks = niceTicks(Math.min(...ys), Math.max(...ys));
+const yMin = yTicks[0];
+const yMax = yTicks[yTicks.length - 1];
+
+const sx = (v: number) => M.left + ((v - xMin) / (xMax - xMin || 1)) * pw;
+const sy = (v: number) => M.top + ph - ((v - yMin) / (yMax - yMin || 1)) * ph;
+
+const points = data.map((d) => ({ ...d, cx: sx(d[xKey]), cy: sy(d[yKey]) }));
+const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.cx.toFixed(1)},${p.cy.toFixed(1)}`).join(' ');
+
+// 直接ラベルは端点のみ。全点に数値を置くと読まれない。
+const labelled = new Set([0, points.length - 1]);
+const titleId = `t-${title.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 12)}-${data.length}`;
+---
+
+<figure class="chart">
+  <p class="title">{title}</p>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby={titleId}>
+    <title id={titleId}>{title}</title>
+
+    {
+      yTicks.map((t) => (
+        <>
+          <line class="grid" x1={M.left} x2={M.left + pw} y1={sy(t)} y2={sy(t)} />
+          <text class="tick" x={M.left - 10} y={sy(t)} text-anchor="end" dominant-baseline="middle">
+            {t.toLocaleString('ja-JP')}
+          </text>
+        </>
+      ))
+    }
+
+    <line class="baseline" x1={M.left} x2={M.left + pw} y1={M.top + ph} y2={M.top + ph} />
+
+    {
+      data.map((d) => (
+        <text class="tick" x={sx(d[xKey])} y={M.top + ph + 20} text-anchor="middle">
+          {d[xKey].toLocaleString('ja-JP')}
+        </text>
+      ))
+    }
+
+    <text class="axis-label" x={M.left + pw / 2} y={H - 6} text-anchor="middle">{xUnit}</text>
+    {/* y 軸の単位は左端に寄せる。目盛りラベルの右端に置くと長い単位が画面外へ出る */}
+    <text class="axis-label" x="0" y="16">{yUnit}</text>
+
+    <path d={path} fill="none" stroke="var(--data)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+
+    {
+      points.map((p) => (
+        <g>
+          {/* リングは表面色。線と重なっても点が読める */}
+          <circle cx={p.cx} cy={p.cy} r="4" fill="var(--data)" stroke="var(--card)" stroke-width="2" />
+          <title>{tooltip ? tooltip(p) : `${p[xKey]}${xUnit} — ${p[yKey]}${yUnit}`}</title>
+        </g>
+      ))
+    }
+
+    {
+      points.map((p, i) =>
+        labelled.has(i) ? (
+          <text
+            class="point-label"
+            x={p.cx}
+            y={p.cy - 14}
+            text-anchor={i === 0 ? 'start' : 'end'}
+          >
+            {p[yKey].toLocaleString('ja-JP')}
+          </text>
+        ) : null,
+      )
+    }
+  </svg>
+
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

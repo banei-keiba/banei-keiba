@@ -1,0 +1,78 @@
+---
+layout: ../../layouts/Base.astro
+title: 馬場水分と勝ちタイム
+description: ばんえい競馬の勝ちタイムは馬場水分で40秒以上変わります。19年分のレース記録で確かめました。
+---
+
+import LineChart from '../../components/LineChart.astro';
+import DataTable from '../../components/DataTable.astro';
+import moisture from '../../data/moisture_vs_time.json';
+
+export const n = (v) => v.toLocaleString('ja-JP');
+export const driest = moisture[0];
+export const wettest = moisture[moisture.length - 1];
+
+# 馬場水分と勝ちタイム
+
+<p class="lede">
+ばんえい競馬でいちばん大きくタイムを動かすのは、馬でも騎手でもなく<strong>馬場の水分</strong>です。
+乾いた日と湿った日で、平均勝ちタイムは40秒以上違います。
+</p>
+
+## 馬場水分とは
+
+ばんえい競馬は、1頭ずつが鉄ソリを曳いて200メートルの直線コースを進む競走です。
+コースの途中には「障害」と呼ばれる2つの山があり、ここを越えられるかどうかが勝負を分けます。
+
+砂の水分量は開催ごとに測定・発表されていて、数値が大きいほど湿っています。
+乾いた砂はソリが沈んで抵抗が増え、湿って締まった砂はソリが滑ります。
+つまり<strong>水分が多いほど速い</strong>——これは体感的にも知られていますが、
+実際にどれくらい違うのかを数字で見てみます。
+
+<LineChart
+  data={moisture}
+  xKey="moisture"
+  yKey="avg_win_sec"
+  title="馬場水分ごとの平均勝ちタイム"
+  subtitle={`勝ち馬 ${n(moisture.reduce((s, d) => s + d.n_wins, 0))} 頭ぶんの平均`}
+  xUnit="馬場水分（%）"
+  yUnit="秒"
+  tooltip={(d) => `水分 ${d.moisture}%：平均 ${d.avg_win_sec} 秒（${n(d.n_wins)} 頭）`}
+  caption="両端のみ数値を表示。すべての値は下の表にあります。"
+/>
+
+<DataTable
+  data={moisture}
+  columns={[
+    { key: 'moisture', label: '馬場水分（%）' },
+    { key: 'n_wins', label: '勝ち馬数' },
+    { key: 'avg_win_sec', label: '平均勝ちタイム（秒）' },
+    { key: 'fastest_sec', label: '最速（秒）' },
+  ]}
+/>
+
+## 読み取れること
+
+水分 {driest.moisture}% の平均が {driest.avg_win_sec} 秒、
+水分 {wettest.moisture}% の平均が {wettest.avg_win_sec} 秒。
+その差は <strong>{(driest.avg_win_sec - wettest.avg_win_sec).toFixed(1)} 秒</strong>です。
+平均が2分前後の競走で40秒の差は、他の条件では作れない大きさです。
+
+もうひとつ目を引くのは、<strong>水分1〜2%あたりで平均がほぼ変わらない</strong>ことです。
+乾いた側では水分が増えてもタイムが縮まず、3%を超えたあたりから効き始めています。
+砂がある程度湿らないと締まらない、ということかもしれません。
+
+## 注意すべきこと
+
+これは<strong>平均の比較であって、因果の証明ではありません</strong>。
+馬場水分は天候と結びついています。雨の日は水分が上がりますが、同時に気温や出走馬の
+顔ぶれも変わります。水分だけを取り出した効果を測るには、他の条件を揃える必要があります。
+
+また、水分が高い日はサンプルが少なくなります。水分 {wettest.moisture}% の
+{n(wettest.n_wins)} 頭に対し、水分2%は {n(moisture[2].n_wins)} 頭です。
+右端ほど推定は不安定になります。
+
+<div class="note">
+このページの数値は、レース結果を集計したものです。個別レースの着順やオッズは掲載していません。
+集計方法と出典は <a href="/data/">データについて</a> を参照してください。
+</div>

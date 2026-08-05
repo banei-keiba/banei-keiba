@@ -1,0 +1,128 @@
+---
+/* 大小を比べる単系列の縦棒。1 系列 = 1 色（棒ごとに濃さを変えない。
+   長さで既に示している情報を色にも積むのは二重符号化）。
+   参照線を置く場合は必ずラベルを添える（色だけに意味を持たせない）。 */
+import { columnPath, niceTicks } from '../lib/scale';
+
+interface Props {
+  data: Record<string, number>[];
+  xKey: string;
+  yKey: string;
+  title: string;
+  subtitle?: string;
+  caption?: string;
+  xUnit?: string;
+  yUnit?: string;
+  refValue?: number;
+  refLabel?: string;
+  labelKeys?: number[];
+  tooltip?: (row: Record<string, number>) => string;
+}
+
+const {
+  data, xKey, yKey, title, subtitle, caption,
+  xUnit = '', yUnit = '', refValue, refLabel, labelKeys, tooltip,
+} = Astro.props;
+
+const W = 720;
+const H = 340;
+const M = { top: 40, right: 56, bottom: 44, left: 52 };
+const pw = W - M.left - M.right;
+const ph = H - M.top - M.bottom;
+
+const ys = data.map((d) => d[yKey]);
+const yTicks = niceTicks(0, Math.max(...ys, refValue ?? 0));
+const yMax = yTicks[yTicks.length - 1];
+const sy = (v: number) => M.top + ph - (v / (yMax || 1)) * ph;
+
+const band = pw / data.length;
+// 棒は 24px 上限。帯を埋めきらず、隣との間に必ず余白（2px 以上）を残す。
+const barW = Math.max(4, Math.min(24, band - 8));
+
+// 直接ラベルは端だけ。全部に置くと読まれない。
+const labelled = new Set(labelKeys ?? [0, data.length - 1]);
+const titleId = `c-${title.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 12)}-${data.length}`;
+---
+
+<figure class="chart">
+  <p class="title">{title}</p>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby={titleId}>
+    <title id={titleId}>{title}</title>
+
+    {
+      yTicks.map((t) => (
+        <>
+          <line class="grid" x1={M.left} x2={M.left + pw} y1={sy(t)} y2={sy(t)} />
+          <text class="tick" x={M.left - 10} y={sy(t)} text-anchor="end" dominant-baseline="middle">
+            {t.toLocaleString('ja-JP')}
+          </text>
+        </>
+      ))
+    }
+
+    {
+      data.map((d, i) => {
+        const x = M.left + band * i + (band - barW) / 2;
+        const y = sy(d[yKey]);
+        return (
+          <g>
+            <path d={columnPath(x, y, barW, M.top + ph - y)} fill="var(--data)" />
+            <title>{tooltip ? tooltip(d) : `${d[xKey]}${xUnit} — ${d[yKey]}${yUnit}`}</title>
+          </g>
+        );
+      })
+    }
+
+    {
+      data.map((d, i) =>
+        labelled.has(i) ? (
+          <text
+            class="point-label"
+            x={M.left + band * i + band / 2}
+            y={sy(d[yKey]) - 8}
+            text-anchor="middle"
+          >
+            {d[yKey].toLocaleString('ja-JP')}
+          </text>
+        ) : null,
+      )
+    }
+
+    <line class="baseline" x1={M.left} x2={M.left + pw} y1={M.top + ph} y2={M.top + ph} />
+
+    {
+      refValue !== undefined && (
+        <>
+          <line
+            x1={M.left}
+            x2={M.left + pw}
+            y1={sy(refValue)}
+            y2={sy(refValue)}
+            stroke="var(--accent)"
+            stroke-width="2"
+          />
+          {/* 参照線のラベルはプロット内側の右端へ。外に出すと画面外へはみ出す */}
+          <text class="point-label" x={M.left + pw - 4} y={sy(refValue) + 16} text-anchor="end">
+            {refLabel}
+          </text>
+        </>
+      )
+    }
+
+    {
+      data.map((d, i) => (
+        <text class="tick" x={M.left + band * i + band / 2} y={M.top + ph + 20} text-anchor="middle">
+          {d[xKey].toLocaleString('ja-JP')}
+        </text>
+      ))
+    }
+
+    <text class="axis-label" x={M.left + pw / 2} y={H - 6} text-anchor="middle">{xUnit}</text>
+    {/* y 軸の単位は左端に寄せる。目盛りラベルの右端に置くと長い単位が画面外へ出る */}
+    <text class="axis-label" x="0" y="16">{yUnit}</text>
+  </svg>
+
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

@@ -1,0 +1,311 @@
+/* 配色は既存の dashboard.html を踏襲している。
+   系列色 2 色（data / accent）は dataviz の検証スクリプトで両モードとも全チェック通過:
+     light  #00805C / #C13B2E  … CVD ΔE 8.2, 通常視 ΔE 26.5, 対背景コントラスト 3:1 以上
+     dark   #26A377 / #E25B44  … CVD ΔE 8.0（要二次符号化）, 通常視 ΔE 27.4
+   accent は系列としてではなく参照線（回収率100%）にのみ使い、必ずラベルを添える。
+   ref は意図的な無彩色で、de-emphasis 用の chrome。系列色ではない。 */
+
+:root {
+  color-scheme: light;
+  --surface: #f4f6f8;
+  --card: #fcfdfe;
+  --ink: #1c2b33;
+  --ink-2: #46595f;
+  --ink-3: #7a8b90;
+  --line: #dce3e7;
+  --data: #00805c;
+  --accent: #c13b2e;
+  --ref: #8fa0a6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --surface: #141b21;
+    --card: #1b242b;
+    --ink: #e8edef;
+    --ink-2: #aebdc2;
+    --ink-3: #74858b;
+    --line: #2c3840;
+    --data: #26a377;
+    --accent: #e25b44;
+    --ref: #5e7078;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --surface: #141b21;
+  --card: #1b242b;
+  --ink: #e8edef;
+  --ink-2: #aebdc2;
+  --ink-3: #74858b;
+  --line: #2c3840;
+  --data: #26a377;
+  --accent: #e25b44;
+  --ref: #5e7078;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+a {
+  color: var(--data);
+  text-underline-offset: 0.2em;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.4;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 3rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 1.0625rem;
+  margin: 2rem 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1.25rem;
+}
+
+.lede {
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+}
+
+.meta {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+  margin: 0 0 2rem;
+}
+
+header.site {
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+header.site .wrap {
+  padding: 1rem 1.25rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+header.site .brand {
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+header.site nav {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+footer.site {
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+footer.site .wrap {
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+/* --- 図版 --- */
+
+figure.chart {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem 1rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+figure.chart .title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 0.125rem;
+}
+
+figure.chart .subtitle {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+  margin: 0 0 0.75rem;
+}
+
+figure.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 20rem;
+}
+
+figure.chart figcaption {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+  margin-top: 0.5rem;
+}
+
+/* テキストは系列色をまとわない。識別は隣の色付きマークが担う。 */
+.tick,
+.axis-label,
+.point-label {
+  fill: var(--ink-3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.point-label {
+  fill: var(--ink-2);
+  font-weight: 600;
+}
+
+.grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.baseline {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+/* --- 表 --- */
+
+details.table {
+  margin: -0.5rem 0 2rem;
+}
+
+details.table summary {
+  cursor: pointer;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  padding: 0.25rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+th,
+td {
+  text-align: right;
+  padding: 0.375rem 0.625rem;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+thead th {
+  color: var(--ink-3);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- 数値タイル --- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.tile {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
+}
+
+.tile .label {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+.tile .value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tile .unit {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  margin-left: 0.125rem;
+}
+
+.note {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ref);
+  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.note p:last-child {
+  margin-bottom: 0;
+}
+
+ul.articles {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+ul.articles li {
+  border-top: 1px solid var(--line);
+  padding: 1rem 0;
+}
+
+ul.articles a {
+  font-weight: 600;
+  font-size: 1.0625rem;
+  text-decoration: none;
+}
+
+ul.articles p {
+  margin: 0.25rem 0 0;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}

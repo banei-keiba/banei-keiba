@@ -1,0 +1,97 @@
+---
+layout: ../../layouts/Base.astro
+title: 人気と回収率
+description: ばんえい競馬の人気別勝率と単勝回収率を19年分で集計しました。市場はよく当たりますが、回収率はどの人気でも100%に届きません。
+---
+
+import ColumnChart from '../../components/ColumnChart.astro';
+import DataTable from '../../components/DataTable.astro';
+import popularity from '../../data/popularity_performance.json';
+
+export const n = (v) => v.toLocaleString('ja-JP');
+export const best = [...popularity].sort((a, b) => b.roi - a.roi)[0];
+export const worst = [...popularity].sort((a, b) => a.roi - b.roi)[0];
+
+# 人気と回収率
+
+<p class="lede">
+「人気馬は強い」は正しい。ただし「人気馬を買えば儲かる」は正しくない。
+19年分の記録で、その両方を確かめます。
+</p>
+
+## 人気はよく当たっている
+
+単勝の人気順（＝オッズの低い順）に勝率を並べると、きれいな階段になります。
+
+<ColumnChart
+  data={popularity}
+  xKey="popularity"
+  yKey="win_rate"
+  title="人気別の勝率"
+  subtitle={`${n(popularity.reduce((s, d) => s + d.n, 0))} 出走ぶん`}
+  xUnit="人気"
+  yUnit="勝率（%）"
+  tooltip={(d) => `${d.popularity}番人気：勝率 ${d.win_rate}%（${n(d.n)} 出走）`}
+  caption="両端のみ数値を表示。順位が下がるほど勝率も下がる。"
+/>
+
+1番人気が {popularity[0].win_rate}%、2番人気が {popularity[1].win_rate}%、
+3番人気が {popularity[2].win_rate}% と、順位と勝率が逆転する箇所がありません。
+賭ける人たちの集合的な評価は、かなり正確に強さを言い当てています。
+
+## それでも回収率は100%に届かない
+
+では人気馬を買い続ければ勝てるのか。単勝の回収率（賭けた額に対する払戻の割合）を
+同じ人気別に見ます。
+
+<ColumnChart
+  data={popularity}
+  xKey="popularity"
+  yKey="roi"
+  title="人気別の単勝回収率"
+  subtitle="100% が収支トントンの線"
+  xUnit="人気"
+  yUnit="回収率（%）"
+  refValue={100}
+  refLabel="収支トントン"
+  tooltip={(d) => `${d.popularity}番人気：回収率 ${d.roi}%（${n(d.n)} 出走）`}
+  caption="どの人気帯でも 100% の線に届かない。"
+/>
+
+<DataTable
+  data={popularity}
+  columns={[
+    { key: 'popularity', label: '人気' },
+    { key: 'n', label: '出走数' },
+    { key: 'win_rate', label: '勝率（%）' },
+    { key: 'roi', label: '単勝回収率（%）' },
+  ]}
+/>
+
+いちばん高い {best.popularity} 番人気でも {best.roi}%、
+低いところでは {worst.roi}% です。**どの人気帯を選んでも、赤字の水準から抜け出せません。**
+
+## なぜそうなるのか
+
+理由ははっきりしていて、**控除率**です。売上の一定割合が主催者に取られ、残りが
+的中者に配分されます。つまり出走馬全部を買うと、必ず控除率のぶんだけ負けます。
+
+人気別の回収率がどれも似た水準に並ぶのは、市場がうまく機能している証拠でもあります。
+どこかの人気帯だけ回収率が高ければ、そこに賭けが集まってオッズが下がり、
+やがて水準が揃うからです。
+
+つまり<strong>「人気を見るだけ」では、控除率の壁は越えられません</strong>。
+越えるには、オッズに織り込まれていない情報を見つける必要があります。
+
+## 注意すべきこと
+
+回収率は的中したときの払戻に大きく左右されるため、**サンプルが少ない人気帯ほど
+数字が暴れます**。人気下位の帯では、1回の大穴で回収率が跳ね上がることがあります。
+
+またこの集計は単勝のみで、複勝や馬連などの他の券種は含みません。
+
+<div class="note">
+このページは過去の集計であり、将来の結果を予測するものではありません。
+馬券の的中を保証するものでもありません。出典と免責は
+<a href="/data/">データについて</a> を参照してください。
+</div>
