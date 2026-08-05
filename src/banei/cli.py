@@ -42,6 +42,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--db", default=ODDS_DB)
     _add_interval(p)
 
+    p = sub.add_parser("export", help="公開用の集計を JSON へ書き出す")
+    p.add_argument("--db", default=RACES_DB)
+    p.add_argument("--out-dir", default="web/src/data")
+
     p = sub.add_parser("validate", help="収集したデータを検証（異常があれば非ゼロ終了）")
     p.add_argument("--db", default=RACES_DB)
     p.add_argument("--odds-db", default=ODDS_DB)
@@ -59,6 +63,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
+
+    if args.command == "export":
+        from banei import export
+        export.run(args.db, args.out_dir)
+        return
 
     if args.command == "validate":
         from banei import validate
