@@ -1,0 +1,22 @@
+# スクレイピングした生データは公開しない（docs/architecture.md §3.4）
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+.astro/
+
+# ログ・認証情報
+*.log
+.env
+.env.*
+!.env.example
+.dev.vars
