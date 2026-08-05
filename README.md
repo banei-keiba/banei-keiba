@@ -104,12 +104,15 @@ gunzip data/banei.db.gz data/odds.db.gz
 
 検証を通ったデータだけが書き戻される。
 
-過去オッズのバックフィル（未取得 約 25,000 レース）は**手元から**行う。オッズパークは
-GitHub Actions の IP からのアクセスに HTTP 500 を返すため、Actions では完走できない。
+過去オッズのバックフィルは**手元から**行う。オッズパークには送信元ごとの累積クォータが
+あり、GitHub Actions の IP（全ユーザー共有）では枠が小さくて完走できないため。
 
 ```bash
-./scripts/backfill-local.sh 1000 1.0
+./scripts/backfill-local.sh 2000 1.0
 ```
+
+一度に欲張らず、実行の合間を空けること。連続して失敗した場合はスクレイパーが
+自分で中断し、そこまでの成果を保存して終了する。
 
 動作には `BACKUP_TOKEN` シークレットが必要（バックアップ用の非公開リポジトリへの
 Contents: Read and write 権限）。詳細は [docs/architecture.md](docs/architecture.md) の Phase 1 を参照。
