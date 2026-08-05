@@ -33,7 +33,7 @@
 | races | 33,493 | 2007-04-27 〜 2026-08-03 |
 | results | 307,849 | |
 | payouts | 331,427 | |
-| odds（単複） | 66,223 | |
+| odds（単複） | 76,477 | 8,277 レース分 |
 | combo_odds | 6,178 | **ほぼ未取得**。三連単は 1着馬ごとに 1 リクエスト必要で重い |
 | 開催日 | 2,905 | 年間 約150〜165日 |
 | 馬 | 5,501 | |
@@ -48,7 +48,7 @@
 
 1. **生データは公開側に渡さない**。Python の `export` を唯一の関門にし、そこを通った集計値だけがサイトに出る。この制約が結果的に構成を最も単純にしている。
 2. **Python はデータ層に閉じる**。収集・特徴量・学習・推論はすべて Python のまま。画面は TypeScript。両者の境界は「生成されたファイル（Parquet / JSON）」だけ。
-3. **サーバーもデータベースも持たない**。Cloudflare Pages（全ページ静的）+ R2 のみで、ドメイン代以外は実質 0 円。
+3. **サーバーもデータベースも持たない**。Cloudflare Pages（全ページ静的）だけで配信し、ドメイン代以外は実質 0 円。
 
 ---
 
@@ -68,9 +68,9 @@ flowchart LR
     B4["export<br/>Parquet / JSON"]
   end
 
-  subgraph store["ストレージ（Cloudflare）"]
-    C1["R2（非公開）<br/>生DBスナップショット"]
-    C2["R2（公開）<br/>集計済み Parquet"]
+  subgraph store["ストレージ"]
+    C1["private GitHub Releases<br/>生DBスナップショット"]
+    C2["Pages 静的アセット<br/>集計済み Parquet"]
   end
 
   subgraph web["配信（Cloudflare Pages・全て静的）"]
@@ -87,17 +87,17 @@ flowchart LR
   C2 --> W2
 ```
 
-**生データは C1（非公開 R2）で止まる。** 公開側に流れるのは B4（export）が集計した派生指標だけ、という一方通行を構造で担保する。
+**生データは C1（非公開リポジトリ）で止まる。** 公開側に流れるのは B4（export）が集計した派生指標だけ、という一方通行を構造で担保する。
 
 ### レイヤごとの責務
 
 | レイヤ | 技術 | 責務 |
 |---|---|---|
 | 収集 | Python (requests + BeautifulSoup) | HTML → SQLite。冪等・再開可能 |
-| 保存（正） | SQLite | 唯一の真実。Git には入れない（R2 にスナップショット） |
+| 保存（正） | SQLite | 唯一の真実。Git 履歴には入れない（非公開リリースアセットにスナップショット） |
 | 変換・学習 | Python (pandas + LightGBM) | 特徴量生成、学習、バックテスト、推論 |
 | エクスポート | Python → Parquet / JSON | **集計して**画面が読む形に固める。ここが Python と TS の唯一の境界であり、生データ／公開データの関門 |
-| 配信データ | Cloudflare R2 | 集計済み Parquet のみ（探索 UI 用） |
+| 配信データ | Pages 静的アセット | 集計済み Parquet のみ（探索 UI 用） |
 | 画面 | Astro (TypeScript) | 全ページ SSG。アイランドで部分的にインタラクティブ |
 
 ---
@@ -144,13 +144,13 @@ Next.js は「アプリ」寄り、Astro は「サイト」寄り。本件は明
 
 | 候補 | 評価 |
 |---|---|
-| **Cloudflare Pages** | **採用。** ①探索 UI 用 Parquet を置く **R2 がエグレス無料**で同一プラットフォームに揃う ②帯域の従量課金がない ③日本からのレイテンシが良い ④将来 SSR/D1 が必要になっても同じ場所で足せる |
-| GitHub Pages | 全静的なら成立するが、サイト 1GB・帯域 100GB/月の制約下に Parquet を同居させたくない。R2 相当がなく、逃げ道もない |
-| Vercel | Astro との相性は良いが、帯域が従量課金で、商用利用の線引きも気になる。R2 の統合が効かない |
+| **Cloudflare Pages** | **採用。** ①帯域の従量課金がない ②日本からのレイテンシが良い ③将来 SSR/D1/R2 が必要になっても同じ場所で足せる |
+| GitHub Pages | 全静的なら成立するが、帯域 100GB/月 の上限があり、逃げ道（SSR・オブジェクトストレージ）もない |
+| Vercel | Astro との相性は良いが、帯域が従量課金で、商用利用の線引きも気になる |
 | Fly.io / Cloud Run | サーバーを持つ構成なら候補。本件は持たないので不要（Phase 5 の推論ジョブでのみ Cloud Run Jobs を使う） |
 | VPS（さくら等） | 運用コストが人的にも金銭的にも見合わない |
 
-**Parquet を R2 に置くこと**が実質的な決め手。ここが無料かつ Range リクエスト対応であることが、Phase 3 の探索 UI をサーバーレスで成立させている。
+**帯域が従量課金でないこと**が実質的な決め手。Parquet を静的アセットとして置き、CDN が Range リクエストに応じることで、Phase 3 の探索 UI がサーバーレスで成立する。
 
 ### 3.4 データ公開方針が構成を決める
 
@@ -179,23 +179,24 @@ Next.js は「アプリ」寄り、Astro は「サイト」寄り。本件は明
 
 結果として、動く部品が「Python バッチ」と「静的サイト」の 2 つだけになる。運用の壊れどころが減り、コストも障害点も下がる。D1 は将来ページ数が上限に近づいたときの逃げ道として覚えておけばよく、初期構成には入れない。
 
-**探索 UI — R2 + Parquet + DuckDB-WASM**
+**探索 UI — Parquet + DuckDB-WASM**
 
 条件を変えながらのクロス集計は、サーバーを介さずブラウザ内で完結させる。
 
-- Python 側が**集計済み** Parquet を R2 に置く。ブラウザの DuckDB-WASM が HTTP Range で必要な部分だけ読む
+- Python 側が**集計済み** Parquet を Pages の静的アセットとして置く。ブラウザの DuckDB-WASM が HTTP Range で必要な部分だけ読む
+- 集計済みなので数 MB 程度に収まり、Pages の 1 ファイル 25MiB 制限に余裕で収まる（生データを出さない方針がここでも効いている）
 - ここに置くのは「馬 × 条件別の集計」「日次・条件別の集計」といった粒度で、明細行は含めない
 - サーバー費用ゼロ、同時アクセス数の心配もゼロ
 
 **Python 側で担保する**
 
-「何が公開されるか」を人間の注意力に依存させない。`src/banei/export/` を**唯一の出口**にし、そこを通ったものだけが公開 R2 と Astro のビルド入力になる。明細行を出力しようとしたらテストで落とす。
+「何が公開されるか」を人間の注意力に依存させない。`src/banei/export/` を**唯一の出口**にし、そこを通ったものだけが Astro のビルド入力になる。明細行を出力しようとしたらテストで落とす。
 
 ### 3.5 当日予想（Phase 5）の扱い
 
 学習済みモデルでの推論なので、エッジで動かす必要はない。
 
-- 開催日のみ、数分間隔で「出走表 + 直前オッズ」を取得 → 推論 → JSON を R2 に置く → 画面はそれを読むだけ
+- 開催日のみ、数分間隔で「出走表 + 直前オッズ」を取得 → 推論 → JSON を配信 → 画面はそれを読むだけ
 - 実行基盤は **Cloud Run Jobs**（GitHub Actions の cron は起動が数分〜十数分ずれるため、分単位の更新には不向き）
 - LightGBM を ONNX 化して Workers 上で推論する案は、複雑さに見合わないので採らない
 
@@ -228,7 +229,7 @@ banei-keiba/
 └── .github/workflows/
 ```
 
-**`.db` を Git に入れないこと。** 80MB のバイナリを毎日コミットすると履歴が数か月で数 GB になり、clone が現実的でなくなる。R2 にスナップショットを置き、`make pull-db` で取得する形にする。
+**`.db` を Git 履歴に入れないこと。** 80MB のバイナリを毎日コミットすると履歴が数か月で数 GB になり、clone が現実的でなくなる。非公開リポジトリのリリースアセットとして置く（`scripts/backup-db.sh`）。リリースアセットは git 履歴に含まれないため、日次で回してもリポジトリは肥大化しない。
 
 ---
 
@@ -236,10 +237,10 @@ banei-keiba/
 
 | ジョブ | 実行場所 | 頻度 | 内容 |
 |---|---|---|---|
-| 日次収集 | GitHub Actions cron | 毎日 JST 深夜 | scrape → 検証 → 集計 Parquet/JSON 出力 → R2 → Pages デプロイ |
+| 日次収集 | GitHub Actions cron | 毎日 JST 深夜 | scrape → 検証 → バックアップ → 集計 Parquet/JSON 出力 → Pages デプロイ |
 | モデル再学習 | GitHub Actions | 週次 | 学習 → バックテスト → 指標が悪化していなければモデル更新 |
 | 過去分バックフィル | ローカル手動 | 随時 | combo_odds の取得（重いので計画的に） |
-| 当日推論（Phase 5） | Cloud Run Jobs | 開催日 数分間隔 | 出走表 + 直前オッズ → 推論 → R2 |
+| 当日推論（Phase 5） | Cloud Run Jobs | 開催日 数分間隔 | 出走表 + 直前オッズ → 推論 → JSON 配信 |
 
 日次収集は「失敗しても翌日リトライで自動復旧する」設計にする（既存の `scraped_days` による取得済みスキップがそのまま活きる）。
 
@@ -256,12 +257,9 @@ banei-keiba/
 - [x] ruff / pytest / GitHub Actions の CI
 - [x] `data/` を gitignore、既存 DB を `data/` へ移行（全テーブル行数一致・integrity_check ok）
 - [x] 初回コミット + リポジトリを public 化（2026-08-06）
-- [ ] `.db` を非公開 R2 へ退避 ← **Cloudflare アカウント作成待ち**（Phase 0 の唯一の残件）
+- [x] `.db` を非公開リポジトリへ退避（2026-08-06）— 復元して内容ハッシュ一致まで検証済み
 
-**完了条件**: clone した状態から `uv run banei scrape --help` が動く → 達成
-
-現在ローカルの `data/` にしか生データが存在しない。**R2 への退避が済むまでは、この
-ディレクトリを消すと 19 年分（2007-04〜）の再取得が必要になる。**
+**Phase 0 完了。** 完了条件（clone した状態から `uv run banei scrape --help` が動く）を達成。
 
 #### 移行時に整理したこと
 
@@ -275,33 +273,48 @@ banei-keiba/
 
 - `dashboard.html`（静的ダッシュボード）— Phase 3 の配色・レイアウト参考として `web/` 側に取り込む予定。移行元ディレクトリを消す前に回収すること
 
-#### R2 への退避
+#### 生データのバックアップ
 
-`scripts/backup-db.sh` が退避を行う。`VACUUM INTO` で一貫性のあるスナップショットを取り
-（収集中でも安全）、integrity_check を通してから gzip して R2 へ置く。92MB → 22MB に圧縮される。
-
-初回のみ、Cloudflare アカウント作成後に:
+退避先は **[banei-keiba/banei-db-backup](https://github.com/banei-keiba/banei-db-backup)（private）** の
+リリースアセット。`scripts/backup-db.sh` が実行する。
 
 ```bash
-npx wrangler login
-npx wrangler r2 bucket create banei-private
+./scripts/backup-db.sh          # 退避
+./scripts/backup-db.sh --dry-run  # アップロードせず確認だけ
 ```
 
-以降は毎回これだけ:
+処理内容:
 
-```bash
-./scripts/backup-db.sh
-```
+1. `VACUUM INTO` でスナップショットを作る（収集中でも一貫性が保たれ、断片化も解消される）
+2. スナップショットに `integrity_check` を通す（壊れたものを退避しない）
+3. `gzip -9` で圧縮（92MB → 22MB）
+4. リリースアセットとして上げる
 
-キー構成:
-
-| キー | 用途 |
+| リリースタグ | 用途 |
 |---|---|
-| `latest/<name>.gz` | 毎回上書き。復元はここから取る |
-| `snapshots/<YYYY-MM>/<name>.gz` | 月内は上書き。取り違え時の巻き戻し用 |
+| `latest` | 毎回上書き。復元はここから取る |
+| `snapshot-YYYY-MM` | 月内は上書き。取り違え時の巻き戻し用 |
 
-**このバケットは public access を有効にしないこと。** 生データの置き場であり、公開用
-Parquet を置く別バケットと必ず分ける（§3.4 の一方通行を崩さないため）。
+リリースアセットは git 履歴に含まれないため、日次で回してもリポジトリは肥大化しない。
+
+復元:
+
+```bash
+gh release download latest --repo banei-keiba/banei-db-backup --dir data
+gunzip data/banei.db.gz data/odds.db.gz
+```
+
+**退避先は private のままにすること。** 生データを含むため、public にすると §3.4 の方針が
+壊れる。スクリプトは実行前に `isPrivate` を確認し、private でなければ中断する。
+
+##### なぜ R2 ではないのか
+
+当初は Cloudflare R2 を想定していたが、R2 はアカウントごとに有効化（checkout flow）が必要で、
+その際に支払い方法の登録を求められる。無料枠（10GB / Class A 100万・Class B 1000万 req/月・
+エグレス無料）で十分収まる規模ではあるが、カード登録を避けて private リリースアセットを選んだ。
+
+データは 22MB と小さく、日次で 4 アセットを差し替えるだけなので GitHub Releases で不足はない。
+将来 R2 を有効化した場合は `scripts/backup-db.sh` のアップロード部分だけ差し替えれば移行できる。
 
 復元:
 
@@ -329,7 +342,7 @@ gunzip data/banei.db.gz
 ### Phase 1 — パイプライン自動化（2〜3日）
 
 - [ ] パーサのゴールデンテスト（保存 HTML → 期待レコード）
-- [ ] 日次 cron ワークフロー: scrape → 検証 → R2
+- [ ] 日次 cron ワークフロー: scrape → 検証 → バックアップ
 - [ ] データ検証（レース数の異常、欠損、重複の検知 → 失敗させる）
 
 **完了条件**: 1 週間、手を触れずにデータが伸び続ける
@@ -346,7 +359,7 @@ gunzip data/banei.db.gz
 
 ### Phase 3 — 探索 UI（1週間）
 
-- [ ] Python 側で集計済み Parquet 出力 → 公開 R2
+- [ ] Python 側で集計済み Parquet 出力 → Pages 静的アセット
 - [ ] DuckDB-WASM でブラウザ内クロス集計（条件・期間・騎手などでフィルタ）
 - [ ] グラフの設計を統一（既存 `dashboard.html` の配色を踏襲する価値あり）
 
@@ -362,7 +375,7 @@ gunzip data/banei.db.gz
 
 - [ ] 出走表スクレイパー（未着手 — 現状は結果のみ）
 - [ ] リアルタイムオッズ取得
-- [ ] Cloud Run Jobs で推論 → R2 → 画面
+- [ ] Cloud Run Jobs で推論 → JSON → 画面
 - [ ] 予想の成績を公開で記録する（後付けで良く見せない仕組み）
 
 ### 並行してやる（フェーズ非依存）
@@ -376,7 +389,7 @@ gunzip data/banei.db.gz
 | 項目 | 月額 |
 |---|---|
 | Cloudflare Pages | 0 円（無料枠内） |
-| R2 | 0 円（10GB まで無料、本件 1GB 未満） |
+| バックアップ（private GitHub Releases） | 0 円 |
 | GitHub Actions | 0 円（public リポジトリのため無制限） |
 | ドメイン | 年 1,000〜2,000 円 |
 | Cloud Run Jobs（Phase 5） | 数十円〜 |
@@ -391,7 +404,7 @@ gunzip data/banei.db.gz
 
 - Cloudflare Pages 無料プランはファイル数 20,000 / ビルドタイムアウト 20分。約 6,000ページなら収まるが、**ページ数は上限に対する残り枠として意識しておく**（レース結果ページを作る方針に戻すと即座に破綻する）
 - GitHub Actions の cron は指定時刻から数分〜十数分ずれる。日次バッチなら無害だが、当日予想には使えない
-- public リポジトリなので、**シークレット（R2 のキー等）は必ず GitHub Secrets に置く**。`.env` をコミットしない仕組み（gitleaks 等）を CI に入れる
+- public リポジトリなので、**シークレットは必ず GitHub Secrets に置く**。`.env` をコミットしない仕組み（gitleaks 等）を CI に入れる
 
 **運用上の注意**
 

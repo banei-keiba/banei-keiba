@@ -20,3 +20,6 @@ dist/
 .env.*
 !.env.example
 .dev.vars
+
+# wrangler がカレントに作るキャッシュ（アカウント ID を含む）
+.wrangler/

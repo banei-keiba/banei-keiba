@@ -72,6 +72,24 @@ uv run banei backtest-ev
 
 確定オッズは払戻金（÷100）との照合で完全一致を検証済み。
 
+## バックアップ
+
+生データは非公開リポジトリのリリースアセットへ退避する。
+
+```bash
+./scripts/backup-db.sh
+```
+
+`VACUUM INTO` で一貫性のあるスナップショットを取り（収集中でも安全）、`integrity_check` を
+通してから gzip して上げる。92MB → 22MB。復元は:
+
+```bash
+gh release download latest --repo banei-keiba/banei-db-backup --dir data
+gunzip data/banei.db.gz data/odds.db.gz
+```
+
+詳細は [docs/architecture.md](docs/architecture.md) の Phase 0 を参照。
+
 ## 開発
 
 ```bash
