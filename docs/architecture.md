@@ -255,10 +255,13 @@ banei-keiba/
 - [x] `pyproject.toml` 作成、既存スクリプトを `src/banei/` へパッケージ化
 - [x] ruff / pytest / GitHub Actions の CI
 - [x] `data/` を gitignore、既存 DB を `data/` へ移行（全テーブル行数一致・integrity_check ok）
-- [ ] `.db` を非公開 R2 へ退避 ← **Cloudflare アカウント作成待ち**
-- [ ] 初回コミット + リポジトリを public 化 ← **`gh auth login` 待ち**
+- [x] 初回コミット + リポジトリを public 化（2026-08-06）
+- [ ] `.db` を非公開 R2 へ退避 ← **Cloudflare アカウント作成待ち**（Phase 0 の唯一の残件）
 
 **完了条件**: clone した状態から `uv run banei scrape --help` が動く → 達成
+
+現在ローカルの `data/` にしか生データが存在しない。**R2 への退避が済むまでは、この
+ディレクトリを消すと 19 年分（2007-04〜）の再取得が必要になる。**
 
 #### 移行時に整理したこと
 
