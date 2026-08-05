@@ -102,8 +102,14 @@ gunzip data/banei.db.gz data/odds.db.gz
 バックアップから DB を復元 → scrape → odds → validate → バックアップ
 ```
 
-検証を通ったデータだけが書き戻される。過去オッズのバックフィルは未取得が約 25,000 レース
-あるため、`backfill-odds` ワークフロー（手動実行）で少しずつ進める。
+検証を通ったデータだけが書き戻される。
+
+過去オッズのバックフィル（未取得 約 25,000 レース）は**手元から**行う。オッズパークは
+GitHub Actions の IP からのアクセスに HTTP 500 を返すため、Actions では完走できない。
+
+```bash
+./scripts/backfill-local.sh 1000 1.0
+```
 
 動作には `BACKUP_TOKEN` シークレットが必要（バックアップ用の非公開リポジトリへの
 Contents: Read and write 権限）。詳細は [docs/architecture.md](docs/architecture.md) の Phase 1 を参照。
