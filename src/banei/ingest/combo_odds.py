@@ -12,8 +12,10 @@
 
 import datetime as dt
 import re
+import sys
 from pathlib import Path
 
+import requests
 from bs4 import BeautifulSoup
 
 from banei.config import ODDS_DB, RACES_DB, REQUEST_INTERVAL
@@ -32,6 +34,9 @@ TYPES = {
 }
 
 DEFAULT_TYPES = "umatan,umaren,wide,sanrenpuku"
+
+# これだけ連続で失敗したら中断する。拒否されている状態で叩き続けても無意味なため。
+MAX_CONSECUTIVE_FAILURES = 20
 
 
 def norm_combo(nums: list[str], ordered: bool) -> str:
@@ -95,8 +100,13 @@ def scrape(
     races_db_path: Path | str = RACES_DB,
     db_path: Path | str = ODDS_DB,
     interval: float = REQUEST_INTERVAL,
+    max_consecutive_failures: int = MAX_CONSECUTIVE_FAILURES,
 ) -> None:
-    """組み合わせ券種の確定オッズを収集する。types はカンマ区切り（TYPES のキー）。"""
+    """組み合わせ券種の確定オッズを収集する。types はカンマ区切り（TYPES のキー）。
+
+    取得に失敗したレースは combo_meta を書かずに飛ばすので、次回の実行で再度対象になる。
+    連続で失敗したら中断する（例外ではなく正常終了。そこまでの成果を保存できるようにするため）。
+    """
     selected = [TYPES[t] for t in types.split(",")]
 
     db = connect(db_path, ODDS_SCHEMA)
@@ -119,18 +129,37 @@ def scrape(
     have = {tuple(r) for r in db.execute("SELECT race_date, race_no, bet_type FROM combo_meta")}
     fetcher = Fetcher(interval)
     done = 0
+    failed = 0
+    consecutive = 0
+    aborted = False
     for race_date, race_no in all_races:
+        if aborted:
+            break
         for t in selected:
             if (race_date, race_no, t["bet_type"]) in have:
                 continue
             base = dict(PARAMS_BASE, raceDy=race_date.replace("-", ""),
                         raceNb=race_no, betType=t["betType"])
             combos: dict[str, tuple[float, float | None]] = {}
-            if t["betType"] == "8":
-                for hn in horse_nos.get((race_date, race_no), []):
-                    combos.update(parse_sanrentan_page(fetcher.get(URL, dict(base, horseNb=hn))))
-            else:
-                combos = parse_matrix(fetcher.get(URL, base), t["ordered"])
+            try:
+                if t["betType"] == "8":
+                    for hn in horse_nos.get((race_date, race_no), []):
+                        combos.update(
+                            parse_sanrentan_page(fetcher.get(URL, dict(base, horseNb=hn))))
+                else:
+                    combos = parse_matrix(fetcher.get(URL, base), t["ordered"])
+            except requests.RequestException as e:
+                failed += 1
+                consecutive += 1
+                print(f"  {race_date} {race_no}R {t['bet_type']}: 取得失敗（スキップ）: {e}",
+                      file=sys.stderr)
+                if consecutive >= max_consecutive_failures:
+                    print(f"連続 {consecutive} 件失敗したため中断する。"
+                          "相手サイトが応答していない可能性が高い。", file=sys.stderr)
+                    aborted = True
+                    break
+                continue
+            consecutive = 0
             for comb, (o, omax) in combos.items():
                 db.execute("INSERT OR REPLACE INTO combo_odds VALUES (?,?,?,?,?,?)",
                            (race_date, race_no, t["bet_type"], comb, o, omax))
@@ -141,4 +170,4 @@ def scrape(
         done += 1
         if done % 100 == 0:
             print(f"{done}/{len(all_races)} レース完了（現在 {race_date}）", flush=True)
-    print(f"完了: {done} レース")
+    print(f"完了: {done} レース / 失敗 {failed} 件")

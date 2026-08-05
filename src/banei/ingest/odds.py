@@ -21,6 +21,10 @@ from banei.net import Fetcher
 URL = "https://www.oddspark.com/keiba/Odds.do"
 PARAMS_BASE = {"sponsorCd": "04", "opTrackCd": "03"}  # ばんえい帯広
 
+# これだけ連続で失敗したら中断する。相手サイトが 500 を返し続ける状態
+# （データセンターの IP からの連続アクセスで発生する）で叩き続けても無意味なため。
+MAX_CONSECUTIVE_FAILURES = 20
+
 
 def parse_float(text: str) -> float | None:
     m = re.search(r"\d+(?:\.\d+)?", text.replace(",", ""))
@@ -79,12 +83,17 @@ def scrape(
     interval: float = REQUEST_INTERVAL,
     since: str | None = None,
     limit: int | None = None,
+    max_consecutive_failures: int = MAX_CONSECUTIVE_FAILURES,
 ) -> None:
     """未取得レースの単複確定オッズを収集する。
 
     since / limit で 1 回の実行を区切れる。日次運用では since で直近に絞り、
     過去分のバックフィルは limit で 1 回あたりのリクエスト数を抑える
     （未取得が 2 万件以上あるため、無制限に回すと数時間かかる）。
+
+    連続で失敗したら中断する。相手サイトに拒否されている状態で叩き続けても
+    データは取れず、負荷をかけるだけになるため。中断は例外ではなく正常終了に
+    するので、呼び出し側（ワークフロー）はそこまでの成果を保存できる。
     """
     db = connect(db_path, ODDS_SCHEMA)
 
@@ -105,13 +114,23 @@ def scrape(
 
     fetcher = Fetcher(interval)
     done = 0
+    failed = 0
+    consecutive = 0
     for race_date, race_no in targets:
         params = dict(PARAMS_BASE, raceDy=race_date.replace("-", ""), raceNb=race_no)
         try:
             html = fetcher.get(URL, params)
         except requests.RequestException as e:
+            failed += 1
+            consecutive += 1
             print(f"  {race_date} {race_no}R: 取得失敗（スキップ）: {e}", file=sys.stderr)
+            # 失敗したレースは odds_meta を書かないので、次回の実行で再度対象になる
+            if consecutive >= max_consecutive_failures:
+                print(f"連続 {consecutive} 件失敗したため中断する。"
+                      "相手サイトが応答していない可能性が高い。", file=sys.stderr)
+                break
             continue
+        consecutive = 0
         rows = parse_odds_page(html)
         for r in rows:
             db.execute(
@@ -127,4 +146,4 @@ def scrape(
         done += 1
         if done % 100 == 0:
             print(f"{done}/{len(targets)} 完了（現在 {race_date}）", flush=True)
-    print(f"完了: {done} レース")
+    print(f"完了: 取得 {done} レース / 失敗 {failed} レース")
