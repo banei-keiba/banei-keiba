@@ -275,16 +275,40 @@ banei-keiba/
 
 - `dashboard.html`（静的ダッシュボード）— Phase 3 の配色・レイアウト参考として `web/` 側に取り込む予定。移行元ディレクトリを消す前に回収すること
 
-#### R2 への退避手順（アカウント作成後に実行）
+#### R2 への退避
+
+`scripts/backup-db.sh` が退避を行う。`VACUUM INTO` で一貫性のあるスナップショットを取り
+（収集中でも安全）、integrity_check を通してから gzip して R2 へ置く。92MB → 22MB に圧縮される。
+
+初回のみ、Cloudflare アカウント作成後に:
 
 ```bash
+npx wrangler login
 npx wrangler r2 bucket create banei-private
-npx wrangler r2 object put banei-private/banei.db --file data/banei.db --remote
-npx wrangler r2 object put banei-private/odds.db  --file data/odds.db  --remote
 ```
 
+以降は毎回これだけ:
+
+```bash
+./scripts/backup-db.sh
+```
+
+キー構成:
+
+| キー | 用途 |
+|---|---|
+| `latest/<name>.gz` | 毎回上書き。復元はここから取る |
+| `snapshots/<YYYY-MM>/<name>.gz` | 月内は上書き。取り違え時の巻き戻し用 |
+
 **このバケットは public access を有効にしないこと。** 生データの置き場であり、公開用
-Parquet を置く別バケットと必ず分ける。
+Parquet を置く別バケットと必ず分ける（§3.4 の一方通行を崩さないため）。
+
+復元:
+
+```bash
+npx wrangler r2 object get banei-private/latest/banei.db.gz --file data/banei.db.gz --remote
+gunzip data/banei.db.gz
+```
 
 #### 環境（2026-08-06 時点・インストール済み）
 
