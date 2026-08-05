@@ -1,0 +1,61 @@
+name: オッズのバックフィル
+
+# 過去分の確定オッズを少しずつ埋める。2026-08 時点で未取得が約 25,000 レースあり、
+# 1 リクエスト/秒なので一度には終わらない（全部で約 7 時間）。
+#
+# 日次収集と DB を共有するため concurrency group を揃えて直列化する。
+# 手動実行のみ。日次が安定してから schedule を足すか判断する。
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "1 回で取得するレース数の上限"
+        required: false
+        default: "3000"
+
+concurrency:
+  group: daily-ingest
+  cancel-in-progress: false
+
+env:
+  BACKUP_REPO: banei-keiba/banei-db-backup
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+
+      - run: uv sync
+
+      - name: バックアップから DB を復元
+        env:
+          GH_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: |
+          mkdir -p data
+          gh release download latest --repo "$BACKUP_REPO" --dir data
+          gunzip data/banei.db.gz data/odds.db.gz
+
+      - name: 未取得件数を表示
+        run: |
+          sqlite3 data/odds.db "ATTACH 'data/banei.db' AS b;
+            SELECT '未取得 ' ||
+              ((SELECT COUNT(*) FROM b.races) - (SELECT COUNT(*) FROM odds_meta)) || ' レース';"
+
+      - name: オッズを取得
+        env:
+          LIMIT: ${{ inputs.limit }}
+        run: uv run banei odds --limit "$LIMIT"
+
+      - name: 検証
+        run: uv run banei validate
+
+      - name: バックアップ
+        env:
+          GH_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: ./scripts/backup-db.sh

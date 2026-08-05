@@ -27,6 +27,10 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("odds", help="単勝・複勝の確定オッズを収集 (オッズパーク)")
     p.add_argument("--races-db", default=RACES_DB)
     p.add_argument("--db", default=ODDS_DB)
+    p.add_argument("--since", default=None, metavar="YYYY-MM-DD",
+                   help="この日以降のレースに限定")
+    p.add_argument("--limit", type=int, default=None,
+                   help="1 回の実行で取得するレース数の上限（バックフィル用）")
     _add_interval(p)
 
     p = sub.add_parser("combo-odds", help="組み合わせ券種の確定オッズを収集 (オッズパーク)")
@@ -37,6 +41,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--races-db", default=RACES_DB)
     p.add_argument("--db", default=ODDS_DB)
     _add_interval(p)
+
+    p = sub.add_parser("validate", help="収集したデータを検証（異常があれば非ゼロ終了）")
+    p.add_argument("--db", default=RACES_DB)
+    p.add_argument("--odds-db", default=ODDS_DB)
+    p.add_argument("--quiet", action="store_true", help="正常な項目を表示しない")
 
     p = sub.add_parser("backtest", help="払戻金ベースの戦略バックテスト")
     p.add_argument("--db", default=RACES_DB)
@@ -51,12 +60,16 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
 
+    if args.command == "validate":
+        from banei import validate
+        raise SystemExit(validate.run(args.db, args.odds_db, verbose=not args.quiet))
+
     if args.command == "scrape":
         from banei.ingest import results
         results.scrape(args.start, args.end, args.db, args.interval)
     elif args.command == "odds":
         from banei.ingest import odds
-        odds.scrape(args.races_db, args.db, args.interval)
+        odds.scrape(args.races_db, args.db, args.interval, args.since, args.limit)
     elif args.command == "combo-odds":
         from banei.ingest import combo_odds
         combo_odds.scrape(args.types, args.since, args.races_db, args.db, args.interval)

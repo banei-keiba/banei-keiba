@@ -37,7 +37,8 @@ uv sync
 uv run banei scrape --start 2024-01 --end 2024-12
 
 # 単勝・複勝の確定オッズを収集（オッズパーク）
-uv run banei odds
+uv run banei odds --since 2026-07-01   # 期間を絞る
+uv run banei odds --limit 3000         # 1回の取得件数を絞る（バックフィル用）
 
 # 組み合わせ券種の確定オッズ（三連単は重いので期間を絞る）
 uv run banei combo-odds --types umatan,umaren,wide,sanrenpuku
@@ -48,6 +49,9 @@ uv run banei backtest
 
 # 実オッズを使った EV バックテスト
 uv run banei backtest-ev
+
+# 収集したデータを検証（異常があれば非ゼロ終了）
+uv run banei validate
 ```
 
 いずれの収集コマンドも 1 リクエスト/秒で、取得済みのレースはスキップする。
@@ -89,6 +93,20 @@ gunzip data/banei.db.gz data/odds.db.gz
 ```
 
 詳細は [docs/architecture.md](docs/architecture.md) の Phase 0 を参照。
+
+## 自動収集
+
+`.github/workflows/daily.yml` が毎日 JST 02:00 に実行する。
+
+```
+バックアップから DB を復元 → scrape → odds → validate → バックアップ
+```
+
+検証を通ったデータだけが書き戻される。過去オッズのバックフィルは未取得が約 25,000 レース
+あるため、`backfill-odds` ワークフロー（手動実行）で少しずつ進める。
+
+動作には `BACKUP_TOKEN` シークレットが必要（バックアップ用の非公開リポジトリへの
+Contents: Read and write 権限）。詳細は [docs/architecture.md](docs/architecture.md) の Phase 1 を参照。
 
 ## 開発
 

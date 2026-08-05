@@ -77,16 +77,30 @@ def scrape(
     races_db_path: Path | str = RACES_DB,
     db_path: Path | str = ODDS_DB,
     interval: float = REQUEST_INTERVAL,
+    since: str | None = None,
+    limit: int | None = None,
 ) -> None:
-    """未取得レースの単複確定オッズを収集する。"""
+    """未取得レースの単複確定オッズを収集する。
+
+    since / limit で 1 回の実行を区切れる。日次運用では since で直近に絞り、
+    過去分のバックフィルは limit で 1 回あたりのリクエスト数を抑える
+    （未取得が 2 万件以上あるため、無制限に回すと数時間かかる）。
+    """
     db = connect(db_path, ODDS_SCHEMA)
 
     races_db = connect_readonly(races_db_path)
-    all_races = races_db.execute(
-        "SELECT race_date, race_no FROM races ORDER BY race_date DESC, race_no").fetchall()
+    if since:
+        all_races = races_db.execute(
+            "SELECT race_date, race_no FROM races WHERE race_date >= ?"
+            " ORDER BY race_date DESC, race_no", (since,)).fetchall()
+    else:
+        all_races = races_db.execute(
+            "SELECT race_date, race_no FROM races ORDER BY race_date DESC, race_no").fetchall()
     races_db.close()
     have = {tuple(r) for r in db.execute("SELECT race_date, race_no FROM odds_meta")}
     targets = [r for r in all_races if tuple(r) not in have]
+    if limit is not None:
+        targets = targets[:limit]
     print(f"取得対象 {len(targets)} レース")
 
     fetcher = Fetcher(interval)

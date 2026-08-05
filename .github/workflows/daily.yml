@@ -1,0 +1,86 @@
+name: 日次収集
+
+# JST 02:00（= UTC 17:00）。開催日のレースは JST 21 時前後に終わるため、
+# 確定を待ってから取りにいく。GitHub の cron は数分〜十数分ずれるが日次なら無害。
+on:
+  schedule:
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+    inputs:
+      odds_since:
+        description: "オッズを取得する開始日 (YYYY-MM-DD)。空なら30日前"
+        required: false
+
+# DB を復元 → 更新 → 書き戻すため、並行実行すると片方の更新が失われる。
+concurrency:
+  group: daily-ingest
+  cancel-in-progress: false
+
+env:
+  BACKUP_REPO: banei-keiba/banei-db-backup
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+
+      # 収集と検証だけなので ml エクストラは入れない
+      - run: uv sync
+
+      # 復元しないと 19 年分を再取得することになる
+      - name: バックアップから DB を復元
+        env:
+          GH_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: |
+          mkdir -p data
+          gh release download latest --repo "$BACKUP_REPO" --dir data
+          gunzip data/banei.db.gz data/odds.db.gz
+          ls -la data
+
+      - name: 収集前の状態を記録
+        run: |
+          {
+            echo "RACES_BEFORE=$(sqlite3 data/banei.db 'select count(*) from races')"
+            echo "ODDS_BEFORE=$(sqlite3 data/odds.db 'select count(*) from odds_meta')"
+          } >> "$GITHUB_ENV"
+
+      - name: レース結果を収集
+        run: |
+          # 月初の取りこぼしを避けるため前月から見る。取得済みの日はスキップされる。
+          START=$(TZ=Asia/Tokyo date -d '1 month ago' +%Y-%m)
+          END=$(TZ=Asia/Tokyo date +%Y-%m)
+          uv run banei scrape --start "$START" --end "$END"
+
+      - name: 確定オッズを収集
+        env:
+          ODDS_SINCE: ${{ inputs.odds_since }}
+        run: |
+          # 未取得が 2 万件以上あるため、日次では直近に絞る。
+          # 過去分のバックフィルは backfill-odds ワークフロー（手動実行）で進める。
+          SINCE="$ODDS_SINCE"
+          if [ -z "$SINCE" ]; then
+            SINCE=$(TZ=Asia/Tokyo date -d '30 days ago' +%F)
+          fi
+          uv run banei odds --since "$SINCE"
+
+      - name: 検証
+        run: uv run banei validate
+
+      - name: 増分を表示
+        run: |
+          RACES_AFTER=$(sqlite3 data/banei.db 'select count(*) from races')
+          ODDS_AFTER=$(sqlite3 data/odds.db 'select count(*) from odds_meta')
+          echo "races:     $RACES_BEFORE -> $RACES_AFTER"
+          echo "odds_meta: $ODDS_BEFORE -> $ODDS_AFTER"
+
+      # 検証を通ったデータだけを書き戻す
+      - name: バックアップ
+        env:
+          GH_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: ./scripts/backup-db.sh
