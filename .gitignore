@@ -1,5 +1,6 @@
 # スクレイピングした生データは公開しない（docs/architecture.md §3.4）
-data/
+# 先頭の / が無いと web/src/data/ など下層の data ディレクトリにもマッチしてしまう
+/data/
 
 # Python
 __pycache__/

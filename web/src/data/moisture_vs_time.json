@@ -1,0 +1,62 @@
+[
+  {
+    "moisture": 0,
+    "n_wins": 232,
+    "avg_win_sec": 117.2,
+    "fastest_sec": 76.8
+  },
+  {
+    "moisture": 1,
+    "n_wins": 7859,
+    "avg_win_sec": 117.2,
+    "fastest_sec": 47.7
+  },
+  {
+    "moisture": 2,
+    "n_wins": 13133,
+    "avg_win_sec": 113.3,
+    "fastest_sec": 42.2
+  },
+  {
+    "moisture": 3,
+    "n_wins": 6398,
+    "avg_win_sec": 108.6,
+    "fastest_sec": 44.3
+  },
+  {
+    "moisture": 4,
+    "n_wins": 2548,
+    "avg_win_sec": 108.2,
+    "fastest_sec": 49.6
+  },
+  {
+    "moisture": 5,
+    "n_wins": 1599,
+    "avg_win_sec": 104.8,
+    "fastest_sec": 46.1
+  },
+  {
+    "moisture": 6,
+    "n_wins": 869,
+    "avg_win_sec": 96.7,
+    "fastest_sec": 49.0
+  },
+  {
+    "moisture": 7,
+    "n_wins": 443,
+    "avg_win_sec": 87.3,
+    "fastest_sec": 51.7
+  },
+  {
+    "moisture": 8,
+    "n_wins": 285,
+    "avg_win_sec": 82.3,
+    "fastest_sec": 46.2
+  },
+  {
+    "moisture": 9,
+    "n_wins": 155,
+    "avg_win_sec": 76.2,
+    "fastest_sec": 42.9
+  }
+]

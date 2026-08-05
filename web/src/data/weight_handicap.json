@@ -1,0 +1,72 @@
+[
+  {
+    "weight_diff_kg": 0,
+    "n": 83566,
+    "win_rate": 11.0
+  },
+  {
+    "weight_diff_kg": 5,
+    "n": 3623,
+    "win_rate": 11.4
+  },
+  {
+    "weight_diff_kg": 10,
+    "n": 46369,
+    "win_rate": 10.9
+  },
+  {
+    "weight_diff_kg": 15,
+    "n": 3538,
+    "win_rate": 12.5
+  },
+  {
+    "weight_diff_kg": 20,
+    "n": 106614,
+    "win_rate": 11.2
+  },
+  {
+    "weight_diff_kg": 25,
+    "n": 4947,
+    "win_rate": 12.9
+  },
+  {
+    "weight_diff_kg": 30,
+    "n": 47059,
+    "win_rate": 10.4
+  },
+  {
+    "weight_diff_kg": 35,
+    "n": 1161,
+    "win_rate": 13.2
+  },
+  {
+    "weight_diff_kg": 40,
+    "n": 6825,
+    "win_rate": 9.7
+  },
+  {
+    "weight_diff_kg": 45,
+    "n": 160,
+    "win_rate": 8.1
+  },
+  {
+    "weight_diff_kg": 50,
+    "n": 790,
+    "win_rate": 11.0
+  },
+  {
+    "weight_diff_kg": 60,
+    "n": 185,
+    "win_rate": 17.8
+  },
+  {
+    "weight_diff_kg": 70,
+    "n": 67,
+    "win_rate": 16.4
+  },
+  {
+    "weight_diff_kg": 80,
+    "n": 31,
+    "win_rate": 12.9
+  }
+]

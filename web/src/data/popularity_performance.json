@@ -1,0 +1,62 @@
+[
+  {
+    "popularity": 1,
+    "n": 33540,
+    "win_rate": 35.4,
+    "roi": 79.1
+  },
+  {
+    "popularity": 2,
+    "n": 33585,
+    "win_rate": 20.1,
+    "roi": 78.5
+  },
+  {
+    "popularity": 3,
+    "n": 33538,
+    "win_rate": 14.1,
+    "roi": 76.9
+  },
+  {
+    "popularity": 4,
+    "n": 33596,
+    "win_rate": 9.9,
+    "roi": 74.3
+  },
+  {
+    "popularity": 5,
+    "n": 33569,
+    "win_rate": 7.5,
+    "roi": 76.8
+  },
+  {
+    "popularity": 6,
+    "n": 33584,
+    "win_rate": 5.2,
+    "roi": 73.4
+  },
+  {
+    "popularity": 7,
+    "n": 33202,
+    "win_rate": 3.7,
+    "roi": 71.7
+  },
+  {
+    "popularity": 8,
+    "n": 31623,
+    "win_rate": 2.4,
+    "roi": 62.4
+  },
+  {
+    "popularity": 9,
+    "n": 25545,
+    "win_rate": 1.8,
+    "roi": 63.9
+  },
+  {
+    "popularity": 10,
+    "n": 13221,
+    "win_rate": 1.2,
+    "roi": 57.8
+  }
+]
