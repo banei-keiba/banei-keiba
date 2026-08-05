@@ -17,7 +17,8 @@ Cloudflare Pages の上限（ファイル数 20,000）に当たって設計が�
 
 - `data/` は .gitignore 済み。`.db` を絶対にコミットしない
 - テストフィクスチャに実ページの HTML を置かない（`tests/fixtures/` は合成 HTML）
-- 公開物は `src/banei/export/`（Phase 2 で作る）を唯一の出口にする
+- 公開物は `src/banei/export/` を唯一の出口にする。**検査はテストではなく実行時**に走り、
+  違反があれば `PolicyError` で書き出しを止める（個体特定キーを含まない / 各行が 30 件以上の集約）
 
 ## 構成
 
@@ -28,8 +29,10 @@ src/banei/
   features/   dataset.py — build_dataset（過去成績は shift で厳密に因果化）
   models/     train.py — LightGBM
   backtest/   strategies.py（払戻ベース）/ ev.py（実オッズベース）
+  export/     【公開データの唯一の出口】集計 → web/src/data/*.json
   validate.py データ検証
   net.py      レート制限付き HTTP クライアント（3スクレイパー共通）
+web/          Astro。全ページ SSG・JS ゼロ。図版はビルド時生成の SVG
 ```
 
 ML 依存は `ml` エクストラに分離してある。収集・検証だけなら `uv sync` で足り、
@@ -53,7 +56,7 @@ gunzip -f data/banei.db.gz data/odds.db.gz
 ```
 
 逆に**ローカルで収集しても次の日次実行で上書きされて失われる**。過去分のバックフィルは
-`gh workflow run backfill-odds.yml -f limit=3000` で回すこと。
+`gh workflow run backfill-odds.yml` で回すこと（既定 1,000 件・間隔 2 秒）。
 
 バックアップ先 [banei-keiba/banei-db-backup](https://github.com/banei-keiba/banei-db-backup)
 は **private のまま**にする（生データを含む）。`scripts/backup-db.sh` は実行前に
@@ -122,8 +125,21 @@ gunzip -f data/banei.db.gz data/odds.db.gz
 - **Phase 1（日次自動化）実装完了、無人稼働の確認待ち** — ゴールデンテスト 27 / 検証テスト 21。
   日次ワークフローは手動実行で全ステップ成功済み。ただし**まだ「取得済みスキップ」の経路しか
   通っていない**。次の開催（8/8 前後）で実際の増分を確認して完了判定する
-- Phase 2 以降は未着手。着手前に**ドメイン名・サイト名**と、記事の方向性
-  （分析ノート寄り / 予想寄り）を決める必要がある
+- **Phase 2（公開サイト）完了** — https://banei-keiba.pages.dev/ に4ページ。
+  分析記事中心の方針。JS ゼロ・全4ページ 92KB。**独自ドメインが決まったら**
+  `web/astro.config.mjs` の `site` / `Base.astro` の noindex / `public/robots.txt`
+  の 3 箇所を外す。名前に banei が入ることは決定済み
+- **日次からの自動デプロイは未検証**。経路は手動デプロイで通したが、
+  日次収集 → export → commit → deploy の繋ぎ込みはレースが増えたときが初回になる
+
+### 図版を足すときの決まり
+
+- 配色は `web/src/styles/global.css` のトークンを使う。系列色は dataviz の検証
+  スクリプトを通してある。**目視で色を決めない**
+- 単系列なら凡例を置かない。値は端点だけ直接ラベルし、全点には置かない
+- 全図版に表ビュー（`DataTable.astro`）を付ける。ツールチップだけに値を閉じ込めない
+- **生成した SVG の座標を検査すること**。y軸単位や参照線ラベルが viewBox の外に
+  出る事故が実際にあった（テキスト幅を数えて左右の広がりを確認する）
 
 ## 書き方
 
