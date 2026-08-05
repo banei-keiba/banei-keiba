@@ -345,10 +345,37 @@ gunzip data/banei.db.gz
 - [x] データ検証 `banei validate`（`tests/test_validate.py` / 21 ケース）
 - [x] 日次 cron ワークフロー `.github/workflows/daily.yml`
 - [x] オッズのバックフィルワークフロー `.github/workflows/backfill-odds.yml`
-- [ ] `BACKUP_TOKEN` シークレットの登録 ← **ユーザー操作待ち**
-- [ ] 1 週間の無人稼働を確認
+- [x] `BACKUP_TOKEN` シークレットの登録（2026-08-06）
+- [x] 手動実行で全ステップの動作を確認（2026-08-06 / 37秒で成功）
+- [ ] 1 週間の無人稼働を確認 ← **次の開催（8/8 前後）以降に判定**
 
 **完了条件**: 1 週間、手を触れずにデータが伸び続ける
+
+#### 初回実行の結果（2026-08-06）
+
+復元 → scrape → odds → validate → バックアップ の全ステップが通り、
+バックアップアセットが実際に更新されることまで確認した。
+
+```
+races:     33493 -> 33493      （8月は3開催日とも取得済みのため増分なし = 正しい挙動）
+odds_meta: 8277  -> 8277
+検証成功（警告 0 件）
+退避完了: banei-keiba/banei-db-backup
+```
+
+#### 運用上の注意: DB の正はバックアップ側になった
+
+日次ワークフローが毎晩 DB を更新するため、**ローカルの `data/` は放っておくと古くなる**。
+ローカルで作業する前に復元しておくこと。
+
+```bash
+gh release download latest --repo banei-keiba/banei-db-backup --dir data --clobber
+gunzip -f data/banei.db.gz data/odds.db.gz
+```
+
+ローカルで収集してしまうと、次の日次実行がバックアップ側の DB を復元して上書きするため、
+ローカルの取得分は失われる。過去分のバックフィルを手元で回したい場合は、日次と衝突しない
+よう `backfill-odds` ワークフロー側で回すのが安全。
 
 #### 検証の閾値は実データから導出している
 
