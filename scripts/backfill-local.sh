@@ -2,16 +2,20 @@
 #
 # 過去分の確定オッズを手元から少しずつ埋め、結果をバックアップへ書き戻す。
 #
-#   ./scripts/backfill-local.sh [件数] [間隔秒]
-#   ./scripts/backfill-local.sh 1000 1.0     # 既定
+#   ./scripts/backfill-local.sh [件数] [間隔秒] [種別]
+#   ./scripts/backfill-local.sh 2000 1.0          # 単複オッズ（既定）
+#   ./scripts/backfill-local.sh 500  1.0 combo    # 組み合わせ4券種（1レース4req）
 #
 # **なぜ手元で回すのか**
-# オッズパークは GitHub Actions の IP からのアクセスに HTTP 500 を返す。
-# 2026-08-06 に確認した内容:
-#   - ランナーからは 200〜1,400 件あたりで全リクエストが 500 になる
-#   - 間隔を 1 秒から 2 秒に広げても改善せず、むしろ早く失敗した
-#   - **同じレースを手元から叩くと 400 件連続で失敗ゼロ**
-# レートやデータの問題ではなく送信元による制限なので、この作業だけは手元で行う。
+# オッズパークには送信元ごとの累積クォータ（時間窓ベース）がある。
+# 2026-08-06 の実測:
+#   - GitHub ランナー 1秒間隔: 約1,490件で 500 が出始める
+#   - GitHub ランナー 2秒間隔: 約253件（前回の失敗から30分しか空けなかったため、
+#                              直前1時間の窓が埋まったまま始まった）
+#   - 手元(WSL2) 1秒間隔:      2,400件を連続で完走、失敗ゼロ
+# 間隔を広げても効かないのは、制限が瞬間レートではなく累積本数だから。
+# GitHub Actions の IP は全ユーザー共有で他人の分も枠を食うため、枠が小さい。
+# 手元が無制限という証拠はないので、区切って回し実行の合間を空けること。
 #
 # 日次収集とは DB を共有する。実行中に日次が走ると、こちらが書き戻したときに
 # 日次の取得分が巻き戻る。ただし scraped_days も一緒に巻き戻るため、
@@ -23,6 +27,13 @@ REPO="${BANEI_BACKUP_REPO:-banei-keiba/banei-db-backup}"
 DATA_DIR="${BANEI_DATA_DIR:-data}"
 LIMIT="${1:-1000}"
 INTERVAL="${2:-1.0}"
+KIND="${3:-odds}"
+
+case "$KIND" in
+  odds)  ;;
+  combo) ;;
+  *) echo "種別は odds か combo" >&2; exit 1 ;;
+esac
 
 remote_stamp() {
   gh release view latest --repo "$REPO" --json assets --jq '[.assets[].updatedAt] | max'
@@ -34,13 +45,24 @@ gh release download latest --repo "$REPO" --dir "$DATA_DIR" --clobber
 gunzip -f "$DATA_DIR/banei.db.gz" "$DATA_DIR/odds.db.gz"
 
 remaining() {
-  sqlite3 "$DATA_DIR/odds.db" "ATTACH '$DATA_DIR/banei.db' AS b;
-    SELECT (SELECT COUNT(*) FROM b.races) - (SELECT COUNT(*) FROM odds_meta);"
+  if [[ "$KIND" == "combo" ]]; then
+    # 4券種ぶんなので「レース数 × 4 - 取得済み」
+    sqlite3 "$DATA_DIR/odds.db" "ATTACH '$DATA_DIR/banei.db' AS b;
+      SELECT (SELECT COUNT(*) FROM b.races) * 4
+             - (SELECT COUNT(*) FROM combo_meta WHERE bet_type <> '三連単');"
+  else
+    sqlite3 "$DATA_DIR/odds.db" "ATTACH '$DATA_DIR/banei.db' AS b;
+      SELECT (SELECT COUNT(*) FROM b.races) - (SELECT COUNT(*) FROM odds_meta);"
+  fi
 }
-echo "未取得 $(remaining) レース"
+echo "未取得 $(remaining) 件（$KIND）"
 
-echo "=== オッズを取得（最大 $LIMIT 件・間隔 ${INTERVAL}s）==="
-uv run banei odds --limit "$LIMIT" --interval "$INTERVAL"
+echo "=== オッズを取得（最大 $LIMIT・間隔 ${INTERVAL}s・$KIND）==="
+if [[ "$KIND" == "combo" ]]; then
+  uv run banei combo-odds --limit "$LIMIT" --interval "$INTERVAL"
+else
+  uv run banei odds --limit "$LIMIT" --interval "$INTERVAL"
+fi
 
 echo "=== 検証 ==="
 uv run banei validate --quiet
@@ -55,4 +77,4 @@ fi
 echo "=== バックアップへ書き戻す ==="
 ./scripts/backup-db.sh
 
-echo "残り $(remaining) レース"
+echo "残り $(remaining) 件"

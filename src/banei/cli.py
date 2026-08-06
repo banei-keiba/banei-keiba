@@ -38,6 +38,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="umatan,umaren,wide,sanrentan,sanrenpuku のカンマ区切り")
     p.add_argument("--since", default=None, metavar="YYYY-MM-DD",
                    help="この日以降のレースに限定（三連単は重いので推奨）")
+    p.add_argument("--limit", type=int, default=None,
+                   help="1 回の実行で処理するレース数の上限（4券種なら1レース4req）")
     p.add_argument("--races-db", default=RACES_DB)
     p.add_argument("--db", default=ODDS_DB)
     _add_interval(p)
@@ -81,7 +83,8 @@ def main(argv: list[str] | None = None) -> None:
         odds.scrape(args.races_db, args.db, args.interval, args.since, args.limit)
     elif args.command == "combo-odds":
         from banei.ingest import combo_odds
-        combo_odds.scrape(args.types, args.since, args.races_db, args.db, args.interval)
+        combo_odds.scrape(args.types, args.since, args.races_db, args.db,
+                          args.interval, args.limit)
     elif args.command == "backtest":
         from banei.backtest import strategies
         strategies.run(args.db)

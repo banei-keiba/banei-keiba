@@ -136,9 +136,13 @@ def scrape(
     races_db_path: Path | str = RACES_DB,
     db_path: Path | str = ODDS_DB,
     interval: float = REQUEST_INTERVAL,
+    limit: int | None = None,
     max_consecutive_failures: int = MAX_CONSECUTIVE_FAILURES,
 ) -> None:
     """組み合わせ券種の確定オッズを収集する。types はカンマ区切り（TYPES のキー）。
+
+    limit は**レース数**の上限（マトリクス4券種なら 1 レース 4 リクエスト）。
+    全期間だと 13 万リクエスト・37 時間かかるので、必ず区切って回すこと。
 
     取得に失敗したレースは combo_meta を書かずに飛ばすので、次回の実行で再度対象になる。
     連続で失敗したら中断する（例外ではなく正常終了。そこまでの成果を保存できるようにするため）。
@@ -163,12 +167,22 @@ def scrape(
     races_db.close()
 
     have = {tuple(r) for r in db.execute("SELECT race_date, race_no, bet_type FROM combo_meta")}
+    # 未取得の券種が 1 つでも残っているレースだけを対象にしてから limit を当てる。
+    # 取得済みレースを数に含めると、実際にはほとんど進まない実行になってしまう。
+    targets = [
+        (rd, rn) for rd, rn in all_races
+        if any((rd, rn, t["bet_type"]) not in have for t in selected)
+    ]
+    if limit is not None:
+        targets = targets[:limit]
+    print(f"取得対象 {len(targets)} レース × 最大 {len(selected)} 券種")
+
     fetcher = Fetcher(interval)
     done = 0
     failed = 0
     consecutive = 0
     aborted = False
-    for race_date, race_no in all_races:
+    for race_date, race_no in targets:
         if aborted:
             break
         for t in selected:
@@ -205,5 +219,5 @@ def scrape(
             db.commit()
         done += 1
         if done % 100 == 0:
-            print(f"{done}/{len(all_races)} レース完了（現在 {race_date}）", flush=True)
+            print(f"{done}/{len(targets)} レース完了（現在 {race_date}）", flush=True)
     print(f"完了: {done} レース / 失敗 {failed} 件")
