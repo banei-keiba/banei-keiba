@@ -74,9 +74,13 @@ ODDS_ERROR_CHECKS: list[tuple[str, str]] = [
     ("複勝オッズの下限が上限を上回っている",
      """SELECT race_date, race_no, horse_no FROM o.odds
         WHERE place_min IS NOT NULL AND place_max IS NOT NULL AND place_min>place_max"""),
-    ("組み合わせオッズが 0 以下",
-     "SELECT race_date, race_no, bet_type, combination FROM o.combo_odds"
-     " WHERE odds IS NULL OR odds<=0"),
+    # 票が入らなかった組番はオッズが付かず NULL になる（実データで確認済み）。
+    # 異常なのは負の値と、レース内の全組番が NULL のとき（パース失敗の兆候）。
+    ("組み合わせオッズが負の値",
+     "SELECT race_date, race_no, bet_type, combination FROM o.combo_odds WHERE odds < 0"),
+    ("券種内の全組番でオッズが欠損している",
+     """SELECT race_date, race_no, bet_type FROM o.combo_odds
+        GROUP BY 1,2,3 HAVING SUM(CASE WHEN odds IS NULL THEN 1 ELSE 0 END)=COUNT(*)"""),
 ]
 
 # (説明, 値を返す SQL, 異常と判定する条件)

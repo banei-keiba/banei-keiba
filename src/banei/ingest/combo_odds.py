@@ -46,6 +46,17 @@ def norm_combo(nums: list[str], ordered: bool) -> str:
     return "-".join(nums if ordered else sorted(nums, key=int))
 
 
+def _odds_value(text: str) -> float | None:
+    """オッズ文字列を数値にする。0 は「票が入らずオッズが付かない」の意味なので NULL。
+
+    パリミュチュエルなので最低でも 1.0 倍。0 は値が無いことの表現であり、
+    実際に 2026-07-20 1R の馬連単 7-9 / 9-7 が 0.0 と表示されていた。
+    単勝オッズで取消馬が NULL になるのと同じ扱いにする。
+    """
+    v = float(text)
+    return v if v > 0 else None
+
+
 def parse_matrix(html: str, ordered: bool) -> dict[str, tuple[float, float | None]]:
     """馬単・馬複・ワイド・三連複のマトリクス表 → {組番: (odds, odds_max)}
 
@@ -96,7 +107,8 @@ def parse_matrix(html: str, ordered: bool) -> dict[str, tuple[float, float | Non
                         if vals:
                             nums = first.split("-") + [cell.get_text(strip=True)]
                             out[norm_combo(nums, ordered)] = (
-                                float(vals[0]), float(vals[1]) if len(vals) > 1 else None)
+                                _odds_value(vals[0]),
+                                _odds_value(vals[1]) if len(vals) > 1 else None)
                     pos += span + int(nxt.get("colspan", 1))
                     i += 2
                     continue
@@ -126,7 +138,7 @@ def parse_sanrentan_page(html: str) -> dict[str, tuple[float, None]]:
                 continue
             v = re.search(r"\d+(?:\.\d+)?", td.get_text(strip=True).replace(",", ""))
             if v:
-                out["-".join(m.groups())] = (float(v.group()), None)
+                out["-".join(m.groups())] = (_odds_value(v.group()), None)
     return out
 
 

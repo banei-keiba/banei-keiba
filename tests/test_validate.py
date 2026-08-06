@@ -103,9 +103,15 @@ class TestDetectsOddsAnomalies:
         corrupt(odds, "UPDATE odds SET place_min=9.9, place_max=1.0 WHERE horse_no=1")
         assert validate.run(races, odds, verbose=False) == 1
 
-    def test_combo_odds_non_positive(self, dbs):
+    def test_combo_odds_negative(self, dbs):
         races, odds = dbs
-        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬複','1-2',0,NULL)")
+        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-2',-1,NULL)")
+        assert validate.run(races, odds, verbose=False) == 1
+
+    def test_all_combinations_missing_odds(self, dbs):
+        # 券種内の全組番が NULL ならパース失敗の兆候
+        races, odds = dbs
+        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-2',NULL,NULL)")
         assert validate.run(races, odds, verbose=False) == 1
 
 
@@ -124,6 +130,16 @@ class TestAcceptsLegitimatePatterns:
         corrupt(races, "UPDATE results SET finish=NULL, status='取消' WHERE horse_no=2")
         corrupt(odds, "UPDATE odds SET win_odds=NULL, place_min=NULL, place_max=NULL"
                       " WHERE horse_no=2")
+        assert validate.run(races, odds, verbose=False) == 0
+
+    def test_combination_without_votes_is_not_an_error(self, dbs):
+        """票が入らなかった組番はオッズが付かず NULL になる。異常ではない。
+
+        2026-07-20 1R 馬連単 7-9 / 9-7 が実際に 0.0 と表示されていた。
+        """
+        races, odds = dbs
+        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-2',12.3,NULL)")
+        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-3',NULL,NULL)")
         assert validate.run(races, odds, verbose=False) == 0
 
     def test_cancelled_meeting_is_only_a_warning(self, dbs):
