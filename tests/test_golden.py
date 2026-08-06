@@ -35,6 +35,11 @@ def matrix_unordered():
 
 
 @pytest.fixture(scope="module")
+def triangular():
+    return parse_matrix(fixture("combo_matrix_triangular.html"), ordered=False)
+
+
+@pytest.fixture(scope="module")
 def sanrentan():
     return parse_sanrentan_page(fixture("sanrentan_page.html"))
 
@@ -153,13 +158,19 @@ class TestOddsPage:
 
 
 class TestComboMatrix:
-    def test_unordered_sorts_combination(self, matrix_unordered):
+    """値の表記（レンジ・カンマ区切り）。列の位置決めは TestTriangularMatrix。"""
+
+    def test_all_combinations_present(self, matrix_unordered):
+        expected = {f"{a}-{b}" for a in range(1, 5) for b in range(a + 1, 5)}
+        assert set(matrix_unordered) == expected
+
+    def test_plain_odds(self, matrix_unordered):
         assert matrix_unordered["1-2"] == (pytest.approx(12.3), None)
         assert matrix_unordered["2-3"] == (pytest.approx(45.6), None)
 
-    def test_ordered_keeps_header_first(self):
+    def test_ordered_keeps_column_first(self):
         got = parse_matrix(fixture("combo_matrix.html"), ordered=True)
-        assert "1-3" in got  # ヘッダ "1" + 相手 "3"
+        assert "1-3" in got  # 列 "1" + 相手 "3"
         assert got["1-3"][0] == pytest.approx(3.1)
 
     def test_range_captures_both_bounds(self, matrix_unordered):
@@ -167,6 +178,34 @@ class TestComboMatrix:
 
     def test_comma_separated_odds(self, matrix_unordered):
         assert matrix_unordered["2-4"][0] == pytest.approx(1234.5)
+
+
+class TestTriangularMatrix:
+    """三角マトリクス。列は「n 番目のセル」ではなく grid 上の位置で決まる。
+
+    2026-08-06 に、セルの並び順で列を決めていたためオッズと組番の対応が
+    壊れていたのを実データで確認した（2026-08-03 4R 馬複 6-10 が 9.7 と
+    記録されていたが、払戻から正しくは 4.3）。その再発防止。
+    """
+
+    def test_all_combinations_present(self, triangular):
+        # 5頭立て相当なので C(5,2)=10 通り
+        expected = {f"{a}-{b}" for a in range(1, 6) for b in range(a + 1, 6)}
+        assert set(triangular) == expected
+
+    def test_first_row_maps_to_columns_in_order(self, triangular):
+        assert triangular["1-2"][0] == pytest.approx(10.1)
+        assert triangular["2-3"][0] == pytest.approx(20.2)
+        assert triangular["3-4"][0] == pytest.approx(30.3)
+
+    def test_empty_cells_do_not_shift_columns(self, triangular):
+        # 空セルを挟んだ行でも列がずれない
+        assert triangular["1-4"][0] == pytest.approx(12.1)
+        assert triangular["2-5"][0] == pytest.approx(22.2)
+
+    def test_column_header_injected_into_the_body(self, triangular):
+        # 4列目のヘッダは三角形の空き領域に差し込まれている
+        assert triangular["4-5"][0] == pytest.approx(44.5)
 
 
 class TestSanrentanPage:

@@ -1,11 +1,11 @@
 """オッズパークから組み合わせ券種の確定オッズを収集して odds.db に保存する。
 
 券種と betType の対応（払戻金との照合で確認済み）:
-  馬単=5 / 馬複=6 / ワイド=7(レンジ) / 三連単=8(1着馬ごとに1頁) / 三連複=9
+  馬連単=5 / 馬連複=6 / ワイド=7(レンジ) / 三連単=8(1着馬ごとに1頁) / 三連複=9
 
-組番の表記は payouts テーブルに合わせる:
-  順序あり（馬単・三連単）は着順どおり "8-2", "8-2-4"
-  順序なし（馬複・ワイド・三連複）は昇順 "2-8", "2-4-8"
+券種名も組番の表記も payouts テーブルに合わせてあるので、そのまま結合できる:
+  順序あり（馬連単・三連単）は着順どおり "8-2", "8-2-4"
+  順序なし（馬連複・ワイド・三連複）は昇順 "2-8", "2-4-8"
 
 三連単は 1 着馬ごとに 1 リクエスト必要なため重い。期間を絞って実行すること。
 """
@@ -25,9 +25,12 @@ from banei.net import Fetcher
 URL = "https://www.oddspark.com/keiba/Odds.do"
 PARAMS_BASE = {"sponsorCd": "04", "opTrackCd": "03", "viewType": "0"}
 
+# bet_type は payouts テーブル（keiba.go.jp 由来）の呼び方に揃える。
+# オッズパークは「馬単 / 馬複」だが keiba.go.jp は「馬連単 / 馬連複」で、
+# 揃えないと combo_odds と payouts の結合が黙って空振りする。
 TYPES = {
-    "umatan":     {"bet_type": "馬単",   "betType": "5", "ordered": True},
-    "umaren":     {"bet_type": "馬複",   "betType": "6", "ordered": False},
+    "umatan":     {"bet_type": "馬連単", "betType": "5", "ordered": True},
+    "umaren":     {"bet_type": "馬連複", "betType": "6", "ordered": False},
     "wide":       {"bet_type": "ワイド", "betType": "7", "ordered": False},
     "sanrentan":  {"bet_type": "三連単", "betType": "8", "ordered": True},
     "sanrenpuku": {"bet_type": "三連複", "betType": "9", "ordered": False},
@@ -44,33 +47,66 @@ def norm_combo(nums: list[str], ordered: bool) -> str:
 
 
 def parse_matrix(html: str, ordered: bool) -> dict[str, tuple[float, float | None]]:
-    """馬単・馬複・ワイド・三連複のマトリクス表 → {組番: (odds, odds_max)}"""
+    """馬単・馬複・ワイド・三連複のマトリクス表 → {組番: (odds, odds_max)}
+
+    表は三角形に組まれていて、**列は「n 番目のセル」ではなく grid 上の位置で決まる**。
+
+      ヘッダ行:  <th colspan=2>1</th><th colspan=2>2</th>...  ← 1列 = grid 2 マス
+      本文行:    <th>相手馬番</th><td>オッズ</td>  が 1 列ぶん
+                 <td colspan=2></td>              で列を丸ごと空ける
+
+    さらに、三角形が空けた右下の領域に**後続列のヘッダが `<th colspan=2>` として
+    差し込まれる**（10頭立てなら 9 列目がここに出る）。
+
+    セルの並び順で列を決めると、空セルが入った行から先が丸ごとずれる。
+    2026-08-06 にこれで実際にオッズと組番の対応が壊れていたのを確認している
+    （2026-08-03 4R 馬複 6-10 が 9.7 と記録されていたが、払戻から正しくは 4.3）。
+    """
     soup = BeautifulSoup(html, "html.parser")
     out = {}
     for tb in soup.find_all("table"):
         rows = tb.find_all("tr")
         if not rows:
             continue
-        headers = [c.get_text(strip=True) for c in rows[0].find_all("th")]
-        if not headers or not all(re.fullmatch(r"\d+(-\d+)?", h) for h in headers):
+
+        # grid 位置 → その列の 1 頭目（三連複なら "1-2" のように 2 頭）
+        col_first: dict[int, str] = {}
+        pos = 0
+        for c in rows[0].find_all(["th", "td"]):
+            col_first[pos // 2] = c.get_text(strip=True)
+            pos += int(c.get("colspan", 1))
+        if not col_first or not all(
+                re.fullmatch(r"\d+(-\d+)?", v) for v in col_first.values()):
             continue
+
         for tr in rows[1:]:
-            pairs, cur = [], None
-            for c in tr.find_all(["th", "td"]):
-                if c.name == "th":
-                    cur = c.get_text(strip=True)
-                elif cur is not None:
-                    pairs.append((cur, c.get_text(" ", strip=True)))
-                    cur = None
-            for j, (partner, text) in enumerate(pairs):
-                if j >= len(headers) or not text:
+            cells = tr.find_all(["th", "td"])
+            pos = 0
+            i = 0
+            while i < len(cells):
+                cell = cells[i]
+                span = int(cell.get("colspan", 1))
+                nxt = cells[i + 1] if i + 1 < len(cells) else None
+
+                if cell.name == "th" and span == 1 and nxt is not None and nxt.name == "td":
+                    first = col_first.get(pos // 2)
+                    text = nxt.get_text(" ", strip=True)
+                    if first and text:
+                        vals = re.findall(r"\d+(?:\.\d+)?", text.replace(",", ""))
+                        if vals:
+                            nums = first.split("-") + [cell.get_text(strip=True)]
+                            out[norm_combo(nums, ordered)] = (
+                                float(vals[0]), float(vals[1]) if len(vals) > 1 else None)
+                    pos += span + int(nxt.get("colspan", 1))
+                    i += 2
                     continue
-                nums = headers[j].split("-") + [partner]
-                vals = re.findall(r"\d+(?:\.\d+)?", text.replace(",", ""))
-                if not vals:
-                    continue
-                out[norm_combo(nums, ordered)] = (
-                    float(vals[0]), float(vals[1]) if len(vals) > 1 else None)
+
+                if cell.name == "th" and span >= 2:
+                    # 三角形の空き領域に差し込まれた後続列のヘッダ
+                    col_first[pos // 2] = cell.get_text(strip=True)
+
+                pos += span
+                i += 1
     return out
 
 

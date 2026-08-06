@@ -1,0 +1,35 @@
+<!-- 合成フィクスチャ。オッズパークの三角マトリクスの構造を再現している。
+     5頭立て相当（組み合わせは C(5,2)=10 通り）。
+
+     - ヘッダは 1 列 = colspan 2
+     - 三角形なので下の行ほど列が減り、空いた分は <td colspan="2"> で埋まる
+     - **空いた右下の領域に 4 列目のヘッダが <th colspan="2"> として差し込まれる**
+
+     セルの並び順で列を決めると row2 以降がずれる。位置で決めなければならない。 -->
+<table>
+  <tr>
+    <th colspan="2">1</th><th colspan="2">2</th><th colspan="2">3</th>
+  </tr>
+  <tr>
+    <th>2</th><td><span>10.1</span></td>
+    <th>3</th><td><span>20.2</span></td>
+    <th>4</th><td><span>30.3</span></td>
+  </tr>
+  <tr>
+    <th>3</th><td><span>11.1</span></td>
+    <th>4</th><td><span>21.2</span></td>
+    <th>5</th><td><span>31.3</span></td>
+  </tr>
+  <tr>
+    <th>4</th><td><span>12.1</span></td>
+    <th>5</th><td><span>22.2</span></td>
+    <td class="nob_all" colspan="2"> </td>
+    <th colspan="2">4</th>
+  </tr>
+  <tr>
+    <th>5</th><td><span>13.1</span></td>
+    <td class="nob_all" colspan="2"> </td>
+    <td class="nob_all" colspan="2"> </td>
+    <th>5</th><td><span>44.5</span></td>
+  </tr>
+</table>
