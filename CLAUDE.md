@@ -55,8 +55,10 @@ gh release download latest --repo banei-keiba/banei-db-backup --dir data --clobb
 gunzip -f data/banei.db.gz data/odds.db.gz
 ```
 
-逆に**ローカルで収集しても次の日次実行で上書きされて失われる**。過去分のバックフィルは
-`gh workflow run backfill-odds.yml` で回すこと（既定 1,000 件・間隔 2 秒）。
+逆に**ローカルで収集しただけでは、次の日次実行が復元した DB で上書きされて失われる**。
+取ったら必ずバックアップへ書き戻すこと。過去分のバックフィルは
+`scripts/backfill-local.sh` が「最新取得 → 収集 → 検証 → 書き戻し」まで面倒を見る
+（→ 下記「送信元ごとの累積クォータ」）。**Actions からは回さない。**
 
 バックアップ先 [banei-keiba/banei-db-backup](https://github.com/banei-keiba/banei-db-backup)
 は **private のまま**にする（生データを含む）。`scripts/backup-db.sh` は実行前に
