@@ -66,7 +66,7 @@ jobs:
           ODDS_SINCE: ${{ inputs.odds_since }}
         run: |
           # 未取得が 2 万件以上あるため、日次では直近に絞る。
-          # 過去分のバックフィルは backfill-odds ワークフロー（手動実行）で進める。
+          # 過去分のバックフィルは scripts/backfill-local.sh で手元から進める（Actions では枠が足りない）。
           SINCE="$ODDS_SINCE"
           if [ -z "$SINCE" ]; then
             SINCE=$(TZ=Asia/Tokyo date -d '30 days ago' +%F)
