@@ -1,10 +1,10 @@
 {
-  "n_races": 33649,
-  "n_runs": 309379,
+  "n_races": 33661,
+  "n_runs": 309497,
   "n_horses": 5520,
   "n_jockeys": 51,
   "n_trainers": 47,
   "period_start": "2007-04-27",
-  "period_end": "2026-09-05",
-  "generated_at": "2026-09-06T18:52:03+00:00"
+  "period_end": "2026-09-06",
+  "generated_at": "2026-09-07T20:22:38+00:00"
 }
