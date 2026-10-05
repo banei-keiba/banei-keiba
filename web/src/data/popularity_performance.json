@@ -1,61 +1,61 @@
 [
   {
     "popularity": 1,
-    "n": 33840,
-    "win_rate": 35.3,
-    "roi": 79.0
+    "n": 33852,
+    "win_rate": 35.4,
+    "roi": 79.1
   },
   {
     "popularity": 2,
-    "n": 33885,
+    "n": 33897,
     "win_rate": 20.1,
     "roi": 78.6
   },
   {
     "popularity": 3,
-    "n": 33838,
+    "n": 33850,
     "win_rate": 14.1,
     "roi": 77.0
   },
   {
     "popularity": 4,
-    "n": 33896,
+    "n": 33908,
     "win_rate": 9.9,
     "roi": 74.4
   },
   {
     "popularity": 5,
-    "n": 33869,
+    "n": 33881,
     "win_rate": 7.5,
     "roi": 76.6
   },
   {
     "popularity": 6,
-    "n": 33884,
+    "n": 33896,
     "win_rate": 5.2,
     "roi": 73.3
   },
   {
     "popularity": 7,
-    "n": 33502,
+    "n": 33514,
     "win_rate": 3.7,
-    "roi": 71.5
+    "roi": 71.6
   },
   {
     "popularity": 8,
-    "n": 31921,
+    "n": 31933,
     "win_rate": 2.4,
     "roi": 62.4
   },
   {
     "popularity": 9,
-    "n": 25838,
+    "n": 25849,
     "win_rate": 1.8,
-    "roi": 63.3
+    "roi": 63.2
   },
   {
     "popularity": 10,
-    "n": 13444,
+    "n": 13452,
     "win_rate": 1.2,
     "roi": 57.8
   }
