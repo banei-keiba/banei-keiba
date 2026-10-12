@@ -115,6 +115,81 @@ class TestDetectsOddsAnomalies:
         assert validate.run(races, odds, verbose=False) == 1
 
 
+@pytest.fixture
+def combo_dbs(dbs):
+    """2026-08-03 1R に、払戻と整合する馬連複・ワイドの組み合わせオッズを足す。
+
+    ワイドの払戻はオッズ範囲の内側に来ることが多い（実データで約半数）ので、
+    下限とも上限とも一致しない値にしてある。
+    """
+    races, odds = dbs
+    corrupt(races, "INSERT INTO payouts VALUES ('2026-08-03',1,'馬連複','1-2',430,1)")
+    corrupt(races, "INSERT INTO payouts VALUES ('2026-08-03',1,'ワイド','1-2',190,1)")
+    for bet_type in ("馬連複", "ワイド"):
+        corrupt(odds, f"INSERT INTO combo_meta VALUES ('2026-08-03',1,'{bet_type}',2,'x')")
+    corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-2',4.3,NULL)")
+    corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'馬連複','1-3',12.3,NULL)")
+    corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'ワイド','1-2',1.8,2.0)")
+    corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'ワイド','1-3',3.1,3.5)")
+    return races, odds
+
+
+class TestComboOddsMatchPayouts:
+    """組み合わせオッズを払戻と照合する（オッズ × 100 = 払戻）。
+
+    2026-08-06 にマトリクスの列ずれで別の組番のオッズが記録されていたのを、
+    払戻との手作業の照合で見つけた（2026-08-03 4R 馬複 6-10 が 4.3 のはずが 9.7）。
+    検証に組み込んで照合漏れをなくす。
+    """
+
+    def test_consistent_odds_pass(self, combo_dbs):
+        races, odds = combo_dbs
+        assert validate.run(races, odds, verbose=False) == 0
+
+    @pytest.mark.parametrize(("label", "sql"), [
+        ("列ずれで別の値が入った",
+         "UPDATE combo_odds SET odds=9.7 WHERE bet_type='馬連複' AND combination='1-2'"),
+        ("的中組番のオッズが NULL",
+         "UPDATE combo_odds SET odds=NULL WHERE bet_type='馬連複' AND combination='1-2'"),
+        ("的中組番の行が無い",
+         "DELETE FROM combo_odds WHERE bet_type='馬連複' AND combination='1-2'"),
+        ("ワイドの払戻がオッズ範囲より下",
+         "UPDATE combo_odds SET odds=2.5, odds_max=3.0"
+         " WHERE bet_type='ワイド' AND combination='1-2'"),
+        ("ワイドの払戻がオッズ範囲より上",
+         "UPDATE combo_odds SET odds=1.0, odds_max=1.5"
+         " WHERE bet_type='ワイド' AND combination='1-2'"),
+    ])
+    def test_mismatch_detected(self, combo_dbs, label, sql):
+        races, odds = combo_dbs
+        corrupt(odds, sql)
+        assert validate.run(races, odds, verbose=False) == 1, f"{label} を検知できていない"
+
+    def test_dead_heat_race_is_excluded(self, combo_dbs):
+        """同着レースは払戻が複数組番に分割されるのでオッズと一致しない。正常。
+
+        1〜3 着の同着は 148 レースあり、分割払戻はすべてこれで説明できる。
+        """
+        races, odds = combo_dbs
+        corrupt(races, "UPDATE results SET finish=1 WHERE horse_no=2")
+        corrupt(races, "UPDATE payouts SET amount=215 WHERE bet_type='馬連複'")
+        assert validate.run(races, odds, verbose=False) == 0
+
+    def test_special_payout_without_winning_tickets(self, combo_dbs):
+        """的中票が無いときの特払い（70 円・組番は空）は照合しない。2011〜2017 に 8 件ある。"""
+        races, odds = combo_dbs
+        corrupt(races, "INSERT INTO payouts VALUES ('2026-08-03',1,'三連複','',70,NULL)")
+        corrupt(odds, "INSERT INTO combo_meta VALUES ('2026-08-03',1,'三連複',1,'x')")
+        corrupt(odds, "INSERT INTO combo_odds VALUES ('2026-08-03',1,'三連複','1-2-3',85.0,NULL)")
+        assert validate.run(races, odds, verbose=False) == 0
+
+    def test_unfetched_bet_type_is_not_checked(self, combo_dbs):
+        # 組み合わせオッズはバックフィル中。未取得の券種まで照合すると全部落ちる
+        races, odds = combo_dbs
+        corrupt(races, "INSERT INTO payouts VALUES ('2026-08-03',1,'馬連単','1-2',1030,1)")
+        assert validate.run(races, odds, verbose=False) == 0
+
+
 class TestAcceptsLegitimatePatterns:
     """実データに存在する正常パターンを異常扱いしないこと。"""
 

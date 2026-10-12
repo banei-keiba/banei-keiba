@@ -81,6 +81,28 @@ ODDS_ERROR_CHECKS: list[tuple[str, str]] = [
     ("券種内の全組番でオッズが欠損している",
      """SELECT race_date, race_no, bet_type FROM o.combo_odds
         GROUP BY 1,2,3 HAVING SUM(CASE WHEN odds IS NULL THEN 1 ELSE 0 END)=COUNT(*)"""),
+    # マトリクスの列ずれはオッズの値が別の組番に入るだけで、他の検査では見つからない。
+    # 払戻 = オッズ × 100 で照合する。ワイドは払戻がオッズ範囲の内側に来ることが多い。
+    # 除外するもの（いずれも実データで確認済み）:
+    #   - 取得していない券種（combo_meta が無い。バックフィル中）
+    #   - 1〜3 着に同着があるレース。払戻が複数組番に分割され、オッズと一致しない
+    #   - 100 円未満の払戻。的中票が無いときの特払い（70 円・組番は空）
+    ("組み合わせオッズが払戻と一致しない（同着レースを除く）",
+     """SELECT p.race_date, p.race_no, p.bet_type, p.combination, p.amount, c.odds, c.odds_max
+        FROM payouts p
+        JOIN o.combo_meta m
+          ON m.race_date=p.race_date AND m.race_no=p.race_no AND m.bet_type=p.bet_type
+        LEFT JOIN o.combo_odds c
+          ON c.race_date=p.race_date AND c.race_no=p.race_no
+         AND c.bet_type=p.bet_type AND c.combination=p.combination
+        WHERE p.amount >= 100
+          AND NOT EXISTS (SELECT 1 FROM results s
+                          WHERE s.race_date=p.race_date AND s.race_no=p.race_no
+                            AND s.finish BETWEEN 1 AND 3
+                          GROUP BY s.finish HAVING COUNT(*) > 1)
+          AND (c.odds IS NULL
+               OR p.amount < ROUND(c.odds * 100)
+               OR p.amount > ROUND(COALESCE(c.odds_max, c.odds) * 100))"""),
 ]
 
 # (説明, 値を返す SQL, 異常と判定する条件)
