@@ -19,6 +19,11 @@ from banei.net import Fetcher
 
 BASE = "https://www.keiba.go.jp/KeibaWeb"
 BABA_CODE = 3  # 帯広（ばんえい）
+JST = dt.timezone(dt.timedelta(hours=9), "JST")
+
+
+def _now() -> dt.datetime:
+    return dt.datetime.now(dt.UTC)
 
 
 def month_range(start: str, end: str) -> Iterator[tuple[int, int]]:
@@ -220,7 +225,9 @@ def scrape(
     """start('YYYY-MM') から end('YYYY-MM') までのレース結果を収集する。"""
     fetcher = Fetcher(interval)
     db = connect(db_path, RACES_SCHEMA)
-    today = dt.date.today().isoformat()
+    # 開催日は JST。実行環境のローカル日付（GitHub ランナーでは UTC）で判定すると、
+    # JST 未明の日次実行で前日の開催日が「今日」扱いになり 1 日遅れる。
+    today = _now().astimezone(JST).date().isoformat()
 
     for year, month in month_range(start, end):
         dates = get_race_dates(fetcher, year, month)
