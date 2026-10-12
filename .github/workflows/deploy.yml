@@ -10,6 +10,11 @@ on:
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
   workflow_call:
+    inputs:
+      ref:
+        description: "checkout するコミット。日次収集が push した集計コミットを渡す"
+        type: string
+        required: false
 
 concurrency:
   group: deploy-site
@@ -23,7 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      # workflow_call では github.sha が呼び出し元の起動時点のコミットになる。
+      # 日次収集はその後に集計をコミットするので、そのコミットを明示的に受け取る。
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - uses: actions/setup-node@v5
         with:

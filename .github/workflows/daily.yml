@@ -27,6 +27,7 @@ jobs:
       contents: write
     outputs:
       site_changed: ${{ steps.export.outputs.changed }}
+      export_sha: ${{ steps.export.outputs.sha }}
     steps:
       - uses: actions/checkout@v7
 
@@ -104,6 +105,7 @@ jobs:
             git commit -m "集計を更新（日次収集）"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
 
   # 集計が変わったときだけサイトを作り直す
@@ -111,4 +113,7 @@ jobs:
     needs: ingest
     if: needs.ingest.outputs.site_changed == 'true'
     uses: ./.github/workflows/deploy.yml
+    # 渡さないと deploy は起動時点のコミットを checkout し、いま push した集計が載らない
+    with:
+      ref: ${{ needs.ingest.outputs.export_sha }}
     secrets: inherit
