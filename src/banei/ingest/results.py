@@ -13,13 +13,12 @@ from urllib.parse import parse_qs, urlparse
 
 from bs4 import BeautifulSoup
 
-from banei.config import RACES_DB, REQUEST_INTERVAL
+from banei.config import JST, RACES_DB, REQUEST_INTERVAL
 from banei.db.schema import RACES_SCHEMA, connect
 from banei.net import Fetcher
 
 BASE = "https://www.keiba.go.jp/KeibaWeb"
 BABA_CODE = 3  # 帯広（ばんえい）
-JST = dt.timezone(dt.timedelta(hours=9), "JST")
 
 
 def _now() -> dt.datetime:
