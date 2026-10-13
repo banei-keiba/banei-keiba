@@ -1,0 +1,91 @@
+---
+import ExploreNav from '../../../components/ExploreNav.astro';
+import ExploreNotes from '../../../components/ExploreNotes.astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  METRICS,
+  PERIODS,
+  RELIABLE_N,
+  TABLES,
+  axisName,
+  count,
+  pct,
+  periodName,
+  seasonRange,
+  type PeriodKey,
+  type Table,
+} from '../../../lib/explore';
+
+export function getStaticPaths() {
+  return Object.values(TABLES)
+    .filter((t) => t.axes.length === 1)
+    .flatMap((table) =>
+      PERIODS.map((p) => ({
+        params: { axis: table.axes[0], period: p.key },
+        props: { table, periodKey: p.key },
+      })),
+    );
+}
+
+interface Props {
+  table: Table;
+  periodKey: PeriodKey;
+}
+
+const { table, periodKey } = Astro.props;
+const period = table.periods[periodKey];
+const axis = table.axes[0];
+const name = axisName(axis);
+const byBin = new Map(period.cells.map((c) => [String(c[axis]), c]));
+---
+
+<Base
+  title={`${name}別の勝率・回収率（${periodName(periodKey)}）`}
+  description={`ばんえい競馬の${name}別に、勝率・連対率・複勝率・回収率を集計した表です。`}
+>
+  <h1>{name}別の勝率・回収率</h1>
+  <p class="meta">
+    {periodName(periodKey)}：{seasonRange(period)}・{count(period.total?.n ?? 0)} 出走
+  </p>
+  <ExploreNav axes={table.axes} period={periodKey} />
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{name}</th>
+          <th scope="col">出走数</th>
+          {METRICS.map((m) => <th scope="col">{m.name}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          table.bins[axis].map((bin) => {
+            const c = byBin.get(bin);
+            return c ? (
+              <tr class={c.n < RELIABLE_N ? 'low-n' : undefined}>
+                <th scope="row">{bin}</th>
+                <td>{count(c.n)}</td>
+                {METRICS.map((m) => <td>{pct(c[m.key])}</td>)}
+              </tr>
+            ) : (
+              <tr>
+                <th scope="row">{bin}</th>
+                <td class="empty" colspan={METRICS.length + 1}>—</td>
+              </tr>
+            );
+          })
+        }
+        {
+          period.total && (
+            <tr class="total">
+              <th scope="row">全体</th>
+              <td>{count(period.total.n)}</td>
+              {METRICS.map((m) => <td>{pct(period.total![m.key])}</td>)}
+            </tr>
+          )
+        }
+      </tbody>
+    </table>
+  </div>
+  <ExploreNotes />
+</Base>

@@ -1,0 +1,49 @@
+---
+import ExploreMatrix from '../../../../components/ExploreMatrix.astro';
+import ExploreNav from '../../../../components/ExploreNav.astro';
+import ExploreNotes from '../../../../components/ExploreNotes.astro';
+import Base from '../../../../layouts/Base.astro';
+import {
+  PERIODS,
+  TABLES,
+  axisName,
+  count,
+  periodName,
+  seasonRange,
+  type PeriodKey,
+  type Table,
+} from '../../../../lib/explore';
+
+export function getStaticPaths() {
+  return Object.values(TABLES)
+    .filter((t) => t.axes.length === 2)
+    .flatMap((table) =>
+      PERIODS.map((p) => ({
+        params: { a: table.axes[0], b: table.axes[1], period: p.key },
+        props: { table, periodKey: p.key },
+      })),
+    );
+}
+
+interface Props {
+  table: Table;
+  periodKey: PeriodKey;
+}
+
+const { table, periodKey } = Astro.props;
+const period = table.periods[periodKey];
+const [a, b] = table.axes.map(axisName);
+---
+
+<Base
+  title={`${a}×${b}の勝率・回収率（${periodName(periodKey)}）`}
+  description={`ばんえい競馬の${a}と${b}の組み合わせごとに、勝率・連対率・複勝率・回収率を集計した表です。`}
+>
+  <h1>{a} × {b}</h1>
+  <p class="meta">
+    {periodName(periodKey)}：{seasonRange(period)}・{count(period.total?.n ?? 0)} 出走
+  </p>
+  <ExploreNav axes={table.axes} period={periodKey} />
+  <ExploreMatrix table={table} period={period} />
+  <ExploreNotes matrix />
+</Base>

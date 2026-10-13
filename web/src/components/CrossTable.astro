@@ -1,0 +1,62 @@
+---
+/* 2 軸のクロス表（1 指標）。端に「全体」の行と列を付ける。
+   全体はマスの合計として export 側で集計済み。ここでは新たな数字を作らない。 */
+import ValueCell from './ValueCell.astro';
+import { heatScale } from '../lib/heat';
+import { RELIABLE_N, axisName, type Metrics, type Period, type Table } from '../lib/explore';
+
+interface Props {
+  table: Table;
+  period: Period;
+  metric: keyof Metrics;
+}
+
+const { table, period, metric } = Astro.props;
+
+// 区分の多い軸を行にする（列が増えて横にはみ出すのを抑える）。同数なら URL の順で先の軸
+const [x, y] = table.axes;
+const [rowAxis, colAxis] = table.bins[y].length > table.bins[x].length ? [y, x] : [x, y];
+const key = (r: string, c: string) => `${r}\u0000${c}`;
+const cells = new Map(period.cells.map((c) => [key(String(c[rowAxis]), String(c[colAxis])), c]));
+const rowTotal = new Map((period.margins?.[rowAxis] ?? []).map((m) => [String(m[rowAxis]), m]));
+const colTotal = new Map((period.margins?.[colAxis] ?? []).map((m) => [String(m[colAxis]), m]));
+const heat = heatScale(period.cells.filter((c) => c.n >= RELIABLE_N).map((c) => c[metric]));
+const cellClass = (n: number, v: number) => (n >= RELIABLE_N ? `heat-${heat(v)}` : 'low-n');
+---
+
+<div class="matrix">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">{axisName(rowAxis)} ＼ {axisName(colAxis)}</th>
+        {table.bins[colAxis].map((c) => <th scope="col">{c}</th>)}
+        <th scope="col" class="total">全体</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        table.bins[rowAxis].map((r) => (
+          <tr>
+            <th scope="row">{r}</th>
+            {table.bins[colAxis].map((c) => {
+              const cell = cells.get(key(r, c));
+              return (
+                <ValueCell
+                  row={cell}
+                  metric={metric}
+                  class={cell ? cellClass(cell.n, cell[metric]) : ''}
+                />
+              );
+            })}
+            <ValueCell row={rowTotal.get(r)} metric={metric} class="total" />
+          </tr>
+        ))
+      }
+      <tr class="total">
+        <th scope="row">全体</th>
+        {table.bins[colAxis].map((c) => <ValueCell row={colTotal.get(c)} metric={metric} />)}
+        <ValueCell row={period.total} metric={metric} class="total" />
+      </tr>
+    </tbody>
+  </table>
+</div>

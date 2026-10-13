@@ -1,0 +1,61 @@
+---
+/* 軸と期間の切り替え。すべて静的ページへのリンク。 */
+import {
+  AXES,
+  PERIODS,
+  axisName,
+  pairUrl,
+  singleUrl,
+  type PeriodKey,
+} from '../lib/explore';
+
+interface Props {
+  axes: string[];
+  period: PeriodKey;
+}
+
+const { axes, period } = Astro.props;
+const urlFor = (keys: string[], p: PeriodKey) =>
+  keys.length === 2 ? pairUrl(keys[0], keys[1], p) : singleUrl(keys[0], p);
+const here = urlFor(axes, period);
+const current = (url: string) => (url === here ? 'page' : undefined);
+---
+
+<nav aria-label="表の切り替え">
+  {
+    axes.map((a) => (
+      <p class="axis-links">
+        {axisName(a)} と組み合わせる：
+        {AXES.filter((o) => o.key !== a).map((o) => {
+          const url = pairUrl(a, o.key, period);
+          return (
+            <a href={url} aria-current={current(url)}>
+              {o.name}
+            </a>
+          );
+        })}
+      </p>
+    ))
+  }
+  {
+    axes.length === 2 && (
+      <p class="axis-links">
+        1 つの条件で見る：
+        {axes.map((a) => <a href={singleUrl(a, period)}>{axisName(a)}</a>)}
+      </p>
+    )
+  }
+  <p class="axis-links">
+    期間：
+    {
+      PERIODS.map((p) => {
+        const url = urlFor(axes, p.key);
+        return (
+          <a href={url} aria-current={current(url)}>
+            {p.name}
+          </a>
+        );
+      })
+    }
+  </p>
+</nav>

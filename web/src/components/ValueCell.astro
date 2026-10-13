@@ -1,0 +1,23 @@
+---
+/* 率と出走数を上下に並べたマス。row が無ければ「—」（0 件のマスは JSON に入らない）。 */
+import { count, pct, type Metrics } from '../lib/explore';
+
+interface Props {
+  row?: Metrics | null;
+  metric: keyof Metrics;
+  class?: string;
+}
+
+const { row, metric, class: cls = '' } = Astro.props;
+---
+
+{
+  row ? (
+    <td class={cls}>
+      <span class="v">{pct(row[metric])}</span>
+      <span class="n">{count(row.n)}</span>
+    </td>
+  ) : (
+    <td class={`${cls} empty`.trim()}>—</td>
+  )
+}

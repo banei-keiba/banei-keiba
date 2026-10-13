@@ -1,0 +1,73 @@
+---
+import ExploreNotes from '../../components/ExploreNotes.astro';
+import Base from '../../layouts/Base.astro';
+import { AXES, TABLES, axisName, pairUrl, singleUrl } from '../../lib/explore';
+
+const tables = Object.values(TABLES);
+const singles = AXES.filter((a) => tables.some((t) => t.axes.length === 1 && t.axes[0] === a.key));
+const pairs = tables.filter((t) => t.axes.length === 2);
+const through = tables[0]?.through_season;
+---
+
+<Base
+  title="条件で探す"
+  description="ばんえい競馬の勝率・連対率・複勝率・回収率を、人気・馬番・馬場水分などの条件の組み合わせで集計した表の一覧です。"
+>
+  <h1>条件で探す</h1>
+  <p class="lede">
+    人気・馬番・重量差・馬齢・性別・馬場水分・天候・月のうち 1 つか 2 つを選んで、
+    勝率・連対率・複勝率・回収率を表で見られます。
+  </p>
+  {
+    through && (
+      <p class="meta">
+        {through} シーズン（{through} 年 4 月〜{through + 1} 年 3 月）までを集計
+      </p>
+    )
+  }
+
+  <h2>1 つの条件で見る</h2>
+  <ul class="explore-links">
+    {singles.map((a) => <li><a href={singleUrl(a.key, 'all')}>{a.name}</a></li>)}
+  </ul>
+
+  <h2>2 つの条件を組み合わせる</h2>
+  {
+    AXES.map((a) => {
+      const mine = pairs.filter((t) => t.axes[0] === a.key);
+      return (
+        mine.length > 0 && (
+          <p class="axis-links">
+            {a.name} ×{' '}
+            {mine.map((t) => (
+              <a href={pairUrl(t.axes[0], t.axes[1], 'all')}>{axisName(t.axes[1])}</a>
+            ))}
+          </p>
+        )
+      );
+    })
+  }
+
+  <h2>何を数えているか</h2>
+  <p>
+    取消・除外を除いた全出走です。競走中止・失格も、馬券は外れとして数えています。
+    複勝率は「複勝の払戻対象になった割合」で、7 頭立て以下では 2 着まで、8 頭立て以上では
+    3 着までです。回収率は、100 円ずつ買い続けたときの払戻の合計を、買った金額で割ったものです。
+  </p>
+
+  <h2>年に 1 回だけ更新します</h2>
+  <p>
+    集計は終わったシーズン（4 月〜翌 3 月）までで、5 月に 1 回だけ更新します。毎日更新すると、
+    前日との差からその日のレース結果が読み取れてしまうためです（このサイトは個別レースの
+    結果を掲載しない方針です）。
+  </p>
+
+  <h2>区分をまとめている表があります</h2>
+  <p>
+    どの表も、シーズンごとに数えて各マスが 0 件か 30 件以上になるよう、件数の少ない区分を
+    隣の区分とまとめています（例：9〜10 番人気）。マスを消すだけだと、合計との差から少ない
+    件数の集計が割り出せてしまうためです。
+  </p>
+
+  <ExploreNotes about={false} />
+</Base>

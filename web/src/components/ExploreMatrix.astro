@@ -1,0 +1,32 @@
+---
+/* 指標のタブ。ラジオボタンと CSS だけで切り替える（JS を配信しない。global.css の .metric-tabs）。 */
+import CrossTable from './CrossTable.astro';
+import { METRICS, type Period, type Table } from '../lib/explore';
+
+interface Props {
+  table: Table;
+  period: Period;
+}
+
+const { table, period } = Astro.props;
+---
+
+<div class="metric-tabs" role="group" aria-label="指標">
+  {
+    METRICS.map((m, i) => (
+      <>
+        <input type="radio" name="metric" id={`metric-${m.key}`} checked={i === 0} />
+        <label for={`metric-${m.key}`}>{m.name}</label>
+      </>
+    ))
+  }
+  <div class="panels">
+    {
+      METRICS.map((m) => (
+        <div class="panel">
+          <CrossTable table={table} period={period} metric={m.key} />
+        </div>
+      ))
+    }
+  </div>
+</div>
