@@ -1,0 +1,2116 @@
+{
+  "axes": [
+    "age",
+    "month"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "age": [
+      "2歳",
+      "3歳",
+      "4歳",
+      "5歳",
+      "6歳",
+      "7歳",
+      "8歳",
+      "9歳〜"
+    ],
+    "month": [
+      "4〜5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+      "1月",
+      "2月",
+      "3月"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "month": "4〜5月",
+          "n": 5665,
+          "win_rate": 11.4,
+          "top2_rate": 22.8,
+          "place_rate": 32.9,
+          "win_roi": 66.2,
+          "place_roi": 69.7
+        },
+        {
+          "age": "2歳",
+          "month": "6月",
+          "n": 7078,
+          "win_rate": 11.2,
+          "top2_rate": 22.4,
+          "place_rate": 32.6,
+          "win_roi": 70.1,
+          "place_roi": 78.4
+        },
+        {
+          "age": "2歳",
+          "month": "7月",
+          "n": 7974,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.3,
+          "win_roi": 76.8,
+          "place_roi": 81.8
+        },
+        {
+          "age": "2歳",
+          "month": "8月",
+          "n": 8118,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.2,
+          "win_roi": 79.2,
+          "place_roi": 78.8
+        },
+        {
+          "age": "2歳",
+          "month": "9月",
+          "n": 7798,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.1,
+          "win_roi": 78.1,
+          "place_roi": 78.8
+        },
+        {
+          "age": "2歳",
+          "month": "10月",
+          "n": 8209,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 32.0,
+          "win_roi": 74.7,
+          "place_roi": 79.3
+        },
+        {
+          "age": "2歳",
+          "month": "11月",
+          "n": 7944,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.1,
+          "win_roi": 77.8,
+          "place_roi": 76.0
+        },
+        {
+          "age": "2歳",
+          "month": "12月",
+          "n": 8850,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 78.2,
+          "place_roi": 78.7
+        },
+        {
+          "age": "3歳",
+          "month": "4〜5月",
+          "n": 8434,
+          "win_rate": 12.3,
+          "top2_rate": 23.8,
+          "place_rate": 34.3,
+          "win_roi": 70.1,
+          "place_roi": 73.0
+        },
+        {
+          "age": "3歳",
+          "month": "6月",
+          "n": 5357,
+          "win_rate": 11.9,
+          "top2_rate": 22.5,
+          "place_rate": 32.4,
+          "win_roi": 64.2,
+          "place_roi": 71.8
+        },
+        {
+          "age": "3歳",
+          "month": "7月",
+          "n": 5437,
+          "win_rate": 11.9,
+          "top2_rate": 23.5,
+          "place_rate": 34.1,
+          "win_roi": 66.5,
+          "place_roi": 72.4
+        },
+        {
+          "age": "3歳",
+          "month": "8月",
+          "n": 5544,
+          "win_rate": 11.8,
+          "top2_rate": 23.0,
+          "place_rate": 32.8,
+          "win_roi": 66.7,
+          "place_roi": 72.6
+        },
+        {
+          "age": "3歳",
+          "month": "9月",
+          "n": 5197,
+          "win_rate": 13.1,
+          "top2_rate": 25.1,
+          "place_rate": 35.8,
+          "win_roi": 76.4,
+          "place_roi": 78.7
+        },
+        {
+          "age": "3歳",
+          "month": "10月",
+          "n": 5459,
+          "win_rate": 12.1,
+          "top2_rate": 23.7,
+          "place_rate": 34.5,
+          "win_roi": 75.4,
+          "place_roi": 76.1
+        },
+        {
+          "age": "3歳",
+          "month": "11月",
+          "n": 5326,
+          "win_rate": 12.3,
+          "top2_rate": 23.8,
+          "place_rate": 34.4,
+          "win_roi": 76.3,
+          "place_roi": 74.5
+        },
+        {
+          "age": "3歳",
+          "month": "12月",
+          "n": 5934,
+          "win_rate": 12.3,
+          "top2_rate": 24.0,
+          "place_rate": 34.8,
+          "win_roi": 81.1,
+          "place_roi": 77.6
+        },
+        {
+          "age": "3歳",
+          "month": "1月",
+          "n": 9440,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.2,
+          "win_roi": 72.6,
+          "place_roi": 77.3
+        },
+        {
+          "age": "3歳",
+          "month": "2月",
+          "n": 6936,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.5,
+          "win_roi": 81.6,
+          "place_roi": 79.6
+        },
+        {
+          "age": "3歳",
+          "month": "3月",
+          "n": 6157,
+          "win_rate": 11.3,
+          "top2_rate": 22.5,
+          "place_rate": 32.8,
+          "win_roi": 75.2,
+          "place_roi": 80.1
+        },
+        {
+          "age": "4歳",
+          "month": "4〜5月",
+          "n": 6360,
+          "win_rate": 12.5,
+          "top2_rate": 25.2,
+          "place_rate": 36.9,
+          "win_roi": 76.9,
+          "place_roi": 81.1
+        },
+        {
+          "age": "4歳",
+          "month": "6月",
+          "n": 4033,
+          "win_rate": 13.5,
+          "top2_rate": 26.8,
+          "place_rate": 38.7,
+          "win_roi": 83.5,
+          "place_roi": 83.9
+        },
+        {
+          "age": "4歳",
+          "month": "7月",
+          "n": 4027,
+          "win_rate": 14.2,
+          "top2_rate": 26.8,
+          "place_rate": 38.0,
+          "win_roi": 81.6,
+          "place_roi": 78.7
+        },
+        {
+          "age": "4歳",
+          "month": "8月",
+          "n": 4097,
+          "win_rate": 12.7,
+          "top2_rate": 25.3,
+          "place_rate": 37.4,
+          "win_roi": 81.2,
+          "place_roi": 78.2
+        },
+        {
+          "age": "4歳",
+          "month": "9月",
+          "n": 3911,
+          "win_rate": 13.6,
+          "top2_rate": 25.7,
+          "place_rate": 37.0,
+          "win_roi": 72.8,
+          "place_roi": 76.9
+        },
+        {
+          "age": "4歳",
+          "month": "10月",
+          "n": 4050,
+          "win_rate": 13.3,
+          "top2_rate": 25.3,
+          "place_rate": 36.3,
+          "win_roi": 89.0,
+          "place_roi": 77.5
+        },
+        {
+          "age": "4歳",
+          "month": "11月",
+          "n": 3951,
+          "win_rate": 12.6,
+          "top2_rate": 24.8,
+          "place_rate": 35.8,
+          "win_roi": 76.9,
+          "place_roi": 80.6
+        },
+        {
+          "age": "4歳",
+          "month": "12月",
+          "n": 4392,
+          "win_rate": 12.5,
+          "top2_rate": 24.1,
+          "place_rate": 35.4,
+          "win_roi": 80.3,
+          "place_roi": 80.4
+        },
+        {
+          "age": "4歳",
+          "month": "1月",
+          "n": 6678,
+          "win_rate": 12.7,
+          "top2_rate": 24.5,
+          "place_rate": 35.5,
+          "win_roi": 77.4,
+          "place_roi": 77.7
+        },
+        {
+          "age": "4歳",
+          "month": "2月",
+          "n": 5059,
+          "win_rate": 12.9,
+          "top2_rate": 24.8,
+          "place_rate": 35.7,
+          "win_roi": 75.6,
+          "place_roi": 78.0
+        },
+        {
+          "age": "4歳",
+          "month": "3月",
+          "n": 4999,
+          "win_rate": 13.2,
+          "top2_rate": 25.9,
+          "place_rate": 36.5,
+          "win_roi": 86.1,
+          "place_roi": 80.9
+        },
+        {
+          "age": "5歳",
+          "month": "4〜5月",
+          "n": 4576,
+          "win_rate": 5.4,
+          "top2_rate": 12.9,
+          "place_rate": 21.7,
+          "win_roi": 48.1,
+          "place_roi": 62.5
+        },
+        {
+          "age": "5歳",
+          "month": "6月",
+          "n": 2657,
+          "win_rate": 6.5,
+          "top2_rate": 15.2,
+          "place_rate": 24.9,
+          "win_roi": 58.8,
+          "place_roi": 64.9
+        },
+        {
+          "age": "5歳",
+          "month": "7月",
+          "n": 2664,
+          "win_rate": 7.4,
+          "top2_rate": 17.3,
+          "place_rate": 26.4,
+          "win_roi": 53.8,
+          "place_roi": 65.5
+        },
+        {
+          "age": "5歳",
+          "month": "8月",
+          "n": 2643,
+          "win_rate": 8.4,
+          "top2_rate": 19.3,
+          "place_rate": 29.1,
+          "win_roi": 60.0,
+          "place_roi": 67.3
+        },
+        {
+          "age": "5歳",
+          "month": "9月",
+          "n": 2504,
+          "win_rate": 7.8,
+          "top2_rate": 17.5,
+          "place_rate": 27.1,
+          "win_roi": 65.4,
+          "place_roi": 64.6
+        },
+        {
+          "age": "5歳",
+          "month": "10月",
+          "n": 2709,
+          "win_rate": 9.2,
+          "top2_rate": 19.7,
+          "place_rate": 30.1,
+          "win_roi": 60.3,
+          "place_roi": 70.5
+        },
+        {
+          "age": "5歳",
+          "month": "11月",
+          "n": 2607,
+          "win_rate": 9.0,
+          "top2_rate": 18.9,
+          "place_rate": 29.1,
+          "win_roi": 61.8,
+          "place_roi": 70.2
+        },
+        {
+          "age": "5歳",
+          "month": "12月",
+          "n": 2848,
+          "win_rate": 8.9,
+          "top2_rate": 19.2,
+          "place_rate": 28.1,
+          "win_roi": 70.5,
+          "place_roi": 68.9
+        },
+        {
+          "age": "5歳",
+          "month": "1月",
+          "n": 4740,
+          "win_rate": 9.6,
+          "top2_rate": 19.6,
+          "place_rate": 29.3,
+          "win_roi": 65.1,
+          "place_roi": 65.9
+        },
+        {
+          "age": "5歳",
+          "month": "2月",
+          "n": 3752,
+          "win_rate": 10.3,
+          "top2_rate": 20.6,
+          "place_rate": 30.8,
+          "win_roi": 71.4,
+          "place_roi": 74.6
+        },
+        {
+          "age": "5歳",
+          "month": "3月",
+          "n": 3614,
+          "win_rate": 10.3,
+          "top2_rate": 20.5,
+          "place_rate": 30.3,
+          "win_roi": 73.5,
+          "place_roi": 72.5
+        },
+        {
+          "age": "6歳",
+          "month": "4〜5月",
+          "n": 3449,
+          "win_rate": 10.1,
+          "top2_rate": 21.5,
+          "place_rate": 31.5,
+          "win_roi": 74.5,
+          "place_roi": 75.3
+        },
+        {
+          "age": "6歳",
+          "month": "6月",
+          "n": 2052,
+          "win_rate": 9.9,
+          "top2_rate": 20.4,
+          "place_rate": 30.7,
+          "win_roi": 71.9,
+          "place_roi": 75.0
+        },
+        {
+          "age": "6歳",
+          "month": "7月",
+          "n": 2020,
+          "win_rate": 9.0,
+          "top2_rate": 17.9,
+          "place_rate": 28.5,
+          "win_roi": 65.6,
+          "place_roi": 68.9
+        },
+        {
+          "age": "6歳",
+          "month": "8月",
+          "n": 2025,
+          "win_rate": 10.1,
+          "top2_rate": 20.7,
+          "place_rate": 29.7,
+          "win_roi": 62.4,
+          "place_roi": 68.8
+        },
+        {
+          "age": "6歳",
+          "month": "9月",
+          "n": 1896,
+          "win_rate": 9.2,
+          "top2_rate": 19.3,
+          "place_rate": 30.0,
+          "win_roi": 54.6,
+          "place_roi": 71.1
+        },
+        {
+          "age": "6歳",
+          "month": "10月",
+          "n": 2055,
+          "win_rate": 8.7,
+          "top2_rate": 18.1,
+          "place_rate": 28.2,
+          "win_roi": 66.0,
+          "place_roi": 65.3
+        },
+        {
+          "age": "6歳",
+          "month": "11月",
+          "n": 1905,
+          "win_rate": 9.9,
+          "top2_rate": 19.8,
+          "place_rate": 30.7,
+          "win_roi": 77.7,
+          "place_roi": 73.4
+        },
+        {
+          "age": "6歳",
+          "month": "12月",
+          "n": 2098,
+          "win_rate": 9.8,
+          "top2_rate": 20.7,
+          "place_rate": 31.5,
+          "win_roi": 60.1,
+          "place_roi": 74.0
+        },
+        {
+          "age": "6歳",
+          "month": "1月",
+          "n": 3103,
+          "win_rate": 9.6,
+          "top2_rate": 19.8,
+          "place_rate": 30.7,
+          "win_roi": 65.8,
+          "place_roi": 74.1
+        },
+        {
+          "age": "6歳",
+          "month": "2月",
+          "n": 2421,
+          "win_rate": 10.3,
+          "top2_rate": 21.9,
+          "place_rate": 31.9,
+          "win_roi": 71.6,
+          "place_roi": 75.5
+        },
+        {
+          "age": "6歳",
+          "month": "3月",
+          "n": 2313,
+          "win_rate": 10.9,
+          "top2_rate": 22.0,
+          "place_rate": 31.8,
+          "win_roi": 74.3,
+          "place_roi": 72.2
+        },
+        {
+          "age": "7歳",
+          "month": "4〜5月",
+          "n": 2726,
+          "win_rate": 12.8,
+          "top2_rate": 24.9,
+          "place_rate": 35.3,
+          "win_roi": 77.5,
+          "place_roi": 75.0
+        },
+        {
+          "age": "7歳",
+          "month": "6月",
+          "n": 1582,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.7,
+          "win_roi": 55.2,
+          "place_roi": 69.0
+        },
+        {
+          "age": "7歳",
+          "month": "7月",
+          "n": 1533,
+          "win_rate": 11.4,
+          "top2_rate": 22.6,
+          "place_rate": 32.9,
+          "win_roi": 81.4,
+          "place_roi": 75.3
+        },
+        {
+          "age": "7歳",
+          "month": "8月",
+          "n": 1545,
+          "win_rate": 12.8,
+          "top2_rate": 22.5,
+          "place_rate": 32.2,
+          "win_roi": 103.0,
+          "place_roi": 81.4
+        },
+        {
+          "age": "7歳",
+          "month": "9月",
+          "n": 1539,
+          "win_rate": 9.6,
+          "top2_rate": 21.4,
+          "place_rate": 31.2,
+          "win_roi": 86.3,
+          "place_roi": 78.8
+        },
+        {
+          "age": "7歳",
+          "month": "10月",
+          "n": 1618,
+          "win_rate": 10.4,
+          "top2_rate": 20.3,
+          "place_rate": 30.7,
+          "win_roi": 74.5,
+          "place_roi": 76.9
+        },
+        {
+          "age": "7歳",
+          "month": "11月",
+          "n": 1532,
+          "win_rate": 9.2,
+          "top2_rate": 19.4,
+          "place_rate": 30.0,
+          "win_roi": 68.4,
+          "place_roi": 73.8
+        },
+        {
+          "age": "7歳",
+          "month": "12月",
+          "n": 1701,
+          "win_rate": 10.6,
+          "top2_rate": 21.0,
+          "place_rate": 31.3,
+          "win_roi": 69.4,
+          "place_roi": 76.3
+        },
+        {
+          "age": "7歳",
+          "month": "1月",
+          "n": 2320,
+          "win_rate": 11.5,
+          "top2_rate": 22.2,
+          "place_rate": 33.8,
+          "win_roi": 74.8,
+          "place_roi": 79.9
+        },
+        {
+          "age": "7歳",
+          "month": "2月",
+          "n": 1784,
+          "win_rate": 9.8,
+          "top2_rate": 21.0,
+          "place_rate": 31.7,
+          "win_roi": 73.3,
+          "place_roi": 74.9
+        },
+        {
+          "age": "7歳",
+          "month": "3月",
+          "n": 1752,
+          "win_rate": 9.9,
+          "top2_rate": 21.1,
+          "place_rate": 32.0,
+          "win_roi": 67.0,
+          "place_roi": 74.7
+        },
+        {
+          "age": "8歳",
+          "month": "4〜5月",
+          "n": 2074,
+          "win_rate": 15.6,
+          "top2_rate": 29.9,
+          "place_rate": 40.3,
+          "win_roi": 78.6,
+          "place_roi": 77.5
+        },
+        {
+          "age": "8歳",
+          "month": "6月",
+          "n": 1229,
+          "win_rate": 12.4,
+          "top2_rate": 23.2,
+          "place_rate": 34.6,
+          "win_roi": 83.2,
+          "place_roi": 72.5
+        },
+        {
+          "age": "8歳",
+          "month": "7月",
+          "n": 1187,
+          "win_rate": 11.9,
+          "top2_rate": 23.0,
+          "place_rate": 33.4,
+          "win_roi": 65.5,
+          "place_roi": 71.2
+        },
+        {
+          "age": "8歳",
+          "month": "8月",
+          "n": 1141,
+          "win_rate": 11.7,
+          "top2_rate": 21.6,
+          "place_rate": 33.1,
+          "win_roi": 80.5,
+          "place_roi": 73.6
+        },
+        {
+          "age": "8歳",
+          "month": "9月",
+          "n": 1127,
+          "win_rate": 9.3,
+          "top2_rate": 19.8,
+          "place_rate": 28.5,
+          "win_roi": 65.5,
+          "place_roi": 66.0
+        },
+        {
+          "age": "8歳",
+          "month": "10月",
+          "n": 1215,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 31.6,
+          "win_roi": 94.3,
+          "place_roi": 75.3
+        },
+        {
+          "age": "8歳",
+          "month": "11月",
+          "n": 1177,
+          "win_rate": 10.3,
+          "top2_rate": 20.6,
+          "place_rate": 30.1,
+          "win_roi": 65.4,
+          "place_roi": 70.8
+        },
+        {
+          "age": "8歳",
+          "month": "12月",
+          "n": 1265,
+          "win_rate": 8.8,
+          "top2_rate": 18.6,
+          "place_rate": 28.6,
+          "win_roi": 59.4,
+          "place_roi": 67.4
+        },
+        {
+          "age": "8歳",
+          "month": "1月",
+          "n": 1850,
+          "win_rate": 10.9,
+          "top2_rate": 23.1,
+          "place_rate": 32.5,
+          "win_roi": 69.9,
+          "place_roi": 73.2
+        },
+        {
+          "age": "8歳",
+          "month": "2月",
+          "n": 1443,
+          "win_rate": 11.3,
+          "top2_rate": 21.0,
+          "place_rate": 31.1,
+          "win_roi": 79.0,
+          "place_roi": 74.2
+        },
+        {
+          "age": "8歳",
+          "month": "3月",
+          "n": 1346,
+          "win_rate": 11.0,
+          "top2_rate": 21.7,
+          "place_rate": 31.6,
+          "win_roi": 78.7,
+          "place_roi": 79.9
+        },
+        {
+          "age": "9歳〜",
+          "month": "4〜5月",
+          "n": 2899,
+          "win_rate": 10.7,
+          "top2_rate": 20.0,
+          "place_rate": 30.8,
+          "win_roi": 61.0,
+          "place_roi": 73.0
+        },
+        {
+          "age": "9歳〜",
+          "month": "6月",
+          "n": 1632,
+          "win_rate": 9.5,
+          "top2_rate": 19.9,
+          "place_rate": 29.1,
+          "win_roi": 53.6,
+          "place_roi": 65.9
+        },
+        {
+          "age": "9歳〜",
+          "month": "7月",
+          "n": 1608,
+          "win_rate": 7.0,
+          "top2_rate": 16.0,
+          "place_rate": 24.9,
+          "win_roi": 50.7,
+          "place_roi": 62.0
+        },
+        {
+          "age": "9歳〜",
+          "month": "8月",
+          "n": 1608,
+          "win_rate": 7.7,
+          "top2_rate": 17.8,
+          "place_rate": 27.4,
+          "win_roi": 48.8,
+          "place_roi": 68.8
+        },
+        {
+          "age": "9歳〜",
+          "month": "9月",
+          "n": 1477,
+          "win_rate": 7.4,
+          "top2_rate": 15.2,
+          "place_rate": 24.7,
+          "win_roi": 52.5,
+          "place_roi": 59.8
+        },
+        {
+          "age": "9歳〜",
+          "month": "10月",
+          "n": 1558,
+          "win_rate": 7.4,
+          "top2_rate": 16.7,
+          "place_rate": 25.2,
+          "win_roi": 57.2,
+          "place_roi": 66.4
+        },
+        {
+          "age": "9歳〜",
+          "month": "11月",
+          "n": 1468,
+          "win_rate": 8.5,
+          "top2_rate": 17.6,
+          "place_rate": 26.9,
+          "win_roi": 63.0,
+          "place_roi": 70.2
+        },
+        {
+          "age": "9歳〜",
+          "month": "12月",
+          "n": 1622,
+          "win_rate": 8.6,
+          "top2_rate": 17.2,
+          "place_rate": 26.9,
+          "win_roi": 73.8,
+          "place_roi": 69.4
+        },
+        {
+          "age": "9歳〜",
+          "month": "1月",
+          "n": 3172,
+          "win_rate": 10.2,
+          "top2_rate": 20.6,
+          "place_rate": 30.7,
+          "win_roi": 72.8,
+          "place_roi": 75.4
+        },
+        {
+          "age": "9歳〜",
+          "month": "2月",
+          "n": 2424,
+          "win_rate": 10.0,
+          "top2_rate": 20.8,
+          "place_rate": 30.9,
+          "win_roi": 87.3,
+          "place_roi": 79.7
+        },
+        {
+          "age": "9歳〜",
+          "month": "3月",
+          "n": 2228,
+          "win_rate": 9.2,
+          "top2_rate": 18.9,
+          "place_rate": 29.1,
+          "win_roi": 59.4,
+          "place_roi": 68.9
+        }
+      ],
+      "margins": {
+        "age": [
+          {
+            "age": "2歳",
+            "n": 61636,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 75.6,
+            "place_roi": 78.0
+          },
+          {
+            "age": "3歳",
+            "n": 69221,
+            "win_rate": 11.8,
+            "top2_rate": 23.1,
+            "place_rate": 33.6,
+            "win_roi": 73.3,
+            "place_roi": 75.9
+          },
+          {
+            "age": "4歳",
+            "n": 51557,
+            "win_rate": 13.0,
+            "top2_rate": 25.3,
+            "place_rate": 36.6,
+            "win_roi": 79.9,
+            "place_roi": 79.4
+          },
+          {
+            "age": "5歳",
+            "n": 35314,
+            "win_rate": 8.5,
+            "top2_rate": 18.2,
+            "place_rate": 27.8,
+            "win_roi": 62.6,
+            "place_roi": 67.9
+          },
+          {
+            "age": "6歳",
+            "n": 25337,
+            "win_rate": 9.8,
+            "top2_rate": 20.3,
+            "place_rate": 30.6,
+            "win_roi": 68.1,
+            "place_roi": 72.4
+          },
+          {
+            "age": "7歳",
+            "n": 19632,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.3,
+            "win_roi": 75.4,
+            "place_roi": 76.0
+          },
+          {
+            "age": "8歳",
+            "n": 15054,
+            "win_rate": 11.5,
+            "top2_rate": 22.7,
+            "place_rate": 32.8,
+            "win_roi": 74.7,
+            "place_roi": 73.3
+          },
+          {
+            "age": "9歳〜",
+            "n": 21696,
+            "win_rate": 9.0,
+            "top2_rate": 18.7,
+            "place_rate": 28.4,
+            "win_roi": 63.5,
+            "place_roi": 70.2
+          }
+        ],
+        "month": [
+          {
+            "month": "4〜5月",
+            "n": 36183,
+            "win_rate": 11.2,
+            "top2_rate": 22.4,
+            "place_rate": 32.8,
+            "win_roi": 68.6,
+            "place_roi": 73.2
+          },
+          {
+            "month": "6月",
+            "n": 25620,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 68.6,
+            "place_roi": 74.5
+          },
+          {
+            "month": "7月",
+            "n": 26450,
+            "win_rate": 11.0,
+            "top2_rate": 21.9,
+            "place_rate": 32.3,
+            "win_roi": 70.4,
+            "place_roi": 74.7
+          },
+          {
+            "month": "8月",
+            "n": 26721,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 73.3,
+            "place_roi": 74.9
+          },
+          {
+            "month": "9月",
+            "n": 25449,
+            "win_rate": 11.0,
+            "top2_rate": 21.9,
+            "place_rate": 32.3,
+            "win_roi": 72.4,
+            "place_roi": 74.8
+          },
+          {
+            "month": "10月",
+            "n": 26873,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 74.7,
+            "place_roi": 75.3
+          },
+          {
+            "month": "11月",
+            "n": 25910,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.2,
+            "win_roi": 73.8,
+            "place_roi": 74.9
+          },
+          {
+            "month": "12月",
+            "n": 28710,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.2,
+            "win_roi": 75.4,
+            "place_roi": 76.3
+          },
+          {
+            "month": "1月",
+            "n": 31303,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.3,
+            "win_roi": 71.8,
+            "place_roi": 75.1
+          },
+          {
+            "month": "2月",
+            "n": 23819,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 77.5,
+            "place_roi": 77.4
+          },
+          {
+            "month": "3月",
+            "n": 22409,
+            "win_rate": 11.2,
+            "top2_rate": 22.4,
+            "place_rate": 32.6,
+            "win_roi": 75.3,
+            "place_roi": 76.7
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "month": "4〜5月",
+          "n": 340,
+          "win_rate": 11.2,
+          "top2_rate": 22.4,
+          "place_rate": 32.9,
+          "win_roi": 52.6,
+          "place_roi": 58.4
+        },
+        {
+          "age": "2歳",
+          "month": "6月",
+          "n": 1124,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 71.6,
+          "place_roi": 79.5
+        },
+        {
+          "age": "2歳",
+          "month": "7月",
+          "n": 1423,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.0,
+          "win_roi": 71.4,
+          "place_roi": 78.4
+        },
+        {
+          "age": "2歳",
+          "month": "8月",
+          "n": 1483,
+          "win_rate": 10.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.5,
+          "win_roi": 79.7,
+          "place_roi": 81.1
+        },
+        {
+          "age": "2歳",
+          "month": "9月",
+          "n": 1577,
+          "win_rate": 10.4,
+          "top2_rate": 20.8,
+          "place_rate": 31.1,
+          "win_roi": 89.5,
+          "place_roi": 83.8
+        },
+        {
+          "age": "2歳",
+          "month": "10月",
+          "n": 1567,
+          "win_rate": 10.5,
+          "top2_rate": 20.9,
+          "place_rate": 31.4,
+          "win_roi": 77.7,
+          "place_roi": 85.8
+        },
+        {
+          "age": "2歳",
+          "month": "11月",
+          "n": 1517,
+          "win_rate": 10.4,
+          "top2_rate": 20.8,
+          "place_rate": 31.2,
+          "win_roi": 78.5,
+          "place_roi": 77.9
+        },
+        {
+          "age": "2歳",
+          "month": "12月",
+          "n": 1621,
+          "win_rate": 10.4,
+          "top2_rate": 20.9,
+          "place_rate": 31.2,
+          "win_roi": 76.6,
+          "place_roi": 78.1
+        },
+        {
+          "age": "3歳",
+          "month": "4〜5月",
+          "n": 1483,
+          "win_rate": 12.7,
+          "top2_rate": 24.5,
+          "place_rate": 35.1,
+          "win_roi": 68.0,
+          "place_roi": 74.0
+        },
+        {
+          "age": "3歳",
+          "month": "6月",
+          "n": 1040,
+          "win_rate": 11.9,
+          "top2_rate": 21.9,
+          "place_rate": 31.2,
+          "win_roi": 60.1,
+          "place_roi": 66.5
+        },
+        {
+          "age": "3歳",
+          "month": "7月",
+          "n": 1005,
+          "win_rate": 11.5,
+          "top2_rate": 23.7,
+          "place_rate": 34.0,
+          "win_roi": 52.6,
+          "place_roi": 72.2
+        },
+        {
+          "age": "3歳",
+          "month": "8月",
+          "n": 943,
+          "win_rate": 10.6,
+          "top2_rate": 21.1,
+          "place_rate": 31.7,
+          "win_roi": 67.7,
+          "place_roi": 76.4
+        },
+        {
+          "age": "3歳",
+          "month": "9月",
+          "n": 988,
+          "win_rate": 12.2,
+          "top2_rate": 24.1,
+          "place_rate": 35.1,
+          "win_roi": 80.7,
+          "place_roi": 76.4
+        },
+        {
+          "age": "3歳",
+          "month": "10月",
+          "n": 895,
+          "win_rate": 11.4,
+          "top2_rate": 22.3,
+          "place_rate": 33.1,
+          "win_roi": 89.7,
+          "place_roi": 77.0
+        },
+        {
+          "age": "3歳",
+          "month": "11月",
+          "n": 881,
+          "win_rate": 11.7,
+          "top2_rate": 22.5,
+          "place_rate": 33.0,
+          "win_roi": 76.1,
+          "place_roi": 77.6
+        },
+        {
+          "age": "3歳",
+          "month": "12月",
+          "n": 946,
+          "win_rate": 12.2,
+          "top2_rate": 24.2,
+          "place_rate": 34.6,
+          "win_roi": 81.0,
+          "place_roi": 88.2
+        },
+        {
+          "age": "3歳",
+          "month": "1月",
+          "n": 1703,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.5,
+          "win_roi": 71.2,
+          "place_roi": 77.5
+        },
+        {
+          "age": "3歳",
+          "month": "2月",
+          "n": 1339,
+          "win_rate": 10.6,
+          "top2_rate": 21.2,
+          "place_rate": 31.7,
+          "win_roi": 88.5,
+          "place_roi": 81.4
+        },
+        {
+          "age": "3歳",
+          "month": "3月",
+          "n": 1048,
+          "win_rate": 11.0,
+          "top2_rate": 21.8,
+          "place_rate": 32.4,
+          "win_roi": 82.0,
+          "place_roi": 84.2
+        },
+        {
+          "age": "4歳",
+          "month": "4〜5月",
+          "n": 1189,
+          "win_rate": 13.5,
+          "top2_rate": 25.9,
+          "place_rate": 38.4,
+          "win_roi": 67.6,
+          "place_roi": 83.5
+        },
+        {
+          "age": "4歳",
+          "month": "6月",
+          "n": 770,
+          "win_rate": 12.6,
+          "top2_rate": 26.5,
+          "place_rate": 39.5,
+          "win_roi": 75.3,
+          "place_roi": 85.1
+        },
+        {
+          "age": "4歳",
+          "month": "7月",
+          "n": 721,
+          "win_rate": 14.6,
+          "top2_rate": 26.6,
+          "place_rate": 37.6,
+          "win_roi": 79.5,
+          "place_roi": 74.4
+        },
+        {
+          "age": "4歳",
+          "month": "8月",
+          "n": 706,
+          "win_rate": 12.6,
+          "top2_rate": 23.9,
+          "place_rate": 34.8,
+          "win_roi": 78.3,
+          "place_roi": 74.2
+        },
+        {
+          "age": "4歳",
+          "month": "9月",
+          "n": 659,
+          "win_rate": 14.4,
+          "top2_rate": 25.5,
+          "place_rate": 36.3,
+          "win_roi": 76.7,
+          "place_roi": 76.5
+        },
+        {
+          "age": "4歳",
+          "month": "10月",
+          "n": 673,
+          "win_rate": 14.1,
+          "top2_rate": 25.6,
+          "place_rate": 35.1,
+          "win_roi": 99.6,
+          "place_roi": 76.4
+        },
+        {
+          "age": "4歳",
+          "month": "11月",
+          "n": 664,
+          "win_rate": 12.0,
+          "top2_rate": 24.5,
+          "place_rate": 36.6,
+          "win_roi": 89.2,
+          "place_roi": 84.7
+        },
+        {
+          "age": "4歳",
+          "month": "12月",
+          "n": 696,
+          "win_rate": 12.1,
+          "top2_rate": 22.4,
+          "place_rate": 33.3,
+          "win_roi": 92.0,
+          "place_roi": 83.3
+        },
+        {
+          "age": "4歳",
+          "month": "1月",
+          "n": 1000,
+          "win_rate": 12.6,
+          "top2_rate": 25.3,
+          "place_rate": 35.8,
+          "win_roi": 76.2,
+          "place_roi": 80.0
+        },
+        {
+          "age": "4歳",
+          "month": "2月",
+          "n": 757,
+          "win_rate": 12.5,
+          "top2_rate": 24.2,
+          "place_rate": 34.9,
+          "win_roi": 82.6,
+          "place_roi": 85.2
+        },
+        {
+          "age": "4歳",
+          "month": "3月",
+          "n": 718,
+          "win_rate": 12.0,
+          "top2_rate": 24.5,
+          "place_rate": 35.9,
+          "win_roi": 84.0,
+          "place_roi": 81.1
+        },
+        {
+          "age": "5歳",
+          "month": "4〜5月",
+          "n": 822,
+          "win_rate": 6.2,
+          "top2_rate": 14.0,
+          "place_rate": 22.3,
+          "win_roi": 49.8,
+          "place_roi": 65.1
+        },
+        {
+          "age": "5歳",
+          "month": "6月",
+          "n": 531,
+          "win_rate": 7.2,
+          "top2_rate": 15.4,
+          "place_rate": 25.0,
+          "win_roi": 65.6,
+          "place_roi": 64.4
+        },
+        {
+          "age": "5歳",
+          "month": "7月",
+          "n": 484,
+          "win_rate": 5.4,
+          "top2_rate": 13.6,
+          "place_rate": 22.5,
+          "win_roi": 37.1,
+          "place_roi": 51.0
+        },
+        {
+          "age": "5歳",
+          "month": "8月",
+          "n": 442,
+          "win_rate": 8.1,
+          "top2_rate": 19.2,
+          "place_rate": 29.2,
+          "win_roi": 53.0,
+          "place_roi": 61.4
+        },
+        {
+          "age": "5歳",
+          "month": "9月",
+          "n": 450,
+          "win_rate": 4.7,
+          "top2_rate": 14.0,
+          "place_rate": 22.9,
+          "win_roi": 21.3,
+          "place_roi": 44.5
+        },
+        {
+          "age": "5歳",
+          "month": "10月",
+          "n": 457,
+          "win_rate": 8.1,
+          "top2_rate": 19.3,
+          "place_rate": 30.6,
+          "win_roi": 36.0,
+          "place_roi": 73.3
+        },
+        {
+          "age": "5歳",
+          "month": "11月",
+          "n": 436,
+          "win_rate": 12.2,
+          "top2_rate": 24.3,
+          "place_rate": 35.6,
+          "win_roi": 101.3,
+          "place_roi": 82.2
+        },
+        {
+          "age": "5歳",
+          "month": "12月",
+          "n": 455,
+          "win_rate": 8.8,
+          "top2_rate": 21.1,
+          "place_rate": 32.7,
+          "win_roi": 44.8,
+          "place_roi": 71.4
+        },
+        {
+          "age": "5歳",
+          "month": "1月",
+          "n": 721,
+          "win_rate": 9.0,
+          "top2_rate": 17.8,
+          "place_rate": 26.8,
+          "win_roi": 53.5,
+          "place_roi": 59.5
+        },
+        {
+          "age": "5歳",
+          "month": "2月",
+          "n": 584,
+          "win_rate": 9.8,
+          "top2_rate": 20.2,
+          "place_rate": 30.5,
+          "win_roi": 69.7,
+          "place_roi": 71.3
+        },
+        {
+          "age": "5歳",
+          "month": "3月",
+          "n": 520,
+          "win_rate": 10.2,
+          "top2_rate": 20.2,
+          "place_rate": 28.3,
+          "win_roi": 92.8,
+          "place_roi": 79.7
+        },
+        {
+          "age": "6歳",
+          "month": "4〜5月",
+          "n": 623,
+          "win_rate": 8.5,
+          "top2_rate": 20.1,
+          "place_rate": 30.5,
+          "win_roi": 77.2,
+          "place_roi": 64.0
+        },
+        {
+          "age": "6歳",
+          "month": "6月",
+          "n": 383,
+          "win_rate": 9.1,
+          "top2_rate": 21.7,
+          "place_rate": 32.6,
+          "win_roi": 50.8,
+          "place_roi": 88.8
+        },
+        {
+          "age": "6歳",
+          "month": "7月",
+          "n": 340,
+          "win_rate": 9.4,
+          "top2_rate": 16.5,
+          "place_rate": 25.6,
+          "win_roi": 69.1,
+          "place_roi": 58.1
+        },
+        {
+          "age": "6歳",
+          "month": "8月",
+          "n": 314,
+          "win_rate": 11.5,
+          "top2_rate": 24.2,
+          "place_rate": 32.2,
+          "win_roi": 67.2,
+          "place_roi": 72.2
+        },
+        {
+          "age": "6歳",
+          "month": "9月",
+          "n": 313,
+          "win_rate": 8.9,
+          "top2_rate": 17.6,
+          "place_rate": 29.1,
+          "win_roi": 53.4,
+          "place_roi": 80.3
+        },
+        {
+          "age": "6歳",
+          "month": "10月",
+          "n": 321,
+          "win_rate": 10.3,
+          "top2_rate": 22.1,
+          "place_rate": 32.4,
+          "win_roi": 88.4,
+          "place_roi": 72.6
+        },
+        {
+          "age": "6歳",
+          "month": "11月",
+          "n": 312,
+          "win_rate": 9.6,
+          "top2_rate": 17.0,
+          "place_rate": 26.9,
+          "win_roi": 59.1,
+          "place_roi": 59.9
+        },
+        {
+          "age": "6歳",
+          "month": "12月",
+          "n": 320,
+          "win_rate": 10.0,
+          "top2_rate": 19.1,
+          "place_rate": 25.9,
+          "win_roi": 98.0,
+          "place_roi": 63.2
+        },
+        {
+          "age": "6歳",
+          "month": "1月",
+          "n": 477,
+          "win_rate": 11.1,
+          "top2_rate": 21.0,
+          "place_rate": 31.9,
+          "win_roi": 59.0,
+          "place_roi": 67.2
+        },
+        {
+          "age": "6歳",
+          "month": "2月",
+          "n": 397,
+          "win_rate": 10.6,
+          "top2_rate": 23.4,
+          "place_rate": 32.5,
+          "win_roi": 84.5,
+          "place_roi": 81.9
+        },
+        {
+          "age": "6歳",
+          "month": "3月",
+          "n": 309,
+          "win_rate": 12.9,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 93.9,
+          "place_roi": 73.4
+        },
+        {
+          "age": "7歳",
+          "month": "4〜5月",
+          "n": 459,
+          "win_rate": 15.7,
+          "top2_rate": 25.5,
+          "place_rate": 36.4,
+          "win_roi": 87.4,
+          "place_roi": 71.2
+        },
+        {
+          "age": "7歳",
+          "month": "6月",
+          "n": 265,
+          "win_rate": 9.1,
+          "top2_rate": 18.1,
+          "place_rate": 28.3,
+          "win_roi": 56.1,
+          "place_roi": 61.3
+        },
+        {
+          "age": "7歳",
+          "month": "7月",
+          "n": 245,
+          "win_rate": 9.8,
+          "top2_rate": 22.0,
+          "place_rate": 34.7,
+          "win_roi": 41.8,
+          "place_roi": 83.6
+        },
+        {
+          "age": "7歳",
+          "month": "8月",
+          "n": 226,
+          "win_rate": 10.2,
+          "top2_rate": 17.7,
+          "place_rate": 28.3,
+          "win_roi": 46.9,
+          "place_roi": 61.1
+        },
+        {
+          "age": "7歳",
+          "month": "9月",
+          "n": 237,
+          "win_rate": 7.2,
+          "top2_rate": 17.7,
+          "place_rate": 29.5,
+          "win_roi": 77.0,
+          "place_roi": 84.3
+        },
+        {
+          "age": "7歳",
+          "month": "10月",
+          "n": 235,
+          "win_rate": 8.5,
+          "top2_rate": 14.0,
+          "place_rate": 20.9,
+          "win_roi": 60.2,
+          "place_roi": 53.3
+        },
+        {
+          "age": "7歳",
+          "month": "11月",
+          "n": 232,
+          "win_rate": 6.9,
+          "top2_rate": 16.4,
+          "place_rate": 22.8,
+          "win_roi": 75.2,
+          "place_roi": 56.6
+        },
+        {
+          "age": "7歳",
+          "month": "12月",
+          "n": 246,
+          "win_rate": 11.4,
+          "top2_rate": 24.4,
+          "place_rate": 36.6,
+          "win_roi": 84.1,
+          "place_roi": 92.8
+        },
+        {
+          "age": "7歳",
+          "month": "1月",
+          "n": 359,
+          "win_rate": 10.0,
+          "top2_rate": 20.9,
+          "place_rate": 33.1,
+          "win_roi": 63.4,
+          "place_roi": 84.2
+        },
+        {
+          "age": "7歳",
+          "month": "2月",
+          "n": 273,
+          "win_rate": 11.0,
+          "top2_rate": 23.4,
+          "place_rate": 36.3,
+          "win_roi": 76.0,
+          "place_roi": 95.5
+        },
+        {
+          "age": "7歳",
+          "month": "3月",
+          "n": 243,
+          "win_rate": 11.5,
+          "top2_rate": 24.3,
+          "place_rate": 37.0,
+          "win_roi": 63.1,
+          "place_roi": 79.8
+        },
+        {
+          "age": "8歳",
+          "month": "4〜5月",
+          "n": 292,
+          "win_rate": 12.3,
+          "top2_rate": 28.4,
+          "place_rate": 39.0,
+          "win_roi": 65.9,
+          "place_roi": 64.9
+        },
+        {
+          "age": "8歳",
+          "month": "6月",
+          "n": 170,
+          "win_rate": 15.3,
+          "top2_rate": 23.5,
+          "place_rate": 36.5,
+          "win_roi": 118.4,
+          "place_roi": 78.7
+        },
+        {
+          "age": "8歳",
+          "month": "7月",
+          "n": 144,
+          "win_rate": 9.7,
+          "top2_rate": 17.4,
+          "place_rate": 31.2,
+          "win_roi": 76.9,
+          "place_roi": 79.4
+        },
+        {
+          "age": "8歳",
+          "month": "8月",
+          "n": 141,
+          "win_rate": 13.5,
+          "top2_rate": 23.4,
+          "place_rate": 35.5,
+          "win_roi": 60.2,
+          "place_roi": 81.4
+        },
+        {
+          "age": "8歳",
+          "month": "9月",
+          "n": 146,
+          "win_rate": 11.0,
+          "top2_rate": 19.2,
+          "place_rate": 26.0,
+          "win_roi": 76.4,
+          "place_roi": 50.5
+        },
+        {
+          "age": "8歳",
+          "month": "10月",
+          "n": 145,
+          "win_rate": 8.3,
+          "top2_rate": 17.9,
+          "place_rate": 29.0,
+          "win_roi": 109.4,
+          "place_roi": 88.5
+        },
+        {
+          "age": "8歳",
+          "month": "11月",
+          "n": 145,
+          "win_rate": 4.1,
+          "top2_rate": 13.8,
+          "place_rate": 23.4,
+          "win_roi": 53.1,
+          "place_roi": 58.8
+        },
+        {
+          "age": "8歳",
+          "month": "12月",
+          "n": 141,
+          "win_rate": 0.7,
+          "top2_rate": 5.0,
+          "place_rate": 14.9,
+          "win_roi": 4.9,
+          "place_roi": 37.6
+        },
+        {
+          "age": "8歳",
+          "month": "1月",
+          "n": 261,
+          "win_rate": 12.3,
+          "top2_rate": 26.8,
+          "place_rate": 37.9,
+          "win_roi": 80.6,
+          "place_roi": 88.9
+        },
+        {
+          "age": "8歳",
+          "month": "2月",
+          "n": 226,
+          "win_rate": 14.6,
+          "top2_rate": 23.0,
+          "place_rate": 33.6,
+          "win_roi": 82.7,
+          "place_roi": 69.3
+        },
+        {
+          "age": "8歳",
+          "month": "3月",
+          "n": 167,
+          "win_rate": 5.4,
+          "top2_rate": 16.2,
+          "place_rate": 25.7,
+          "win_roi": 36.0,
+          "place_roi": 60.0
+        },
+        {
+          "age": "9歳〜",
+          "month": "4〜5月",
+          "n": 309,
+          "win_rate": 8.1,
+          "top2_rate": 20.1,
+          "place_rate": 30.7,
+          "win_roi": 29.6,
+          "place_roi": 65.1
+        },
+        {
+          "age": "9歳〜",
+          "month": "6月",
+          "n": 162,
+          "win_rate": 8.0,
+          "top2_rate": 16.7,
+          "place_rate": 22.8,
+          "win_roi": 37.8,
+          "place_roi": 55.8
+        },
+        {
+          "age": "9歳〜",
+          "month": "7月",
+          "n": 164,
+          "win_rate": 6.1,
+          "top2_rate": 12.8,
+          "place_rate": 21.3,
+          "win_roi": 37.4,
+          "place_roi": 49.5
+        },
+        {
+          "age": "9歳〜",
+          "month": "8月",
+          "n": 147,
+          "win_rate": 6.8,
+          "top2_rate": 15.0,
+          "place_rate": 25.9,
+          "win_roi": 36.4,
+          "place_roi": 66.7
+        },
+        {
+          "age": "9歳〜",
+          "month": "9月",
+          "n": 159,
+          "win_rate": 9.4,
+          "top2_rate": 18.9,
+          "place_rate": 26.4,
+          "win_roi": 104.8,
+          "place_roi": 63.9
+        },
+        {
+          "age": "9歳〜",
+          "month": "10月",
+          "n": 157,
+          "win_rate": 3.2,
+          "top2_rate": 12.1,
+          "place_rate": 26.8,
+          "win_roi": 23.9,
+          "place_roi": 58.5
+        },
+        {
+          "age": "9歳〜",
+          "month": "11月",
+          "n": 132,
+          "win_rate": 7.6,
+          "top2_rate": 13.6,
+          "place_rate": 22.7,
+          "win_roi": 46.1,
+          "place_roi": 57.8
+        },
+        {
+          "age": "9歳〜",
+          "month": "12月",
+          "n": 163,
+          "win_rate": 9.2,
+          "top2_rate": 13.5,
+          "place_rate": 21.5,
+          "win_roi": 76.6,
+          "place_roi": 49.1
+        },
+        {
+          "age": "9歳〜",
+          "month": "1月",
+          "n": 321,
+          "win_rate": 10.3,
+          "top2_rate": 19.9,
+          "place_rate": 29.3,
+          "win_roi": 69.3,
+          "place_roi": 68.9
+        },
+        {
+          "age": "9歳〜",
+          "month": "2月",
+          "n": 267,
+          "win_rate": 8.6,
+          "top2_rate": 17.6,
+          "place_rate": 27.7,
+          "win_roi": 46.3,
+          "place_roi": 61.6
+        },
+        {
+          "age": "9歳〜",
+          "month": "3月",
+          "n": 179,
+          "win_rate": 10.1,
+          "top2_rate": 19.0,
+          "place_rate": 29.6,
+          "win_roi": 72.1,
+          "place_roi": 72.1
+        }
+      ],
+      "margins": {
+        "age": [
+          {
+            "age": "2歳",
+            "n": 10652,
+            "win_rate": 10.6,
+            "top2_rate": 21.2,
+            "place_rate": 31.5,
+            "win_roi": 77.4,
+            "place_roi": 80.0
+          },
+          {
+            "age": "3歳",
+            "n": 12271,
+            "win_rate": 11.5,
+            "top2_rate": 22.6,
+            "place_rate": 33.0,
+            "win_roi": 74.1,
+            "place_roi": 77.3
+          },
+          {
+            "age": "4歳",
+            "n": 8553,
+            "win_rate": 13.0,
+            "top2_rate": 25.1,
+            "place_rate": 36.3,
+            "win_roi": 80.7,
+            "place_roi": 80.6
+          },
+          {
+            "age": "5歳",
+            "n": 5902,
+            "win_rate": 8.1,
+            "top2_rate": 17.8,
+            "place_rate": 27.4,
+            "win_roi": 56.8,
+            "place_roi": 65.6
+          },
+          {
+            "age": "6歳",
+            "n": 4109,
+            "win_rate": 10.1,
+            "top2_rate": 20.5,
+            "place_rate": 30.3,
+            "win_roi": 72.5,
+            "place_roi": 70.8
+          },
+          {
+            "age": "7歳",
+            "n": 3020,
+            "win_rate": 10.5,
+            "top2_rate": 20.9,
+            "place_rate": 31.8,
+            "win_roi": 68.0,
+            "place_roi": 75.3
+          },
+          {
+            "age": "8歳",
+            "n": 1978,
+            "win_rate": 10.3,
+            "top2_rate": 20.8,
+            "place_rate": 31.5,
+            "win_roi": 70.8,
+            "place_roi": 69.8
+          },
+          {
+            "age": "9歳〜",
+            "n": 2160,
+            "win_rate": 8.2,
+            "top2_rate": 16.9,
+            "place_rate": 26.6,
+            "win_roi": 52.4,
+            "place_roi": 61.8
+          }
+        ],
+        "month": [
+          {
+            "month": "4〜5月",
+            "n": 5517,
+            "win_rate": 11.3,
+            "top2_rate": 22.6,
+            "place_rate": 33.3,
+            "win_roi": 64.6,
+            "place_roi": 71.4
+          },
+          {
+            "month": "6月",
+            "n": 4445,
+            "win_rate": 10.8,
+            "top2_rate": 21.6,
+            "place_rate": 32.1,
+            "win_roi": 66.7,
+            "place_roi": 74.4
+          },
+          {
+            "month": "7月",
+            "n": 4526,
+            "win_rate": 10.6,
+            "top2_rate": 21.2,
+            "place_rate": 31.6,
+            "win_roi": 62.0,
+            "place_roi": 71.2
+          },
+          {
+            "month": "8月",
+            "n": 4402,
+            "win_rate": 10.7,
+            "top2_rate": 21.3,
+            "place_rate": 31.7,
+            "win_roi": 69.6,
+            "place_roi": 74.9
+          },
+          {
+            "month": "9月",
+            "n": 4529,
+            "win_rate": 10.5,
+            "top2_rate": 21.0,
+            "place_rate": 31.4,
+            "win_roi": 75.9,
+            "place_roi": 75.2
+          },
+          {
+            "month": "10月",
+            "n": 4450,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.5,
+            "win_roi": 78.1,
+            "place_roi": 77.8
+          },
+          {
+            "month": "11月",
+            "n": 4319,
+            "win_rate": 10.6,
+            "top2_rate": 21.1,
+            "place_rate": 31.6,
+            "win_roi": 78.5,
+            "place_roi": 75.6
+          },
+          {
+            "month": "12月",
+            "n": 4588,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.5,
+            "win_roi": 76.4,
+            "place_roi": 77.8
+          },
+          {
+            "month": "1月",
+            "n": 4842,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.0,
+            "win_roi": 68.2,
+            "place_roi": 74.8
+          },
+          {
+            "month": "2月",
+            "n": 3843,
+            "win_rate": 11.0,
+            "top2_rate": 21.9,
+            "place_rate": 32.4,
+            "win_roi": 79.9,
+            "place_roi": 79.6
+          },
+          {
+            "month": "3月",
+            "n": 3184,
+            "win_rate": 11.0,
+            "top2_rate": 21.9,
+            "place_rate": 32.4,
+            "win_roi": 81.0,
+            "place_roi": 79.4
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "axes": [
+    "weight_diff"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "weight_diff": [
+      "0kg",
+      "1〜10kg",
+      "11〜20kg",
+      "21〜30kg",
+      "31kg〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "n": 82454,
+          "win_rate": 10.9,
+          "top2_rate": 21.9,
+          "place_rate": 32.3,
+          "win_roi": 75.1,
+          "place_roi": 76.3
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "n": 48542,
+          "win_rate": 10.9,
+          "top2_rate": 22.0,
+          "place_rate": 32.3,
+          "win_roi": 71.0,
+          "place_roi": 74.6
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "n": 108713,
+          "win_rate": 11.2,
+          "top2_rate": 22.4,
+          "place_rate": 33.0,
+          "win_roi": 74.9,
+          "place_roi": 76.6
+        },
+        {
+          "weight_diff": "21〜30kg",
+          "n": 50660,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 31.5,
+          "win_roi": 68.2,
+          "place_roi": 72.3
+        },
+        {
+          "weight_diff": "31kg〜",
+          "n": 9078,
+          "win_rate": 10.6,
+          "top2_rate": 20.8,
+          "place_rate": 30.8,
+          "win_roi": 58.7,
+          "place_roi": 67.1
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "n": 11668,
+          "win_rate": 11.6,
+          "top2_rate": 22.9,
+          "place_rate": 33.6,
+          "win_roi": 76.1,
+          "place_roi": 78.6
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "n": 10675,
+          "win_rate": 10.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.3,
+          "win_roi": 71.0,
+          "place_roi": 73.9
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "n": 14030,
+          "win_rate": 10.7,
+          "top2_rate": 21.6,
+          "place_rate": 32.3,
+          "win_roi": 75.1,
+          "place_roi": 77.3
+        },
+        {
+          "weight_diff": "21〜30kg",
+          "n": 10766,
+          "win_rate": 10.3,
+          "top2_rate": 20.5,
+          "place_rate": 30.6,
+          "win_roi": 68.3,
+          "place_roi": 72.5
+        },
+        {
+          "weight_diff": "31kg〜",
+          "n": 1506,
+          "win_rate": 10.5,
+          "top2_rate": 20.7,
+          "place_rate": 30.3,
+          "win_roi": 53.4,
+          "place_roi": 64.5
+        }
+      ]
+    }
+  }
+}

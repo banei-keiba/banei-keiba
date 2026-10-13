@@ -1,0 +1,744 @@
+{
+  "axes": [
+    "age",
+    "weather"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "age": [
+      "2歳",
+      "3歳",
+      "4歳",
+      "5歳",
+      "6歳",
+      "7歳",
+      "8歳",
+      "9歳〜"
+    ],
+    "weather": [
+      "晴",
+      "曇",
+      "雨・雪"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "weather": "晴",
+          "n": 34724,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.1,
+          "win_roi": 75.5,
+          "place_roi": 78.6
+        },
+        {
+          "age": "2歳",
+          "weather": "曇",
+          "n": 21159,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.3,
+          "win_roi": 76.3,
+          "place_roi": 77.3
+        },
+        {
+          "age": "2歳",
+          "weather": "雨・雪",
+          "n": 5753,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.3,
+          "win_roi": 73.5,
+          "place_roi": 76.5
+        },
+        {
+          "age": "3歳",
+          "weather": "晴",
+          "n": 44297,
+          "win_rate": 11.6,
+          "top2_rate": 22.8,
+          "place_rate": 33.3,
+          "win_roi": 72.5,
+          "place_roi": 76.1
+        },
+        {
+          "age": "3歳",
+          "weather": "曇",
+          "n": 19224,
+          "win_rate": 12.0,
+          "top2_rate": 23.5,
+          "place_rate": 33.9,
+          "win_roi": 74.9,
+          "place_roi": 74.9
+        },
+        {
+          "age": "3歳",
+          "weather": "雨・雪",
+          "n": 5700,
+          "win_rate": 12.5,
+          "top2_rate": 24.2,
+          "place_rate": 34.9,
+          "win_roi": 74.7,
+          "place_roi": 77.3
+        },
+        {
+          "age": "4歳",
+          "weather": "晴",
+          "n": 31998,
+          "win_rate": 13.0,
+          "top2_rate": 25.3,
+          "place_rate": 36.5,
+          "win_roi": 80.4,
+          "place_roi": 79.6
+        },
+        {
+          "age": "4歳",
+          "weather": "曇",
+          "n": 14914,
+          "win_rate": 13.2,
+          "top2_rate": 25.6,
+          "place_rate": 37.1,
+          "win_roi": 80.1,
+          "place_roi": 79.3
+        },
+        {
+          "age": "4歳",
+          "weather": "雨・雪",
+          "n": 4645,
+          "win_rate": 12.5,
+          "top2_rate": 24.7,
+          "place_rate": 35.5,
+          "win_roi": 75.9,
+          "place_roi": 79.1
+        },
+        {
+          "age": "5歳",
+          "weather": "晴",
+          "n": 21722,
+          "win_rate": 8.5,
+          "top2_rate": 18.4,
+          "place_rate": 27.8,
+          "win_roi": 61.8,
+          "place_roi": 68.2
+        },
+        {
+          "age": "5歳",
+          "weather": "曇",
+          "n": 10308,
+          "win_rate": 8.2,
+          "top2_rate": 17.7,
+          "place_rate": 27.1,
+          "win_roi": 62.0,
+          "place_roi": 65.6
+        },
+        {
+          "age": "5歳",
+          "weather": "雨・雪",
+          "n": 3284,
+          "win_rate": 8.8,
+          "top2_rate": 18.5,
+          "place_rate": 29.8,
+          "win_roi": 69.0,
+          "place_roi": 72.5
+        },
+        {
+          "age": "6歳",
+          "weather": "晴",
+          "n": 15235,
+          "win_rate": 9.6,
+          "top2_rate": 20.2,
+          "place_rate": 30.5,
+          "win_roi": 65.4,
+          "place_roi": 71.9
+        },
+        {
+          "age": "6歳",
+          "weather": "曇",
+          "n": 7586,
+          "win_rate": 9.8,
+          "top2_rate": 20.2,
+          "place_rate": 30.5,
+          "win_roi": 68.4,
+          "place_roi": 72.0
+        },
+        {
+          "age": "6歳",
+          "weather": "雨・雪",
+          "n": 2516,
+          "win_rate": 10.8,
+          "top2_rate": 21.1,
+          "place_rate": 31.0,
+          "win_roi": 84.0,
+          "place_roi": 76.8
+        },
+        {
+          "age": "7歳",
+          "weather": "晴",
+          "n": 11661,
+          "win_rate": 11.1,
+          "top2_rate": 22.0,
+          "place_rate": 32.9,
+          "win_roi": 75.4,
+          "place_roi": 76.7
+        },
+        {
+          "age": "7歳",
+          "weather": "曇",
+          "n": 5952,
+          "win_rate": 10.9,
+          "top2_rate": 21.6,
+          "place_rate": 31.9,
+          "win_roi": 74.1,
+          "place_roi": 74.9
+        },
+        {
+          "age": "7歳",
+          "weather": "雨・雪",
+          "n": 2019,
+          "win_rate": 10.2,
+          "top2_rate": 21.3,
+          "place_rate": 30.2,
+          "win_roi": 79.5,
+          "place_roi": 75.9
+        },
+        {
+          "age": "8歳",
+          "weather": "晴",
+          "n": 9044,
+          "win_rate": 11.5,
+          "top2_rate": 22.5,
+          "place_rate": 32.3,
+          "win_roi": 74.3,
+          "place_roi": 73.3
+        },
+        {
+          "age": "8歳",
+          "weather": "曇",
+          "n": 4527,
+          "win_rate": 11.5,
+          "top2_rate": 22.9,
+          "place_rate": 33.6,
+          "win_roi": 75.9,
+          "place_roi": 73.4
+        },
+        {
+          "age": "8歳",
+          "weather": "雨・雪",
+          "n": 1483,
+          "win_rate": 11.9,
+          "top2_rate": 23.5,
+          "place_rate": 33.0,
+          "win_roi": 73.4,
+          "place_roi": 72.4
+        },
+        {
+          "age": "9歳〜",
+          "weather": "晴",
+          "n": 13141,
+          "win_rate": 9.5,
+          "top2_rate": 19.2,
+          "place_rate": 29.3,
+          "win_roi": 67.6,
+          "place_roi": 72.6
+        },
+        {
+          "age": "9歳〜",
+          "weather": "曇",
+          "n": 6404,
+          "win_rate": 8.6,
+          "top2_rate": 18.3,
+          "place_rate": 27.6,
+          "win_roi": 58.1,
+          "place_roi": 66.9
+        },
+        {
+          "age": "9歳〜",
+          "weather": "雨・雪",
+          "n": 2151,
+          "win_rate": 7.3,
+          "top2_rate": 16.4,
+          "place_rate": 25.6,
+          "win_roi": 54.5,
+          "place_roi": 65.5
+        }
+      ],
+      "margins": {
+        "age": [
+          {
+            "age": "2歳",
+            "n": 61636,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 75.6,
+            "place_roi": 78.0
+          },
+          {
+            "age": "3歳",
+            "n": 69221,
+            "win_rate": 11.8,
+            "top2_rate": 23.1,
+            "place_rate": 33.6,
+            "win_roi": 73.3,
+            "place_roi": 75.9
+          },
+          {
+            "age": "4歳",
+            "n": 51557,
+            "win_rate": 13.0,
+            "top2_rate": 25.3,
+            "place_rate": 36.6,
+            "win_roi": 79.9,
+            "place_roi": 79.4
+          },
+          {
+            "age": "5歳",
+            "n": 35314,
+            "win_rate": 8.5,
+            "top2_rate": 18.2,
+            "place_rate": 27.8,
+            "win_roi": 62.6,
+            "place_roi": 67.9
+          },
+          {
+            "age": "6歳",
+            "n": 25337,
+            "win_rate": 9.8,
+            "top2_rate": 20.3,
+            "place_rate": 30.6,
+            "win_roi": 68.1,
+            "place_roi": 72.4
+          },
+          {
+            "age": "7歳",
+            "n": 19632,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.3,
+            "win_roi": 75.4,
+            "place_roi": 76.0
+          },
+          {
+            "age": "8歳",
+            "n": 15054,
+            "win_rate": 11.5,
+            "top2_rate": 22.7,
+            "place_rate": 32.8,
+            "win_roi": 74.7,
+            "place_roi": 73.3
+          },
+          {
+            "age": "9歳〜",
+            "n": 21696,
+            "win_rate": 9.0,
+            "top2_rate": 18.7,
+            "place_rate": 28.4,
+            "win_roi": 63.5,
+            "place_roi": 70.2
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 181822,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.5,
+            "place_roi": 75.6
+          },
+          {
+            "weather": "曇",
+            "n": 90074,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.9,
+            "place_roi": 74.2
+          },
+          {
+            "weather": "雨・雪",
+            "n": 27551,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 73.5,
+            "place_roi": 75.5
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "weather": "晴",
+          "n": 6399,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.5,
+          "win_roi": 76.7,
+          "place_roi": 81.2
+        },
+        {
+          "age": "2歳",
+          "weather": "曇",
+          "n": 3439,
+          "win_rate": 10.6,
+          "top2_rate": 21.3,
+          "place_rate": 31.7,
+          "win_roi": 79.3,
+          "place_roi": 79.1
+        },
+        {
+          "age": "2歳",
+          "weather": "雨・雪",
+          "n": 814,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.6,
+          "win_roi": 74.5,
+          "place_roi": 74.8
+        },
+        {
+          "age": "3歳",
+          "weather": "晴",
+          "n": 8255,
+          "win_rate": 11.3,
+          "top2_rate": 22.5,
+          "place_rate": 32.8,
+          "win_roi": 72.4,
+          "place_roi": 78.1
+        },
+        {
+          "age": "3歳",
+          "weather": "曇",
+          "n": 3256,
+          "win_rate": 11.5,
+          "top2_rate": 22.3,
+          "place_rate": 33.0,
+          "win_roi": 75.3,
+          "place_roi": 76.0
+        },
+        {
+          "age": "3歳",
+          "weather": "雨・雪",
+          "n": 760,
+          "win_rate": 13.2,
+          "top2_rate": 25.0,
+          "place_rate": 34.5,
+          "win_roi": 87.9,
+          "place_roi": 74.9
+        },
+        {
+          "age": "4歳",
+          "weather": "晴",
+          "n": 5339,
+          "win_rate": 12.9,
+          "top2_rate": 24.8,
+          "place_rate": 36.2,
+          "win_roi": 83.9,
+          "place_roi": 80.8
+        },
+        {
+          "age": "4歳",
+          "weather": "曇",
+          "n": 2639,
+          "win_rate": 13.5,
+          "top2_rate": 26.0,
+          "place_rate": 36.8,
+          "win_roi": 78.8,
+          "place_roi": 80.8
+        },
+        {
+          "age": "4歳",
+          "weather": "雨・雪",
+          "n": 575,
+          "win_rate": 11.8,
+          "top2_rate": 23.7,
+          "place_rate": 35.5,
+          "win_roi": 60.4,
+          "place_roi": 78.2
+        },
+        {
+          "age": "5歳",
+          "weather": "晴",
+          "n": 3577,
+          "win_rate": 8.4,
+          "top2_rate": 18.2,
+          "place_rate": 27.8,
+          "win_roi": 58.8,
+          "place_roi": 67.9
+        },
+        {
+          "age": "5歳",
+          "weather": "曇",
+          "n": 1968,
+          "win_rate": 7.7,
+          "top2_rate": 17.4,
+          "place_rate": 26.4,
+          "win_roi": 52.8,
+          "place_roi": 61.5
+        },
+        {
+          "age": "5歳",
+          "weather": "雨・雪",
+          "n": 357,
+          "win_rate": 6.4,
+          "top2_rate": 16.5,
+          "place_rate": 29.1,
+          "win_roi": 58.6,
+          "place_roi": 65.8
+        },
+        {
+          "age": "6歳",
+          "weather": "晴",
+          "n": 2434,
+          "win_rate": 9.6,
+          "top2_rate": 20.3,
+          "place_rate": 29.9,
+          "win_roi": 65.1,
+          "place_roi": 67.8
+        },
+        {
+          "age": "6歳",
+          "weather": "曇",
+          "n": 1373,
+          "win_rate": 10.9,
+          "top2_rate": 21.0,
+          "place_rate": 31.8,
+          "win_roi": 80.8,
+          "place_roi": 76.0
+        },
+        {
+          "age": "6歳",
+          "weather": "雨・雪",
+          "n": 302,
+          "win_rate": 10.6,
+          "top2_rate": 19.9,
+          "place_rate": 27.5,
+          "win_roi": 93.6,
+          "place_roi": 71.9
+        },
+        {
+          "age": "7歳",
+          "weather": "晴",
+          "n": 1771,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.7,
+          "win_roi": 65.7,
+          "place_roi": 76.0
+        },
+        {
+          "age": "7歳",
+          "weather": "曇",
+          "n": 1048,
+          "win_rate": 10.4,
+          "top2_rate": 19.9,
+          "place_rate": 30.9,
+          "win_roi": 76.9,
+          "place_roi": 73.1
+        },
+        {
+          "age": "7歳",
+          "weather": "雨・雪",
+          "n": 201,
+          "win_rate": 8.5,
+          "top2_rate": 19.4,
+          "place_rate": 28.4,
+          "win_roi": 41.6,
+          "place_roi": 80.4
+        },
+        {
+          "age": "8歳",
+          "weather": "晴",
+          "n": 1181,
+          "win_rate": 10.9,
+          "top2_rate": 21.4,
+          "place_rate": 32.2,
+          "win_roi": 80.7,
+          "place_roi": 72.9
+        },
+        {
+          "age": "8歳",
+          "weather": "曇",
+          "n": 647,
+          "win_rate": 9.0,
+          "top2_rate": 19.9,
+          "place_rate": 30.8,
+          "win_roi": 54.4,
+          "place_roi": 65.7
+        },
+        {
+          "age": "8歳",
+          "weather": "雨・雪",
+          "n": 150,
+          "win_rate": 11.3,
+          "top2_rate": 19.3,
+          "place_rate": 30.0,
+          "win_roi": 63.8,
+          "place_roi": 63.8
+        },
+        {
+          "age": "9歳〜",
+          "weather": "晴",
+          "n": 1312,
+          "win_rate": 8.3,
+          "top2_rate": 16.6,
+          "place_rate": 25.9,
+          "win_roi": 55.4,
+          "place_roi": 60.5
+        },
+        {
+          "age": "9歳〜",
+          "weather": "曇",
+          "n": 668,
+          "win_rate": 8.2,
+          "top2_rate": 18.1,
+          "place_rate": 28.0,
+          "win_roi": 47.8,
+          "place_roi": 65.5
+        },
+        {
+          "age": "9歳〜",
+          "weather": "雨・雪",
+          "n": 180,
+          "win_rate": 7.2,
+          "top2_rate": 15.0,
+          "place_rate": 26.7,
+          "win_roi": 47.6,
+          "place_roi": 57.8
+        }
+      ],
+      "margins": {
+        "age": [
+          {
+            "age": "2歳",
+            "n": 10652,
+            "win_rate": 10.6,
+            "top2_rate": 21.2,
+            "place_rate": 31.5,
+            "win_roi": 77.4,
+            "place_roi": 80.0
+          },
+          {
+            "age": "3歳",
+            "n": 12271,
+            "win_rate": 11.5,
+            "top2_rate": 22.6,
+            "place_rate": 33.0,
+            "win_roi": 74.1,
+            "place_roi": 77.3
+          },
+          {
+            "age": "4歳",
+            "n": 8553,
+            "win_rate": 13.0,
+            "top2_rate": 25.1,
+            "place_rate": 36.3,
+            "win_roi": 80.7,
+            "place_roi": 80.6
+          },
+          {
+            "age": "5歳",
+            "n": 5902,
+            "win_rate": 8.1,
+            "top2_rate": 17.8,
+            "place_rate": 27.4,
+            "win_roi": 56.8,
+            "place_roi": 65.6
+          },
+          {
+            "age": "6歳",
+            "n": 4109,
+            "win_rate": 10.1,
+            "top2_rate": 20.5,
+            "place_rate": 30.3,
+            "win_roi": 72.5,
+            "place_roi": 70.8
+          },
+          {
+            "age": "7歳",
+            "n": 3020,
+            "win_rate": 10.5,
+            "top2_rate": 20.9,
+            "place_rate": 31.8,
+            "win_roi": 68.0,
+            "place_roi": 75.3
+          },
+          {
+            "age": "8歳",
+            "n": 1978,
+            "win_rate": 10.3,
+            "top2_rate": 20.8,
+            "place_rate": 31.5,
+            "win_roi": 70.8,
+            "place_roi": 69.8
+          },
+          {
+            "age": "9歳〜",
+            "n": 2160,
+            "win_rate": 8.2,
+            "top2_rate": 16.9,
+            "place_rate": 26.6,
+            "win_roi": 52.4,
+            "place_roi": 61.8
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 30268,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 32.0,
+            "win_roi": 72.3,
+            "place_roi": 76.1
+          },
+          {
+            "weather": "曇",
+            "n": 15038,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 31.9,
+            "win_roi": 72.4,
+            "place_roi": 74.5
+          },
+          {
+            "weather": "雨・雪",
+            "n": 3339,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.7,
+            "win_roi": 71.2,
+            "place_roi": 73.1
+          }
+        ]
+      }
+    }
+  }
+}

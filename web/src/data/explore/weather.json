@@ -1,0 +1,97 @@
+{
+  "axes": [
+    "weather"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "weather": [
+      "晴",
+      "曇",
+      "雨・雪"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "weather": "晴",
+          "n": 181822,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 72.5,
+          "place_roi": 75.6
+        },
+        {
+          "weather": "曇",
+          "n": 90074,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 72.9,
+          "place_roi": 74.2
+        },
+        {
+          "weather": "雨・雪",
+          "n": 27551,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.3,
+          "win_roi": 73.5,
+          "place_roi": 75.5
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "weather": "晴",
+          "n": 30268,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 32.0,
+          "win_roi": 72.3,
+          "place_roi": 76.1
+        },
+        {
+          "weather": "曇",
+          "n": 15038,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 72.4,
+          "place_roi": 74.5
+        },
+        {
+          "weather": "雨・雪",
+          "n": 3339,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.7,
+          "win_roi": 71.2,
+          "place_roi": 73.1
+        }
+      ]
+    }
+  }
+}

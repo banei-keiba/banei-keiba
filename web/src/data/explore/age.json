@@ -1,0 +1,211 @@
+{
+  "axes": [
+    "age"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "age": [
+      "2歳",
+      "3歳",
+      "4歳",
+      "5歳",
+      "6歳",
+      "7歳",
+      "8歳",
+      "9歳",
+      "10歳〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "n": 61636,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.2,
+          "win_roi": 75.6,
+          "place_roi": 78.0
+        },
+        {
+          "age": "3歳",
+          "n": 69221,
+          "win_rate": 11.8,
+          "top2_rate": 23.1,
+          "place_rate": 33.6,
+          "win_roi": 73.3,
+          "place_roi": 75.9
+        },
+        {
+          "age": "4歳",
+          "n": 51557,
+          "win_rate": 13.0,
+          "top2_rate": 25.3,
+          "place_rate": 36.6,
+          "win_roi": 79.9,
+          "place_roi": 79.4
+        },
+        {
+          "age": "5歳",
+          "n": 35314,
+          "win_rate": 8.5,
+          "top2_rate": 18.2,
+          "place_rate": 27.8,
+          "win_roi": 62.6,
+          "place_roi": 67.9
+        },
+        {
+          "age": "6歳",
+          "n": 25337,
+          "win_rate": 9.8,
+          "top2_rate": 20.3,
+          "place_rate": 30.6,
+          "win_roi": 68.1,
+          "place_roi": 72.4
+        },
+        {
+          "age": "7歳",
+          "n": 19632,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.3,
+          "win_roi": 75.4,
+          "place_roi": 76.0
+        },
+        {
+          "age": "8歳",
+          "n": 15054,
+          "win_rate": 11.5,
+          "top2_rate": 22.7,
+          "place_rate": 32.8,
+          "win_roi": 74.7,
+          "place_roi": 73.3
+        },
+        {
+          "age": "9歳",
+          "n": 10805,
+          "win_rate": 9.8,
+          "top2_rate": 20.1,
+          "place_rate": 29.7,
+          "win_roi": 62.6,
+          "place_roi": 71.0
+        },
+        {
+          "age": "10歳〜",
+          "n": 10891,
+          "win_rate": 8.3,
+          "top2_rate": 17.2,
+          "place_rate": 27.2,
+          "win_roi": 64.4,
+          "place_roi": 69.4
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "age": "2歳",
+          "n": 10652,
+          "win_rate": 10.6,
+          "top2_rate": 21.2,
+          "place_rate": 31.5,
+          "win_roi": 77.4,
+          "place_roi": 80.0
+        },
+        {
+          "age": "3歳",
+          "n": 12271,
+          "win_rate": 11.5,
+          "top2_rate": 22.6,
+          "place_rate": 33.0,
+          "win_roi": 74.1,
+          "place_roi": 77.3
+        },
+        {
+          "age": "4歳",
+          "n": 8553,
+          "win_rate": 13.0,
+          "top2_rate": 25.1,
+          "place_rate": 36.3,
+          "win_roi": 80.7,
+          "place_roi": 80.6
+        },
+        {
+          "age": "5歳",
+          "n": 5902,
+          "win_rate": 8.1,
+          "top2_rate": 17.8,
+          "place_rate": 27.4,
+          "win_roi": 56.8,
+          "place_roi": 65.6
+        },
+        {
+          "age": "6歳",
+          "n": 4109,
+          "win_rate": 10.1,
+          "top2_rate": 20.5,
+          "place_rate": 30.3,
+          "win_roi": 72.5,
+          "place_roi": 70.8
+        },
+        {
+          "age": "7歳",
+          "n": 3020,
+          "win_rate": 10.5,
+          "top2_rate": 20.9,
+          "place_rate": 31.8,
+          "win_roi": 68.0,
+          "place_roi": 75.3
+        },
+        {
+          "age": "8歳",
+          "n": 1978,
+          "win_rate": 10.3,
+          "top2_rate": 20.8,
+          "place_rate": 31.5,
+          "win_roi": 70.8,
+          "place_roi": 69.8
+        },
+        {
+          "age": "9歳",
+          "n": 1234,
+          "win_rate": 9.2,
+          "top2_rate": 19.0,
+          "place_rate": 29.0,
+          "win_roi": 54.5,
+          "place_roi": 63.0
+        },
+        {
+          "age": "10歳〜",
+          "n": 926,
+          "win_rate": 6.8,
+          "top2_rate": 14.3,
+          "place_rate": 23.4,
+          "win_roi": 49.7,
+          "place_roi": 60.2
+        }
+      ]
+    }
+  }
+}

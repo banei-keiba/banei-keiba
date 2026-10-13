@@ -1,0 +1,586 @@
+{
+  "axes": [
+    "moisture",
+    "weather"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "moisture": [
+      "〜0.9",
+      "1.0〜1.4",
+      "1.5〜1.9",
+      "2.0〜2.4",
+      "2.5〜2.9",
+      "3.0〜"
+    ],
+    "weather": [
+      "晴",
+      "曇",
+      "雨・雪"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "moisture": "〜0.9",
+          "weather": "晴",
+          "n": 16853,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.4,
+          "win_roi": 70.0,
+          "place_roi": 76.1
+        },
+        {
+          "moisture": "〜0.9",
+          "weather": "曇",
+          "n": 7012,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 71.7,
+          "place_roi": 73.8
+        },
+        {
+          "moisture": "〜0.9",
+          "weather": "雨・雪",
+          "n": 523,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 33.1,
+          "win_roi": 87.0,
+          "place_roi": 78.7
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "晴",
+          "n": 29747,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 73.4,
+          "place_roi": 75.4
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "曇",
+          "n": 14081,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.5,
+          "win_roi": 70.5,
+          "place_roi": 73.2
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "雨・雪",
+          "n": 1916,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.4,
+          "win_roi": 63.3,
+          "place_roi": 74.2
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "晴",
+          "n": 39392,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 71.9,
+          "place_roi": 75.4
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "曇",
+          "n": 17041,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 75.2,
+          "place_roi": 75.0
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "雨・雪",
+          "n": 2964,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.3,
+          "win_roi": 74.3,
+          "place_roi": 73.8
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "晴",
+          "n": 35700,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.6,
+          "win_roi": 74.2,
+          "place_roi": 76.0
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "曇",
+          "n": 17148,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 71.9,
+          "place_roi": 74.4
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "雨・雪",
+          "n": 5355,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.6,
+          "win_roi": 77.9,
+          "place_roi": 73.3
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "晴",
+          "n": 19617,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.5,
+          "win_roi": 68.2,
+          "place_roi": 74.9
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "曇",
+          "n": 10611,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.6,
+          "win_roi": 74.5,
+          "place_roi": 75.5
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "雨・雪",
+          "n": 4609,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.4,
+          "win_roi": 70.5,
+          "place_roi": 75.4
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "晴",
+          "n": 40513,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 74.1,
+          "place_roi": 75.6
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "曇",
+          "n": 24181,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.1,
+          "win_roi": 72.9,
+          "place_roi": 73.8
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "雨・雪",
+          "n": 12184,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.1,
+          "win_roi": 73.6,
+          "place_roi": 77.1
+        }
+      ],
+      "margins": {
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 24388,
+            "win_rate": 11.1,
+            "top2_rate": 22.2,
+            "place_rate": 32.4,
+            "win_roi": 70.9,
+            "place_roi": 75.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 45744,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.1,
+            "place_roi": 74.7
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 59397,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 58203,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 73.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.5〜2.9",
+            "n": 34837,
+            "win_rate": 11.0,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 70.4,
+            "place_roi": 75.1
+          },
+          {
+            "moisture": "3.0〜",
+            "n": 76878,
+            "win_rate": 10.8,
+            "top2_rate": 21.6,
+            "place_rate": 32.0,
+            "win_roi": 73.7,
+            "place_roi": 75.2
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 181822,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.5,
+            "place_roi": 75.6
+          },
+          {
+            "weather": "曇",
+            "n": 90074,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.9,
+            "place_roi": 74.2
+          },
+          {
+            "weather": "雨・雪",
+            "n": 27551,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 73.5,
+            "place_roi": 75.5
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "moisture": "〜0.9",
+          "weather": "晴",
+          "n": 2265,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 31.9,
+          "win_roi": 69.6,
+          "place_roi": 73.5
+        },
+        {
+          "moisture": "〜0.9",
+          "weather": "曇",
+          "n": 1497,
+          "win_rate": 11.1,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 67.7,
+          "place_roi": 73.4
+        },
+        {
+          "moisture": "〜0.9",
+          "weather": "雨・雪",
+          "n": 92,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.6,
+          "win_roi": 47.9,
+          "place_roi": 72.9
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "晴",
+          "n": 6139,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.2,
+          "win_roi": 68.4,
+          "place_roi": 73.0
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "曇",
+          "n": 4203,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 72.1,
+          "place_roi": 74.5
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "weather": "雨・雪",
+          "n": 494,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 31.8,
+          "win_roi": 64.6,
+          "place_roi": 73.2
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "晴",
+          "n": 10781,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 74.8,
+          "place_roi": 76.7
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "曇",
+          "n": 4786,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 80.4,
+          "place_roi": 75.6
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "weather": "雨・雪",
+          "n": 629,
+          "win_rate": 10.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.5,
+          "win_roi": 68.6,
+          "place_roi": 75.3
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "晴",
+          "n": 7395,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 72.4,
+          "place_roi": 78.1
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "曇",
+          "n": 3079,
+          "win_rate": 10.7,
+          "top2_rate": 21.3,
+          "place_rate": 31.8,
+          "win_roi": 66.7,
+          "place_roi": 74.0
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "weather": "雨・雪",
+          "n": 864,
+          "win_rate": 10.6,
+          "top2_rate": 21.3,
+          "place_rate": 31.7,
+          "win_roi": 79.3,
+          "place_roi": 73.7
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "晴",
+          "n": 2713,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 32.1,
+          "win_roi": 69.0,
+          "place_roi": 77.4
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "曇",
+          "n": 1004,
+          "win_rate": 10.6,
+          "top2_rate": 21.2,
+          "place_rate": 31.6,
+          "win_roi": 69.5,
+          "place_roi": 73.7
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "weather": "雨・雪",
+          "n": 678,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.0,
+          "win_roi": 72.9,
+          "place_roi": 71.0
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "晴",
+          "n": 975,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.8,
+          "win_roi": 84.9,
+          "place_roi": 75.9
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "曇",
+          "n": 469,
+          "win_rate": 10.7,
+          "top2_rate": 21.3,
+          "place_rate": 31.8,
+          "win_roi": 51.4,
+          "place_roi": 73.3
+        },
+        {
+          "moisture": "3.0〜",
+          "weather": "雨・雪",
+          "n": 582,
+          "win_rate": 10.7,
+          "top2_rate": 21.3,
+          "place_rate": 31.6,
+          "win_roi": 69.5,
+          "place_roi": 72.4
+        }
+      ],
+      "margins": {
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 3854,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.1,
+            "win_roi": 68.4,
+            "place_roi": 73.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 10836,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.1,
+            "win_roi": 69.7,
+            "place_roi": 73.6
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 16196,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 76.2,
+            "place_roi": 76.3
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 11338,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 71.4,
+            "place_roi": 76.7
+          },
+          {
+            "moisture": "2.5〜2.9",
+            "n": 4395,
+            "win_rate": 10.7,
+            "top2_rate": 21.5,
+            "place_rate": 31.9,
+            "win_roi": 69.7,
+            "place_roi": 75.6
+          },
+          {
+            "moisture": "3.0〜",
+            "n": 2026,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.7,
+            "win_roi": 72.7,
+            "place_roi": 74.2
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 30268,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 32.0,
+            "win_roi": 72.3,
+            "place_roi": 76.1
+          },
+          {
+            "weather": "曇",
+            "n": 15038,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 31.9,
+            "win_roi": 72.4,
+            "place_roi": 74.5
+          },
+          {
+            "weather": "雨・雪",
+            "n": 3339,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.7,
+            "win_roi": 71.2,
+            "place_roi": 73.1
+          }
+        ]
+      }
+    }
+  }
+}

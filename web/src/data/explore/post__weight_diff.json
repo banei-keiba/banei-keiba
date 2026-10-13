@@ -1,0 +1,1121 @@
+{
+  "axes": [
+    "post",
+    "weight_diff"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "post": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "weight_diff": [
+      "0kg",
+      "1〜10kg",
+      "11〜20kg",
+      "21kg〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "post": "1",
+          "weight_diff": "0kg",
+          "n": 8885,
+          "win_rate": 10.8,
+          "top2_rate": 20.8,
+          "place_rate": 30.4,
+          "win_roi": 72.7,
+          "place_roi": 69.3
+        },
+        {
+          "post": "1",
+          "weight_diff": "1〜10kg",
+          "n": 5265,
+          "win_rate": 10.5,
+          "top2_rate": 19.8,
+          "place_rate": 29.6,
+          "win_roi": 63.3,
+          "place_roi": 67.3
+        },
+        {
+          "post": "1",
+          "weight_diff": "11〜20kg",
+          "n": 11969,
+          "win_rate": 10.9,
+          "top2_rate": 21.4,
+          "place_rate": 31.3,
+          "win_roi": 72.0,
+          "place_roi": 71.9
+        },
+        {
+          "post": "1",
+          "weight_diff": "21kg〜",
+          "n": 6451,
+          "win_rate": 10.2,
+          "top2_rate": 20.2,
+          "place_rate": 29.6,
+          "win_roi": 62.3,
+          "place_roi": 67.2
+        },
+        {
+          "post": "2",
+          "weight_diff": "0kg",
+          "n": 9043,
+          "win_rate": 11.6,
+          "top2_rate": 23.5,
+          "place_rate": 34.0,
+          "win_roi": 82.5,
+          "place_roi": 79.1
+        },
+        {
+          "post": "2",
+          "weight_diff": "1〜10kg",
+          "n": 5239,
+          "win_rate": 10.8,
+          "top2_rate": 22.1,
+          "place_rate": 32.2,
+          "win_roi": 67.3,
+          "place_roi": 75.2
+        },
+        {
+          "post": "2",
+          "weight_diff": "11〜20kg",
+          "n": 11816,
+          "win_rate": 11.5,
+          "top2_rate": 23.2,
+          "place_rate": 33.9,
+          "win_roi": 74.4,
+          "place_roi": 78.0
+        },
+        {
+          "post": "2",
+          "weight_diff": "21kg〜",
+          "n": 6481,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.4,
+          "win_roi": 65.5,
+          "place_roi": 75.5
+        },
+        {
+          "post": "3",
+          "weight_diff": "0kg",
+          "n": 9118,
+          "win_rate": 12.0,
+          "top2_rate": 23.5,
+          "place_rate": 34.4,
+          "win_roi": 82.0,
+          "place_roi": 80.7
+        },
+        {
+          "post": "3",
+          "weight_diff": "1〜10kg",
+          "n": 5228,
+          "win_rate": 11.5,
+          "top2_rate": 22.9,
+          "place_rate": 33.4,
+          "win_roi": 66.9,
+          "place_roi": 76.0
+        },
+        {
+          "post": "3",
+          "weight_diff": "11〜20kg",
+          "n": 11778,
+          "win_rate": 11.6,
+          "top2_rate": 23.1,
+          "place_rate": 34.1,
+          "win_roi": 75.9,
+          "place_roi": 78.7
+        },
+        {
+          "post": "3",
+          "weight_diff": "21kg〜",
+          "n": 6447,
+          "win_rate": 10.8,
+          "top2_rate": 22.0,
+          "place_rate": 32.2,
+          "win_roi": 66.4,
+          "place_roi": 71.0
+        },
+        {
+          "post": "4",
+          "weight_diff": "0kg",
+          "n": 9153,
+          "win_rate": 10.9,
+          "top2_rate": 23.0,
+          "place_rate": 32.9,
+          "win_roi": 72.8,
+          "place_roi": 77.8
+        },
+        {
+          "post": "4",
+          "weight_diff": "1〜10kg",
+          "n": 5258,
+          "win_rate": 11.7,
+          "top2_rate": 23.5,
+          "place_rate": 33.3,
+          "win_roi": 68.7,
+          "place_roi": 74.4
+        },
+        {
+          "post": "4",
+          "weight_diff": "11〜20kg",
+          "n": 11763,
+          "win_rate": 12.3,
+          "top2_rate": 24.1,
+          "place_rate": 35.5,
+          "win_roi": 80.9,
+          "place_roi": 82.3
+        },
+        {
+          "post": "4",
+          "weight_diff": "21kg〜",
+          "n": 6382,
+          "win_rate": 11.3,
+          "top2_rate": 22.8,
+          "place_rate": 32.7,
+          "win_roi": 75.2,
+          "place_roi": 76.5
+        },
+        {
+          "post": "5",
+          "weight_diff": "0kg",
+          "n": 9071,
+          "win_rate": 11.6,
+          "top2_rate": 22.8,
+          "place_rate": 33.1,
+          "win_roi": 79.7,
+          "place_roi": 78.3
+        },
+        {
+          "post": "5",
+          "weight_diff": "1〜10kg",
+          "n": 5206,
+          "win_rate": 11.0,
+          "top2_rate": 23.0,
+          "place_rate": 33.9,
+          "win_roi": 74.4,
+          "place_roi": 78.0
+        },
+        {
+          "post": "5",
+          "weight_diff": "11〜20kg",
+          "n": 11830,
+          "win_rate": 11.9,
+          "top2_rate": 23.6,
+          "place_rate": 34.1,
+          "win_roi": 77.9,
+          "place_roi": 78.3
+        },
+        {
+          "post": "5",
+          "weight_diff": "21kg〜",
+          "n": 6498,
+          "win_rate": 11.2,
+          "top2_rate": 21.6,
+          "place_rate": 31.9,
+          "win_roi": 69.3,
+          "place_roi": 70.3
+        },
+        {
+          "post": "6",
+          "weight_diff": "0kg",
+          "n": 8998,
+          "win_rate": 11.2,
+          "top2_rate": 22.0,
+          "place_rate": 32.6,
+          "win_roi": 75.2,
+          "place_roi": 77.0
+        },
+        {
+          "post": "6",
+          "weight_diff": "1〜10kg",
+          "n": 5248,
+          "win_rate": 11.2,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 74.6,
+          "place_roi": 74.9
+        },
+        {
+          "post": "6",
+          "weight_diff": "11〜20kg",
+          "n": 11917,
+          "win_rate": 11.4,
+          "top2_rate": 22.8,
+          "place_rate": 33.5,
+          "win_roi": 74.6,
+          "place_roi": 77.5
+        },
+        {
+          "post": "6",
+          "weight_diff": "21kg〜",
+          "n": 6415,
+          "win_rate": 10.5,
+          "top2_rate": 21.8,
+          "place_rate": 31.8,
+          "win_roi": 65.7,
+          "place_roi": 72.9
+        },
+        {
+          "post": "7",
+          "weight_diff": "0kg",
+          "n": 9044,
+          "win_rate": 10.6,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 71.1,
+          "place_roi": 76.2
+        },
+        {
+          "post": "7",
+          "weight_diff": "1〜10kg",
+          "n": 5313,
+          "win_rate": 11.4,
+          "top2_rate": 23.2,
+          "place_rate": 34.2,
+          "win_roi": 80.3,
+          "place_roi": 77.2
+        },
+        {
+          "post": "7",
+          "weight_diff": "11〜20kg",
+          "n": 11660,
+          "win_rate": 11.1,
+          "top2_rate": 22.5,
+          "place_rate": 33.2,
+          "win_roi": 72.9,
+          "place_roi": 75.4
+        },
+        {
+          "post": "7",
+          "weight_diff": "21kg〜",
+          "n": 6351,
+          "win_rate": 10.6,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 63.7,
+          "place_roi": 71.2
+        },
+        {
+          "post": "8",
+          "weight_diff": "0kg",
+          "n": 8506,
+          "win_rate": 10.3,
+          "top2_rate": 21.1,
+          "place_rate": 32.4,
+          "win_roi": 70.4,
+          "place_roi": 75.8
+        },
+        {
+          "post": "8",
+          "weight_diff": "1〜10kg",
+          "n": 5080,
+          "win_rate": 10.4,
+          "top2_rate": 21.9,
+          "place_rate": 32.3,
+          "win_roi": 70.0,
+          "place_roi": 74.4
+        },
+        {
+          "post": "8",
+          "weight_diff": "11〜20kg",
+          "n": 11315,
+          "win_rate": 11.0,
+          "top2_rate": 21.8,
+          "place_rate": 32.8,
+          "win_roi": 75.8,
+          "place_roi": 76.3
+        },
+        {
+          "post": "8",
+          "weight_diff": "21kg〜",
+          "n": 6281,
+          "win_rate": 10.9,
+          "top2_rate": 21.6,
+          "place_rate": 31.6,
+          "win_roi": 70.8,
+          "place_roi": 71.1
+        },
+        {
+          "post": "9",
+          "weight_diff": "0kg",
+          "n": 6938,
+          "win_rate": 10.0,
+          "top2_rate": 19.5,
+          "place_rate": 30.6,
+          "win_roi": 71.4,
+          "place_roi": 74.6
+        },
+        {
+          "post": "9",
+          "weight_diff": "1〜10kg",
+          "n": 4296,
+          "win_rate": 10.2,
+          "top2_rate": 20.7,
+          "place_rate": 31.2,
+          "win_roi": 70.1,
+          "place_roi": 75.0
+        },
+        {
+          "post": "9",
+          "weight_diff": "11〜20kg",
+          "n": 9522,
+          "win_rate": 10.5,
+          "top2_rate": 20.9,
+          "place_rate": 31.6,
+          "win_roi": 70.4,
+          "place_roi": 73.4
+        },
+        {
+          "post": "9",
+          "weight_diff": "21kg〜",
+          "n": 5265,
+          "win_rate": 10.0,
+          "top2_rate": 19.8,
+          "place_rate": 30.0,
+          "win_roi": 64.8,
+          "place_roi": 69.0
+        },
+        {
+          "post": "10",
+          "weight_diff": "0kg",
+          "n": 3698,
+          "win_rate": 9.0,
+          "top2_rate": 17.3,
+          "place_rate": 25.5,
+          "win_roi": 68.1,
+          "place_roi": 69.1
+        },
+        {
+          "post": "10",
+          "weight_diff": "1〜10kg",
+          "n": 2409,
+          "win_rate": 10.3,
+          "top2_rate": 18.8,
+          "place_rate": 28.2,
+          "win_roi": 76.7,
+          "place_roi": 72.4
+        },
+        {
+          "post": "10",
+          "weight_diff": "11〜20kg",
+          "n": 5143,
+          "win_rate": 8.5,
+          "top2_rate": 17.8,
+          "place_rate": 26.4,
+          "win_roi": 72.5,
+          "place_roi": 69.7
+        },
+        {
+          "post": "10",
+          "weight_diff": "21kg〜",
+          "n": 3167,
+          "win_rate": 8.9,
+          "top2_rate": 18.2,
+          "place_rate": 27.6,
+          "win_roi": 61.0,
+          "place_roi": 68.8
+        }
+      ],
+      "margins": {
+        "post": [
+          {
+            "post": "1",
+            "n": 32570,
+            "win_rate": 10.7,
+            "top2_rate": 20.7,
+            "place_rate": 30.4,
+            "win_roi": 68.8,
+            "place_roi": 69.5
+          },
+          {
+            "post": "2",
+            "n": 32579,
+            "win_rate": 11.4,
+            "top2_rate": 22.9,
+            "place_rate": 33.4,
+            "win_roi": 73.7,
+            "place_roi": 77.3
+          },
+          {
+            "post": "3",
+            "n": 32571,
+            "win_rate": 11.5,
+            "top2_rate": 23.0,
+            "place_rate": 33.7,
+            "win_roi": 74.3,
+            "place_roi": 77.3
+          },
+          {
+            "post": "4",
+            "n": 32556,
+            "win_rate": 11.6,
+            "top2_rate": 23.4,
+            "place_rate": 33.9,
+            "win_roi": 75.5,
+            "place_roi": 78.6
+          },
+          {
+            "post": "5",
+            "n": 32605,
+            "win_rate": 11.5,
+            "top2_rate": 22.9,
+            "place_rate": 33.4,
+            "win_roi": 76.1,
+            "place_roi": 76.6
+          },
+          {
+            "post": "6",
+            "n": 32578,
+            "win_rate": 11.2,
+            "top2_rate": 22.2,
+            "place_rate": 32.7,
+            "win_roi": 73.0,
+            "place_roi": 76.0
+          },
+          {
+            "post": "7",
+            "n": 32368,
+            "win_rate": 10.9,
+            "top2_rate": 22.3,
+            "place_rate": 32.9,
+            "win_roi": 71.8,
+            "place_roi": 75.1
+          },
+          {
+            "post": "8",
+            "n": 31182,
+            "win_rate": 10.7,
+            "top2_rate": 21.6,
+            "place_rate": 32.3,
+            "win_roi": 72.4,
+            "place_roi": 74.8
+          },
+          {
+            "post": "9",
+            "n": 26021,
+            "win_rate": 10.2,
+            "top2_rate": 20.3,
+            "place_rate": 31.0,
+            "win_roi": 69.5,
+            "place_roi": 73.1
+          },
+          {
+            "post": "10",
+            "n": 14417,
+            "win_rate": 9.0,
+            "top2_rate": 17.9,
+            "place_rate": 26.7,
+            "win_roi": 69.5,
+            "place_roi": 69.8
+          }
+        ],
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 82454,
+            "win_rate": 10.9,
+            "top2_rate": 21.9,
+            "place_rate": 32.3,
+            "win_roi": 75.1,
+            "place_roi": 76.3
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 48542,
+            "win_rate": 10.9,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 71.0,
+            "place_roi": 74.6
+          },
+          {
+            "weight_diff": "11〜20kg",
+            "n": 108713,
+            "win_rate": 11.2,
+            "top2_rate": 22.4,
+            "place_rate": 33.0,
+            "win_roi": 74.9,
+            "place_roi": 76.6
+          },
+          {
+            "weight_diff": "21kg〜",
+            "n": 59738,
+            "win_rate": 10.6,
+            "top2_rate": 21.3,
+            "place_rate": 31.4,
+            "win_roi": 66.8,
+            "place_roi": 71.5
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "post": "1",
+          "weight_diff": "0kg",
+          "n": 1225,
+          "win_rate": 11.9,
+          "top2_rate": 22.8,
+          "place_rate": 32.8,
+          "win_roi": 69.7,
+          "place_roi": 77.3
+        },
+        {
+          "post": "1",
+          "weight_diff": "1〜10kg",
+          "n": 1123,
+          "win_rate": 10.2,
+          "top2_rate": 19.1,
+          "place_rate": 29.6,
+          "win_roi": 66.3,
+          "place_roi": 70.0
+        },
+        {
+          "post": "1",
+          "weight_diff": "11〜20kg",
+          "n": 1510,
+          "win_rate": 10.1,
+          "top2_rate": 21.8,
+          "place_rate": 31.6,
+          "win_roi": 71.4,
+          "place_roi": 77.0
+        },
+        {
+          "post": "1",
+          "weight_diff": "21kg〜",
+          "n": 1329,
+          "win_rate": 9.2,
+          "top2_rate": 19.3,
+          "place_rate": 28.7,
+          "win_roi": 59.2,
+          "place_roi": 70.9
+        },
+        {
+          "post": "2",
+          "weight_diff": "0kg",
+          "n": 1250,
+          "win_rate": 13.4,
+          "top2_rate": 25.7,
+          "place_rate": 36.1,
+          "win_roi": 87.5,
+          "place_roi": 83.6
+        },
+        {
+          "post": "2",
+          "weight_diff": "1〜10kg",
+          "n": 1142,
+          "win_rate": 11.3,
+          "top2_rate": 22.7,
+          "place_rate": 31.4,
+          "win_roi": 73.6,
+          "place_roi": 71.2
+        },
+        {
+          "post": "2",
+          "weight_diff": "11〜20kg",
+          "n": 1456,
+          "win_rate": 11.7,
+          "top2_rate": 21.8,
+          "place_rate": 33.8,
+          "win_roi": 75.4,
+          "place_roi": 79.0
+        },
+        {
+          "post": "2",
+          "weight_diff": "21kg〜",
+          "n": 1331,
+          "win_rate": 11.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.2,
+          "win_roi": 70.6,
+          "place_roi": 71.9
+        },
+        {
+          "post": "3",
+          "weight_diff": "0kg",
+          "n": 1251,
+          "win_rate": 13.5,
+          "top2_rate": 25.1,
+          "place_rate": 35.2,
+          "win_roi": 91.6,
+          "place_roi": 82.1
+        },
+        {
+          "post": "3",
+          "weight_diff": "1〜10kg",
+          "n": 1083,
+          "win_rate": 11.4,
+          "top2_rate": 21.9,
+          "place_rate": 30.9,
+          "win_roi": 65.1,
+          "place_roi": 71.0
+        },
+        {
+          "post": "3",
+          "weight_diff": "11〜20kg",
+          "n": 1558,
+          "win_rate": 10.1,
+          "top2_rate": 20.5,
+          "place_rate": 32.3,
+          "win_roi": 75.1,
+          "place_roi": 79.1
+        },
+        {
+          "post": "3",
+          "weight_diff": "21kg〜",
+          "n": 1296,
+          "win_rate": 11.7,
+          "top2_rate": 22.9,
+          "place_rate": 34.0,
+          "win_roi": 81.9,
+          "place_roi": 77.4
+        },
+        {
+          "post": "4",
+          "weight_diff": "0kg",
+          "n": 1316,
+          "win_rate": 10.0,
+          "top2_rate": 21.7,
+          "place_rate": 32.1,
+          "win_roi": 67.7,
+          "place_roi": 73.5
+        },
+        {
+          "post": "4",
+          "weight_diff": "1〜10kg",
+          "n": 1125,
+          "win_rate": 12.6,
+          "top2_rate": 23.1,
+          "place_rate": 33.7,
+          "win_roi": 89.0,
+          "place_roi": 82.1
+        },
+        {
+          "post": "4",
+          "weight_diff": "11〜20kg",
+          "n": 1438,
+          "win_rate": 11.1,
+          "top2_rate": 22.0,
+          "place_rate": 34.7,
+          "win_roi": 82.9,
+          "place_roi": 86.0
+        },
+        {
+          "post": "4",
+          "weight_diff": "21kg〜",
+          "n": 1302,
+          "win_rate": 10.4,
+          "top2_rate": 21.7,
+          "place_rate": 31.0,
+          "win_roi": 68.2,
+          "place_roi": 73.5
+        },
+        {
+          "post": "5",
+          "weight_diff": "0kg",
+          "n": 1266,
+          "win_rate": 11.5,
+          "top2_rate": 21.5,
+          "place_rate": 32.1,
+          "win_roi": 83.1,
+          "place_roi": 78.2
+        },
+        {
+          "post": "5",
+          "weight_diff": "1〜10kg",
+          "n": 1133,
+          "win_rate": 9.5,
+          "top2_rate": 20.0,
+          "place_rate": 32.0,
+          "win_roi": 57.5,
+          "place_roi": 72.7
+        },
+        {
+          "post": "5",
+          "weight_diff": "11〜20kg",
+          "n": 1520,
+          "win_rate": 10.9,
+          "top2_rate": 21.2,
+          "place_rate": 31.4,
+          "win_roi": 74.4,
+          "place_roi": 73.9
+        },
+        {
+          "post": "5",
+          "weight_diff": "21kg〜",
+          "n": 1271,
+          "win_rate": 11.3,
+          "top2_rate": 21.2,
+          "place_rate": 31.3,
+          "win_roi": 70.8,
+          "place_roi": 68.3
+        },
+        {
+          "post": "6",
+          "weight_diff": "0kg",
+          "n": 1249,
+          "win_rate": 10.8,
+          "top2_rate": 21.4,
+          "place_rate": 33.1,
+          "win_roi": 62.8,
+          "place_roi": 75.8
+        },
+        {
+          "post": "6",
+          "weight_diff": "1〜10kg",
+          "n": 1159,
+          "win_rate": 9.2,
+          "top2_rate": 18.7,
+          "place_rate": 28.8,
+          "win_roi": 65.9,
+          "place_roi": 68.3
+        },
+        {
+          "post": "6",
+          "weight_diff": "11〜20kg",
+          "n": 1496,
+          "win_rate": 10.9,
+          "top2_rate": 22.4,
+          "place_rate": 31.4,
+          "win_roi": 77.4,
+          "place_roi": 75.2
+        },
+        {
+          "post": "6",
+          "weight_diff": "21kg〜",
+          "n": 1292,
+          "win_rate": 10.1,
+          "top2_rate": 20.9,
+          "place_rate": 30.7,
+          "win_roi": 57.5,
+          "place_roi": 69.9
+        },
+        {
+          "post": "7",
+          "weight_diff": "0kg",
+          "n": 1177,
+          "win_rate": 11.7,
+          "top2_rate": 23.7,
+          "place_rate": 34.5,
+          "win_roi": 80.6,
+          "place_roi": 78.9
+        },
+        {
+          "post": "7",
+          "weight_diff": "1〜10kg",
+          "n": 1171,
+          "win_rate": 10.1,
+          "top2_rate": 21.8,
+          "place_rate": 33.0,
+          "win_roi": 77.8,
+          "place_roi": 77.0
+        },
+        {
+          "post": "7",
+          "weight_diff": "11〜20kg",
+          "n": 1509,
+          "win_rate": 10.9,
+          "top2_rate": 22.5,
+          "place_rate": 32.7,
+          "win_roi": 79.0,
+          "place_roi": 77.2
+        },
+        {
+          "post": "7",
+          "weight_diff": "21kg〜",
+          "n": 1304,
+          "win_rate": 9.5,
+          "top2_rate": 20.2,
+          "place_rate": 30.8,
+          "win_roi": 50.9,
+          "place_roi": 68.8
+        },
+        {
+          "post": "8",
+          "weight_diff": "0kg",
+          "n": 1216,
+          "win_rate": 11.2,
+          "top2_rate": 23.9,
+          "place_rate": 35.9,
+          "win_roi": 64.4,
+          "place_roi": 80.5
+        },
+        {
+          "post": "8",
+          "weight_diff": "1〜10kg",
+          "n": 1107,
+          "win_rate": 9.9,
+          "top2_rate": 22.0,
+          "place_rate": 31.7,
+          "win_roi": 64.6,
+          "place_roi": 72.5
+        },
+        {
+          "post": "8",
+          "weight_diff": "11〜20kg",
+          "n": 1467,
+          "win_rate": 10.1,
+          "top2_rate": 21.7,
+          "place_rate": 34.3,
+          "win_roi": 57.7,
+          "place_roi": 79.5
+        },
+        {
+          "post": "8",
+          "weight_diff": "21kg〜",
+          "n": 1265,
+          "win_rate": 10.0,
+          "top2_rate": 19.5,
+          "place_rate": 29.2,
+          "win_roi": 69.0,
+          "place_roi": 71.8
+        },
+        {
+          "post": "9",
+          "weight_diff": "0kg",
+          "n": 1056,
+          "win_rate": 10.9,
+          "top2_rate": 22.3,
+          "place_rate": 34.0,
+          "win_roi": 78.5,
+          "place_roi": 79.2
+        },
+        {
+          "post": "9",
+          "weight_diff": "1〜10kg",
+          "n": 1025,
+          "win_rate": 11.0,
+          "top2_rate": 21.6,
+          "place_rate": 31.5,
+          "win_roi": 75.0,
+          "place_roi": 77.0
+        },
+        {
+          "post": "9",
+          "weight_diff": "11〜20kg",
+          "n": 1301,
+          "win_rate": 10.8,
+          "top2_rate": 20.4,
+          "place_rate": 29.9,
+          "win_roi": 65.5,
+          "place_roi": 64.1
+        },
+        {
+          "post": "9",
+          "weight_diff": "21kg〜",
+          "n": 1137,
+          "win_rate": 9.9,
+          "top2_rate": 20.0,
+          "place_rate": 29.8,
+          "win_roi": 68.1,
+          "place_roi": 73.2
+        },
+        {
+          "post": "10",
+          "weight_diff": "0kg",
+          "n": 662,
+          "win_rate": 9.7,
+          "top2_rate": 19.5,
+          "place_rate": 27.8,
+          "win_roi": 76.0,
+          "place_roi": 75.5
+        },
+        {
+          "post": "10",
+          "weight_diff": "1〜10kg",
+          "n": 607,
+          "win_rate": 9.6,
+          "top2_rate": 18.1,
+          "place_rate": 29.2,
+          "win_roi": 78.5,
+          "place_roi": 80.5
+        },
+        {
+          "post": "10",
+          "weight_diff": "11〜20kg",
+          "n": 775,
+          "win_rate": 10.2,
+          "top2_rate": 20.6,
+          "place_rate": 29.5,
+          "win_roi": 106.5,
+          "place_roi": 84.2
+        },
+        {
+          "post": "10",
+          "weight_diff": "21kg〜",
+          "n": 745,
+          "win_rate": 9.0,
+          "top2_rate": 17.4,
+          "place_rate": 27.5,
+          "win_roi": 70.9,
+          "place_roi": 68.4
+        }
+      ],
+      "margins": {
+        "post": [
+          {
+            "post": "1",
+            "n": 5187,
+            "win_rate": 10.3,
+            "top2_rate": 20.8,
+            "place_rate": 30.7,
+            "win_roi": 66.8,
+            "place_roi": 74.0
+          },
+          {
+            "post": "2",
+            "n": 5179,
+            "win_rate": 12.0,
+            "top2_rate": 22.7,
+            "place_rate": 33.2,
+            "win_roi": 76.7,
+            "place_roi": 76.6
+          },
+          {
+            "post": "3",
+            "n": 5188,
+            "win_rate": 11.6,
+            "top2_rate": 22.5,
+            "place_rate": 33.1,
+            "win_roi": 78.7,
+            "place_roi": 77.7
+          },
+          {
+            "post": "4",
+            "n": 5181,
+            "win_rate": 11.0,
+            "top2_rate": 22.1,
+            "place_rate": 32.9,
+            "win_roi": 76.7,
+            "place_roi": 78.8
+          },
+          {
+            "post": "5",
+            "n": 5190,
+            "win_rate": 10.8,
+            "top2_rate": 21.0,
+            "place_rate": 31.7,
+            "win_roi": 71.9,
+            "place_roi": 73.3
+          },
+          {
+            "post": "6",
+            "n": 5196,
+            "win_rate": 10.3,
+            "top2_rate": 21.0,
+            "place_rate": 31.0,
+            "win_roi": 66.4,
+            "place_roi": 72.5
+          },
+          {
+            "post": "7",
+            "n": 5161,
+            "win_rate": 10.6,
+            "top2_rate": 22.0,
+            "place_rate": 32.7,
+            "win_roi": 72.0,
+            "place_roi": 75.4
+          },
+          {
+            "post": "8",
+            "n": 5055,
+            "win_rate": 10.3,
+            "top2_rate": 21.8,
+            "place_rate": 32.8,
+            "win_roi": 63.6,
+            "place_roi": 76.3
+          },
+          {
+            "post": "9",
+            "n": 4519,
+            "win_rate": 10.7,
+            "top2_rate": 21.0,
+            "place_rate": 31.2,
+            "win_roi": 71.3,
+            "place_roi": 72.9
+          },
+          {
+            "post": "10",
+            "n": 2789,
+            "win_rate": 9.6,
+            "top2_rate": 19.0,
+            "place_rate": 28.5,
+            "win_roi": 83.7,
+            "place_roi": 77.1
+          }
+        ],
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 11668,
+            "win_rate": 11.6,
+            "top2_rate": 22.9,
+            "place_rate": 33.6,
+            "win_roi": 76.1,
+            "place_roi": 78.6
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 10675,
+            "win_rate": 10.5,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.0,
+            "place_roi": 73.9
+          },
+          {
+            "weight_diff": "11〜20kg",
+            "n": 14030,
+            "win_rate": 10.7,
+            "top2_rate": 21.6,
+            "place_rate": 32.3,
+            "win_roi": 75.1,
+            "place_roi": 77.3
+          },
+          {
+            "weight_diff": "21kg〜",
+            "n": 12272,
+            "win_rate": 10.3,
+            "top2_rate": 20.6,
+            "place_rate": 30.5,
+            "win_roi": 66.5,
+            "place_roi": 71.5
+          }
+        ]
+      }
+    }
+  }
+}

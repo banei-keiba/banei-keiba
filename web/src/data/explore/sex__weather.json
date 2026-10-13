@@ -1,0 +1,349 @@
+{
+  "axes": [
+    "sex",
+    "weather"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "sex": [
+      "牝",
+      "牡",
+      "セン"
+    ],
+    "weather": [
+      "晴",
+      "曇",
+      "雨・雪"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "weather": "晴",
+          "n": 58527,
+          "win_rate": 10.1,
+          "top2_rate": 20.4,
+          "place_rate": 30.7,
+          "win_roi": 70.4,
+          "place_roi": 73.8
+        },
+        {
+          "sex": "牝",
+          "weather": "曇",
+          "n": 28177,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.1,
+          "win_roi": 75.5,
+          "place_roi": 75.0
+        },
+        {
+          "sex": "牝",
+          "weather": "雨・雪",
+          "n": 8350,
+          "win_rate": 10.9,
+          "top2_rate": 21.9,
+          "place_rate": 32.4,
+          "win_roi": 71.0,
+          "place_roi": 75.6
+        },
+        {
+          "sex": "牡",
+          "weather": "晴",
+          "n": 119242,
+          "win_rate": 11.4,
+          "top2_rate": 22.6,
+          "place_rate": 33.2,
+          "win_roi": 73.6,
+          "place_roi": 76.5
+        },
+        {
+          "sex": "牡",
+          "weather": "曇",
+          "n": 59856,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 71.6,
+          "place_roi": 73.9
+        },
+        {
+          "sex": "牡",
+          "weather": "雨・雪",
+          "n": 18585,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.3,
+          "win_roi": 75.2,
+          "place_roi": 75.4
+        },
+        {
+          "sex": "セン",
+          "weather": "晴",
+          "n": 4053,
+          "win_rate": 12.5,
+          "top2_rate": 24.3,
+          "place_rate": 34.3,
+          "win_roi": 70.7,
+          "place_roi": 75.5
+        },
+        {
+          "sex": "セン",
+          "weather": "曇",
+          "n": 2041,
+          "win_rate": 11.9,
+          "top2_rate": 22.4,
+          "place_rate": 33.9,
+          "win_roi": 74.1,
+          "place_roi": 73.3
+        },
+        {
+          "sex": "セン",
+          "weather": "雨・雪",
+          "n": 616,
+          "win_rate": 9.7,
+          "top2_rate": 21.1,
+          "place_rate": 33.1,
+          "win_roi": 58.5,
+          "place_roi": 76.6
+        }
+      ],
+      "margins": {
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 95054,
+            "win_rate": 10.4,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.9,
+            "place_roi": 74.3
+          },
+          {
+            "sex": "牡",
+            "n": 197683,
+            "win_rate": 11.2,
+            "top2_rate": 22.4,
+            "place_rate": 32.9,
+            "win_roi": 73.2,
+            "place_roi": 75.6
+          },
+          {
+            "sex": "セン",
+            "n": 6710,
+            "win_rate": 12.1,
+            "top2_rate": 23.4,
+            "place_rate": 34.1,
+            "win_roi": 70.6,
+            "place_roi": 74.9
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 181822,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.5,
+            "place_roi": 75.6
+          },
+          {
+            "weather": "曇",
+            "n": 90074,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.4,
+            "win_roi": 72.9,
+            "place_roi": 74.2
+          },
+          {
+            "weather": "雨・雪",
+            "n": 27551,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 73.5,
+            "place_roi": 75.5
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "weather": "晴",
+          "n": 10094,
+          "win_rate": 10.1,
+          "top2_rate": 20.7,
+          "place_rate": 30.8,
+          "win_roi": 69.4,
+          "place_roi": 74.4
+        },
+        {
+          "sex": "牝",
+          "weather": "曇",
+          "n": 4801,
+          "win_rate": 11.2,
+          "top2_rate": 21.6,
+          "place_rate": 32.3,
+          "win_roi": 75.1,
+          "place_roi": 76.3
+        },
+        {
+          "sex": "牝",
+          "weather": "雨・雪",
+          "n": 1062,
+          "win_rate": 11.1,
+          "top2_rate": 23.2,
+          "place_rate": 33.6,
+          "win_roi": 73.5,
+          "place_roi": 78.4
+        },
+        {
+          "sex": "牡",
+          "weather": "晴",
+          "n": 19221,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.5,
+          "win_roi": 73.1,
+          "place_roi": 76.8
+        },
+        {
+          "sex": "牡",
+          "weather": "曇",
+          "n": 9750,
+          "win_rate": 10.5,
+          "top2_rate": 21.4,
+          "place_rate": 31.7,
+          "win_roi": 71.5,
+          "place_roi": 73.8
+        },
+        {
+          "sex": "牡",
+          "weather": "雨・雪",
+          "n": 2161,
+          "win_rate": 10.5,
+          "top2_rate": 20.6,
+          "place_rate": 30.8,
+          "win_roi": 71.3,
+          "place_roi": 70.7
+        },
+        {
+          "sex": "セン",
+          "weather": "晴",
+          "n": 953,
+          "win_rate": 13.7,
+          "top2_rate": 23.5,
+          "place_rate": 34.0,
+          "win_roi": 88.5,
+          "place_roi": 81.2
+        },
+        {
+          "sex": "セン",
+          "weather": "曇",
+          "n": 487,
+          "win_rate": 11.3,
+          "top2_rate": 22.8,
+          "place_rate": 33.7,
+          "win_roi": 63.0,
+          "place_roi": 71.5
+        },
+        {
+          "sex": "セン",
+          "weather": "雨・雪",
+          "n": 116,
+          "win_rate": 11.2,
+          "top2_rate": 19.8,
+          "place_rate": 31.9,
+          "win_roi": 49.5,
+          "place_roi": 69.2
+        }
+      ],
+      "margins": {
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 15957,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.4,
+            "win_roi": 71.4,
+            "place_roi": 75.2
+          },
+          {
+            "sex": "牡",
+            "n": 31132,
+            "win_rate": 10.8,
+            "top2_rate": 21.6,
+            "place_rate": 32.1,
+            "win_roi": 72.5,
+            "place_roi": 75.4
+          },
+          {
+            "sex": "セン",
+            "n": 1556,
+            "win_rate": 12.8,
+            "top2_rate": 23.0,
+            "place_rate": 33.7,
+            "win_roi": 77.6,
+            "place_roi": 77.3
+          }
+        ],
+        "weather": [
+          {
+            "weather": "晴",
+            "n": 30268,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 32.0,
+            "win_roi": 72.3,
+            "place_roi": 76.1
+          },
+          {
+            "weather": "曇",
+            "n": 15038,
+            "win_rate": 10.8,
+            "top2_rate": 21.5,
+            "place_rate": 31.9,
+            "win_roi": 72.4,
+            "place_roi": 74.5
+          },
+          {
+            "weather": "雨・雪",
+            "n": 3339,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.7,
+            "win_roi": 71.2,
+            "place_roi": 73.1
+          }
+        ]
+      }
+    }
+  }
+}

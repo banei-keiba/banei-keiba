@@ -1,0 +1,268 @@
+{
+  "axes": [
+    "month"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "month": [
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+      "1月",
+      "2月",
+      "3月"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "month": "4月",
+          "n": 10652,
+          "win_rate": 11.4,
+          "top2_rate": 22.9,
+          "place_rate": 33.4,
+          "win_roi": 71.3,
+          "place_roi": 76.7
+        },
+        {
+          "month": "5月",
+          "n": 25531,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.6,
+          "win_roi": 67.5,
+          "place_roi": 71.7
+        },
+        {
+          "month": "6月",
+          "n": 25620,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 68.6,
+          "place_roi": 74.5
+        },
+        {
+          "month": "7月",
+          "n": 26450,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.3,
+          "win_roi": 70.4,
+          "place_roi": 74.7
+        },
+        {
+          "month": "8月",
+          "n": 26721,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.4,
+          "win_roi": 73.3,
+          "place_roi": 74.9
+        },
+        {
+          "month": "9月",
+          "n": 25449,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.3,
+          "win_roi": 72.4,
+          "place_roi": 74.8
+        },
+        {
+          "month": "10月",
+          "n": 26873,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.2,
+          "win_roi": 74.7,
+          "place_roi": 75.3
+        },
+        {
+          "month": "11月",
+          "n": 25910,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.2,
+          "win_roi": 73.8,
+          "place_roi": 74.9
+        },
+        {
+          "month": "12月",
+          "n": 28710,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.2,
+          "win_roi": 75.4,
+          "place_roi": 76.3
+        },
+        {
+          "month": "1月",
+          "n": 31303,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.3,
+          "win_roi": 71.8,
+          "place_roi": 75.1
+        },
+        {
+          "month": "2月",
+          "n": 23819,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 77.5,
+          "place_roi": 77.4
+        },
+        {
+          "month": "3月",
+          "n": 22409,
+          "win_rate": 11.2,
+          "top2_rate": 22.4,
+          "place_rate": 32.6,
+          "win_roi": 75.3,
+          "place_roi": 76.7
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "month": "4月",
+          "n": 2050,
+          "win_rate": 11.7,
+          "top2_rate": 23.4,
+          "place_rate": 34.1,
+          "win_roi": 71.1,
+          "place_roi": 75.1
+        },
+        {
+          "month": "5月",
+          "n": 3467,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.8,
+          "win_roi": 60.8,
+          "place_roi": 69.2
+        },
+        {
+          "month": "6月",
+          "n": 4445,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.1,
+          "win_roi": 66.7,
+          "place_roi": 74.4
+        },
+        {
+          "month": "7月",
+          "n": 4526,
+          "win_rate": 10.6,
+          "top2_rate": 21.2,
+          "place_rate": 31.6,
+          "win_roi": 62.0,
+          "place_roi": 71.2
+        },
+        {
+          "month": "8月",
+          "n": 4402,
+          "win_rate": 10.7,
+          "top2_rate": 21.3,
+          "place_rate": 31.7,
+          "win_roi": 69.6,
+          "place_roi": 74.9
+        },
+        {
+          "month": "9月",
+          "n": 4529,
+          "win_rate": 10.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.4,
+          "win_roi": 75.9,
+          "place_roi": 75.2
+        },
+        {
+          "month": "10月",
+          "n": 4450,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.5,
+          "win_roi": 78.1,
+          "place_roi": 77.8
+        },
+        {
+          "month": "11月",
+          "n": 4319,
+          "win_rate": 10.6,
+          "top2_rate": 21.1,
+          "place_rate": 31.6,
+          "win_roi": 78.5,
+          "place_roi": 75.6
+        },
+        {
+          "month": "12月",
+          "n": 4588,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.5,
+          "win_roi": 76.4,
+          "place_roi": 77.8
+        },
+        {
+          "month": "1月",
+          "n": 4842,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.0,
+          "win_roi": 68.2,
+          "place_roi": 74.8
+        },
+        {
+          "month": "2月",
+          "n": 3843,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.4,
+          "win_roi": 79.9,
+          "place_roi": 79.6
+        },
+        {
+          "month": "3月",
+          "n": 3184,
+          "win_rate": 11.0,
+          "top2_rate": 21.9,
+          "place_rate": 32.4,
+          "win_roi": 81.0,
+          "place_roi": 79.4
+        }
+      ]
+    }
+  }
+}

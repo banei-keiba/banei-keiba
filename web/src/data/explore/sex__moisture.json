@@ -1,0 +1,388 @@
+{
+  "axes": [
+    "sex",
+    "moisture"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "sex": [
+      "牝",
+      "牡・セン"
+    ],
+    "moisture": [
+      "〜0.9",
+      "1.0〜1.4",
+      "1.5〜1.9",
+      "2.0〜2.4",
+      "2.5〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "moisture": "〜0.9",
+          "n": 7287,
+          "win_rate": 9.8,
+          "top2_rate": 20.4,
+          "place_rate": 30.6,
+          "win_roi": 67.1,
+          "place_roi": 75.0
+        },
+        {
+          "sex": "牝",
+          "moisture": "1.0〜1.4",
+          "n": 14230,
+          "win_rate": 10.2,
+          "top2_rate": 21.0,
+          "place_rate": 31.3,
+          "win_roi": 67.9,
+          "place_roi": 74.2
+        },
+        {
+          "sex": "牝",
+          "moisture": "1.5〜1.9",
+          "n": 19498,
+          "win_rate": 10.6,
+          "top2_rate": 21.2,
+          "place_rate": 31.3,
+          "win_roi": 77.0,
+          "place_roi": 74.2
+        },
+        {
+          "sex": "牝",
+          "moisture": "2.0〜2.4",
+          "n": 19060,
+          "win_rate": 10.4,
+          "top2_rate": 20.8,
+          "place_rate": 31.3,
+          "win_roi": 72.4,
+          "place_roi": 74.4
+        },
+        {
+          "sex": "牝",
+          "moisture": "2.5〜",
+          "n": 34979,
+          "win_rate": 10.5,
+          "top2_rate": 21.0,
+          "place_rate": 31.3,
+          "win_roi": 71.5,
+          "place_roi": 74.2
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "〜0.9",
+          "n": 17101,
+          "win_rate": 11.6,
+          "top2_rate": 23.0,
+          "place_rate": 33.2,
+          "win_roi": 72.5,
+          "place_roi": 75.7
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "1.0〜1.4",
+          "n": 31514,
+          "win_rate": 11.4,
+          "top2_rate": 22.6,
+          "place_rate": 33.0,
+          "win_roi": 74.0,
+          "place_roi": 74.9
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "1.5〜1.9",
+          "n": 39899,
+          "win_rate": 11.3,
+          "top2_rate": 22.5,
+          "place_rate": 33.1,
+          "win_roi": 70.9,
+          "place_roi": 75.8
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "2.0〜2.4",
+          "n": 39143,
+          "win_rate": 11.4,
+          "top2_rate": 22.7,
+          "place_rate": 33.1,
+          "win_roi": 74.6,
+          "place_roi": 75.7
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "2.5〜",
+          "n": 76736,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.6,
+          "win_roi": 73.2,
+          "place_roi": 75.7
+        }
+      ],
+      "margins": {
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 95054,
+            "win_rate": 10.4,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.9,
+            "place_roi": 74.3
+          },
+          {
+            "sex": "牡・セン",
+            "n": 204393,
+            "win_rate": 11.3,
+            "top2_rate": 22.5,
+            "place_rate": 32.9,
+            "win_roi": 73.1,
+            "place_roi": 75.6
+          }
+        ],
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 24388,
+            "win_rate": 11.1,
+            "top2_rate": 22.2,
+            "place_rate": 32.4,
+            "win_roi": 70.9,
+            "place_roi": 75.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 45744,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.1,
+            "place_roi": 74.7
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 59397,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 58203,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 73.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.5〜",
+            "n": 111715,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 72.6,
+            "place_roi": 75.2
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "moisture": "〜0.9",
+          "n": 1125,
+          "win_rate": 8.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.5,
+          "win_roi": 53.6,
+          "place_roi": 75.9
+        },
+        {
+          "sex": "牝",
+          "moisture": "1.0〜1.4",
+          "n": 3334,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 31.8,
+          "win_roi": 64.5,
+          "place_roi": 73.4
+        },
+        {
+          "sex": "牝",
+          "moisture": "1.5〜1.9",
+          "n": 5430,
+          "win_rate": 10.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.6,
+          "win_roi": 77.8,
+          "place_roi": 75.0
+        },
+        {
+          "sex": "牝",
+          "moisture": "2.0〜2.4",
+          "n": 3824,
+          "win_rate": 10.7,
+          "top2_rate": 20.5,
+          "place_rate": 30.9,
+          "win_roi": 76.4,
+          "place_roi": 77.2
+        },
+        {
+          "sex": "牝",
+          "moisture": "2.5〜",
+          "n": 2244,
+          "win_rate": 9.7,
+          "top2_rate": 20.1,
+          "place_rate": 30.6,
+          "win_roi": 66.2,
+          "place_roi": 74.9
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "〜0.9",
+          "n": 2729,
+          "win_rate": 11.9,
+          "top2_rate": 22.1,
+          "place_rate": 31.9,
+          "win_roi": 74.5,
+          "place_roi": 72.4
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "1.0〜1.4",
+          "n": 7502,
+          "win_rate": 10.9,
+          "top2_rate": 21.8,
+          "place_rate": 32.2,
+          "win_roi": 71.9,
+          "place_roi": 73.7
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "1.5〜1.9",
+          "n": 10766,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 32.0,
+          "win_roi": 75.4,
+          "place_roi": 77.0
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "2.0〜2.4",
+          "n": 7514,
+          "win_rate": 10.7,
+          "top2_rate": 21.8,
+          "place_rate": 32.4,
+          "win_roi": 68.8,
+          "place_roi": 76.4
+        },
+        {
+          "sex": "牡・セン",
+          "moisture": "2.5〜",
+          "n": 4177,
+          "win_rate": 11.3,
+          "top2_rate": 22.1,
+          "place_rate": 32.6,
+          "win_roi": 73.1,
+          "place_roi": 75.3
+        }
+      ],
+      "margins": {
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 15957,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.4,
+            "win_roi": 71.4,
+            "place_roi": 75.2
+          },
+          {
+            "sex": "牡・セン",
+            "n": 32688,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.2,
+            "win_roi": 72.7,
+            "place_roi": 75.5
+          }
+        ],
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 3854,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.1,
+            "win_roi": 68.4,
+            "place_roi": 73.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 10836,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.1,
+            "win_roi": 69.7,
+            "place_roi": 73.6
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 16196,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 76.2,
+            "place_roi": 76.3
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 11338,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 71.4,
+            "place_roi": 76.7
+          },
+          {
+            "moisture": "2.5〜",
+            "n": 6421,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 70.7,
+            "place_roi": 75.1
+          }
+        ]
+      }
+    }
+  }
+}

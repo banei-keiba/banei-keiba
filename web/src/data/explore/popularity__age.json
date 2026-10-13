@@ -1,0 +1,1778 @@
+{
+  "axes": [
+    "popularity",
+    "age"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "popularity": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "age": [
+      "2歳",
+      "3歳",
+      "4歳",
+      "5歳",
+      "6歳",
+      "7歳",
+      "8歳〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "popularity": "1",
+          "age": "2歳",
+          "n": 6733,
+          "win_rate": 34.1,
+          "top2_rate": 53.8,
+          "place_rate": 66.1,
+          "win_roi": 75.3,
+          "place_roi": 85.8
+        },
+        {
+          "popularity": "1",
+          "age": "3歳",
+          "n": 8442,
+          "win_rate": 35.9,
+          "top2_rate": 55.3,
+          "place_rate": 67.4,
+          "win_roi": 81.8,
+          "place_roi": 87.0
+        },
+        {
+          "popularity": "1",
+          "age": "4歳",
+          "n": 6648,
+          "win_rate": 37.2,
+          "top2_rate": 57.6,
+          "place_rate": 70.8,
+          "win_roi": 83.4,
+          "place_roi": 89.9
+        },
+        {
+          "popularity": "1",
+          "age": "5歳",
+          "n": 2949,
+          "win_rate": 30.8,
+          "top2_rate": 51.8,
+          "place_rate": 65.3,
+          "win_roi": 71.5,
+          "place_roi": 84.8
+        },
+        {
+          "popularity": "1",
+          "age": "6歳",
+          "n": 2363,
+          "win_rate": 34.7,
+          "top2_rate": 55.6,
+          "place_rate": 69.2,
+          "win_roi": 78.3,
+          "place_roi": 87.9
+        },
+        {
+          "popularity": "1",
+          "age": "7歳",
+          "n": 2068,
+          "win_rate": 36.9,
+          "top2_rate": 57.6,
+          "place_rate": 70.5,
+          "win_roi": 81.2,
+          "place_roi": 88.8
+        },
+        {
+          "popularity": "1",
+          "age": "8歳〜",
+          "n": 3735,
+          "win_rate": 35.8,
+          "top2_rate": 56.7,
+          "place_rate": 68.8,
+          "win_roi": 77.2,
+          "place_roi": 86.9
+        },
+        {
+          "popularity": "2",
+          "age": "2歳",
+          "n": 6741,
+          "win_rate": 19.6,
+          "top2_rate": 39.2,
+          "place_rate": 53.5,
+          "win_roi": 78.6,
+          "place_roi": 82.8
+        },
+        {
+          "popularity": "2",
+          "age": "3歳",
+          "n": 8040,
+          "win_rate": 20.6,
+          "top2_rate": 40.4,
+          "place_rate": 54.7,
+          "win_roi": 80.9,
+          "place_roi": 82.8
+        },
+        {
+          "popularity": "2",
+          "age": "4歳",
+          "n": 6485,
+          "win_rate": 21.9,
+          "top2_rate": 42.6,
+          "place_rate": 58.2,
+          "win_roi": 84.6,
+          "place_roi": 86.9
+        },
+        {
+          "popularity": "2",
+          "age": "5歳",
+          "n": 3411,
+          "win_rate": 17.9,
+          "top2_rate": 38.6,
+          "place_rate": 53.8,
+          "win_roi": 70.0,
+          "place_roi": 80.8
+        },
+        {
+          "popularity": "2",
+          "age": "6歳",
+          "n": 2507,
+          "win_rate": 19.4,
+          "top2_rate": 39.6,
+          "place_rate": 53.5,
+          "win_roi": 76.9,
+          "place_roi": 80.3
+        },
+        {
+          "popularity": "2",
+          "age": "7歳",
+          "n": 2116,
+          "win_rate": 19.8,
+          "top2_rate": 40.8,
+          "place_rate": 56.6,
+          "win_roi": 75.8,
+          "place_roi": 83.9
+        },
+        {
+          "popularity": "2",
+          "age": "8歳〜",
+          "n": 3683,
+          "win_rate": 18.8,
+          "top2_rate": 38.3,
+          "place_rate": 52.9,
+          "win_roi": 72.6,
+          "place_roi": 79.3
+        },
+        {
+          "popularity": "3",
+          "age": "2歳",
+          "n": 6737,
+          "win_rate": 13.7,
+          "top2_rate": 29.6,
+          "place_rate": 43.0,
+          "win_roi": 77.8,
+          "place_roi": 78.2
+        },
+        {
+          "popularity": "3",
+          "age": "3歳",
+          "n": 7784,
+          "win_rate": 14.6,
+          "top2_rate": 31.2,
+          "place_rate": 45.3,
+          "win_roi": 79.0,
+          "place_roi": 80.9
+        },
+        {
+          "popularity": "3",
+          "age": "4歳",
+          "n": 6198,
+          "win_rate": 14.9,
+          "top2_rate": 32.1,
+          "place_rate": 46.9,
+          "win_roi": 79.9,
+          "place_roi": 81.4
+        },
+        {
+          "popularity": "3",
+          "age": "5歳",
+          "n": 3606,
+          "win_rate": 12.6,
+          "top2_rate": 26.8,
+          "place_rate": 41.5,
+          "win_roi": 69.0,
+          "place_roi": 72.7
+        },
+        {
+          "popularity": "3",
+          "age": "6歳",
+          "n": 2708,
+          "win_rate": 14.0,
+          "top2_rate": 29.8,
+          "place_rate": 43.8,
+          "win_roi": 74.4,
+          "place_roi": 76.0
+        },
+        {
+          "popularity": "3",
+          "age": "7歳",
+          "n": 2140,
+          "win_rate": 14.4,
+          "top2_rate": 29.0,
+          "place_rate": 43.3,
+          "win_roi": 79.5,
+          "place_roi": 76.1
+        },
+        {
+          "popularity": "3",
+          "age": "8歳〜",
+          "n": 3763,
+          "win_rate": 14.2,
+          "top2_rate": 29.9,
+          "place_rate": 43.2,
+          "win_roi": 76.9,
+          "place_roi": 75.7
+        },
+        {
+          "popularity": "4",
+          "age": "2歳",
+          "n": 6745,
+          "win_rate": 10.2,
+          "top2_rate": 22.3,
+          "place_rate": 34.9,
+          "win_roi": 77.8,
+          "place_roi": 76.7
+        },
+        {
+          "popularity": "4",
+          "age": "3歳",
+          "n": 7665,
+          "win_rate": 9.8,
+          "top2_rate": 22.8,
+          "place_rate": 36.4,
+          "win_roi": 73.2,
+          "place_roi": 77.3
+        },
+        {
+          "popularity": "4",
+          "age": "4歳",
+          "n": 5980,
+          "win_rate": 11.6,
+          "top2_rate": 25.2,
+          "place_rate": 38.6,
+          "win_roi": 85.0,
+          "place_roi": 79.3
+        },
+        {
+          "popularity": "4",
+          "age": "5歳",
+          "n": 3727,
+          "win_rate": 8.1,
+          "top2_rate": 20.0,
+          "place_rate": 33.2,
+          "win_roi": 60.3,
+          "place_roi": 69.7
+        },
+        {
+          "popularity": "4",
+          "age": "6歳",
+          "n": 2719,
+          "win_rate": 9.1,
+          "top2_rate": 23.1,
+          "place_rate": 38.1,
+          "win_roi": 68.2,
+          "place_roi": 78.3
+        },
+        {
+          "popularity": "4",
+          "age": "7歳",
+          "n": 2133,
+          "win_rate": 10.0,
+          "top2_rate": 24.1,
+          "place_rate": 38.0,
+          "win_roi": 74.7,
+          "place_roi": 79.0
+        },
+        {
+          "popularity": "4",
+          "age": "8歳〜",
+          "n": 4025,
+          "win_rate": 9.2,
+          "top2_rate": 22.2,
+          "place_rate": 35.9,
+          "win_roi": 71.0,
+          "place_roi": 75.9
+        },
+        {
+          "popularity": "5",
+          "age": "2歳",
+          "n": 6722,
+          "win_rate": 7.4,
+          "top2_rate": 16.6,
+          "place_rate": 27.9,
+          "win_roi": 76.3,
+          "place_roi": 73.8
+        },
+        {
+          "popularity": "5",
+          "age": "3歳",
+          "n": 7621,
+          "win_rate": 7.4,
+          "top2_rate": 17.4,
+          "place_rate": 28.4,
+          "win_roi": 73.9,
+          "place_roi": 73.0
+        },
+        {
+          "popularity": "5",
+          "age": "4歳",
+          "n": 5601,
+          "win_rate": 8.8,
+          "top2_rate": 20.3,
+          "place_rate": 32.2,
+          "win_roi": 90.7,
+          "place_roi": 82.0
+        },
+        {
+          "popularity": "5",
+          "age": "5歳",
+          "n": 3926,
+          "win_rate": 6.9,
+          "top2_rate": 15.5,
+          "place_rate": 26.2,
+          "win_roi": 72.6,
+          "place_roi": 67.7
+        },
+        {
+          "popularity": "5",
+          "age": "6歳",
+          "n": 2795,
+          "win_rate": 7.5,
+          "top2_rate": 17.9,
+          "place_rate": 28.4,
+          "win_roi": 78.2,
+          "place_roi": 73.9
+        },
+        {
+          "popularity": "5",
+          "age": "7歳",
+          "n": 2123,
+          "win_rate": 7.4,
+          "top2_rate": 17.1,
+          "place_rate": 29.2,
+          "win_roi": 76.2,
+          "place_roi": 75.3
+        },
+        {
+          "popularity": "5",
+          "age": "8歳〜",
+          "n": 4185,
+          "win_rate": 6.7,
+          "top2_rate": 16.2,
+          "place_rate": 27.2,
+          "win_roi": 68.8,
+          "place_roi": 70.4
+        },
+        {
+          "popularity": "6",
+          "age": "2歳",
+          "n": 6736,
+          "win_rate": 5.6,
+          "top2_rate": 14.1,
+          "place_rate": 23.4,
+          "win_roi": 78.2,
+          "place_roi": 76.3
+        },
+        {
+          "popularity": "6",
+          "age": "3歳",
+          "n": 7445,
+          "win_rate": 5.9,
+          "top2_rate": 14.0,
+          "place_rate": 23.3,
+          "win_roi": 79.0,
+          "place_roi": 75.7
+        },
+        {
+          "popularity": "6",
+          "age": "4歳",
+          "n": 5478,
+          "win_rate": 5.6,
+          "top2_rate": 14.0,
+          "place_rate": 24.4,
+          "win_roi": 79.8,
+          "place_roi": 78.5
+        },
+        {
+          "popularity": "6",
+          "age": "5歳",
+          "n": 4051,
+          "win_rate": 4.2,
+          "top2_rate": 11.6,
+          "place_rate": 19.5,
+          "win_roi": 60.4,
+          "place_roi": 65.1
+        },
+        {
+          "popularity": "6",
+          "age": "6歳",
+          "n": 2962,
+          "win_rate": 4.3,
+          "top2_rate": 11.7,
+          "place_rate": 21.9,
+          "win_roi": 61.3,
+          "place_roi": 69.4
+        },
+        {
+          "popularity": "6",
+          "age": "7歳",
+          "n": 2147,
+          "win_rate": 4.9,
+          "top2_rate": 13.1,
+          "place_rate": 22.5,
+          "win_roi": 71.5,
+          "place_roi": 72.9
+        },
+        {
+          "popularity": "6",
+          "age": "8歳〜",
+          "n": 4172,
+          "win_rate": 4.7,
+          "top2_rate": 11.9,
+          "place_rate": 21.4,
+          "win_roi": 67.5,
+          "place_roi": 72.4
+        },
+        {
+          "popularity": "7",
+          "age": "2歳",
+          "n": 6681,
+          "win_rate": 4.1,
+          "top2_rate": 10.1,
+          "place_rate": 18.7,
+          "win_roi": 78.0,
+          "place_roi": 76.2
+        },
+        {
+          "popularity": "7",
+          "age": "3歳",
+          "n": 7262,
+          "win_rate": 3.8,
+          "top2_rate": 10.0,
+          "place_rate": 18.0,
+          "win_roi": 65.0,
+          "place_roi": 73.2
+        },
+        {
+          "popularity": "7",
+          "age": "4歳",
+          "n": 5116,
+          "win_rate": 3.8,
+          "top2_rate": 9.9,
+          "place_rate": 17.9,
+          "win_roi": 76.3,
+          "place_roi": 72.8
+        },
+        {
+          "popularity": "7",
+          "age": "5歳",
+          "n": 4306,
+          "win_rate": 3.3,
+          "top2_rate": 8.8,
+          "place_rate": 15.9,
+          "win_roi": 67.5,
+          "place_roi": 68.3
+        },
+        {
+          "popularity": "7",
+          "age": "6歳",
+          "n": 2917,
+          "win_rate": 3.9,
+          "top2_rate": 8.6,
+          "place_rate": 17.0,
+          "win_roi": 79.3,
+          "place_roi": 70.9
+        },
+        {
+          "popularity": "7",
+          "age": "7歳",
+          "n": 2127,
+          "win_rate": 3.9,
+          "top2_rate": 9.3,
+          "place_rate": 15.9,
+          "win_roi": 78.3,
+          "place_roi": 67.1
+        },
+        {
+          "popularity": "7",
+          "age": "8歳〜",
+          "n": 4197,
+          "win_rate": 3.0,
+          "top2_rate": 8.0,
+          "place_rate": 15.1,
+          "win_roi": 62.8,
+          "place_roi": 67.4
+        },
+        {
+          "popularity": "8",
+          "age": "2歳",
+          "n": 6409,
+          "win_rate": 2.9,
+          "top2_rate": 8.0,
+          "place_rate": 14.7,
+          "win_roi": 70.7,
+          "place_roi": 74.2
+        },
+        {
+          "popularity": "8",
+          "age": "3歳",
+          "n": 6836,
+          "win_rate": 2.7,
+          "top2_rate": 6.7,
+          "place_rate": 13.0,
+          "win_roi": 68.1,
+          "place_roi": 66.7
+        },
+        {
+          "popularity": "8",
+          "age": "4歳",
+          "n": 4683,
+          "win_rate": 2.4,
+          "top2_rate": 6.7,
+          "place_rate": 12.9,
+          "win_roi": 64.6,
+          "place_roi": 68.5
+        },
+        {
+          "popularity": "8",
+          "age": "5歳",
+          "n": 4160,
+          "win_rate": 1.5,
+          "top2_rate": 5.3,
+          "place_rate": 10.7,
+          "win_roi": 39.8,
+          "place_roi": 57.2
+        },
+        {
+          "popularity": "8",
+          "age": "6歳",
+          "n": 2788,
+          "win_rate": 2.2,
+          "top2_rate": 5.8,
+          "place_rate": 11.5,
+          "win_roi": 63.9,
+          "place_roi": 63.7
+        },
+        {
+          "popularity": "8",
+          "age": "7歳",
+          "n": 2129,
+          "win_rate": 2.4,
+          "top2_rate": 6.4,
+          "place_rate": 12.7,
+          "win_roi": 69.5,
+          "place_roi": 72.3
+        },
+        {
+          "popularity": "8",
+          "age": "8歳〜",
+          "n": 4045,
+          "win_rate": 2.0,
+          "top2_rate": 5.5,
+          "place_rate": 11.7,
+          "win_roi": 56.9,
+          "place_roi": 65.2
+        },
+        {
+          "popularity": "9",
+          "age": "2歳",
+          "n": 5341,
+          "win_rate": 2.3,
+          "top2_rate": 6.0,
+          "place_rate": 11.9,
+          "win_roi": 74.7,
+          "place_roi": 78.0
+        },
+        {
+          "popularity": "9",
+          "age": "3歳",
+          "n": 5450,
+          "win_rate": 1.8,
+          "top2_rate": 5.1,
+          "place_rate": 10.0,
+          "win_roi": 61.1,
+          "place_roi": 64.7
+        },
+        {
+          "popularity": "9",
+          "age": "4歳",
+          "n": 3543,
+          "win_rate": 1.7,
+          "top2_rate": 4.8,
+          "place_rate": 9.8,
+          "win_roi": 61.2,
+          "place_roi": 69.6
+        },
+        {
+          "popularity": "9",
+          "age": "5歳",
+          "n": 3410,
+          "win_rate": 1.3,
+          "top2_rate": 4.1,
+          "place_rate": 7.9,
+          "win_roi": 59.5,
+          "place_roi": 58.0
+        },
+        {
+          "popularity": "9",
+          "age": "6歳",
+          "n": 2356,
+          "win_rate": 1.1,
+          "top2_rate": 3.7,
+          "place_rate": 8.5,
+          "win_roi": 44.4,
+          "place_roi": 59.1
+        },
+        {
+          "popularity": "9",
+          "age": "7歳",
+          "n": 1707,
+          "win_rate": 2.1,
+          "top2_rate": 4.9,
+          "place_rate": 10.2,
+          "win_roi": 87.8,
+          "place_roi": 74.0
+        },
+        {
+          "popularity": "9",
+          "age": "8歳〜",
+          "n": 3241,
+          "win_rate": 1.7,
+          "top2_rate": 4.4,
+          "place_rate": 8.7,
+          "win_roi": 60.3,
+          "place_roi": 59.6
+        },
+        {
+          "popularity": "10",
+          "age": "2歳",
+          "n": 2791,
+          "win_rate": 1.3,
+          "top2_rate": 4.2,
+          "place_rate": 9.0,
+          "win_roi": 57.5,
+          "place_roi": 77.1
+        },
+        {
+          "popularity": "10",
+          "age": "3歳",
+          "n": 2676,
+          "win_rate": 1.1,
+          "top2_rate": 3.3,
+          "place_rate": 7.4,
+          "win_roi": 51.7,
+          "place_roi": 63.9
+        },
+        {
+          "popularity": "10",
+          "age": "4歳",
+          "n": 1825,
+          "win_rate": 1.6,
+          "top2_rate": 4.3,
+          "place_rate": 8.1,
+          "win_roi": 86.3,
+          "place_roi": 69.2
+        },
+        {
+          "popularity": "10",
+          "age": "5歳",
+          "n": 1768,
+          "win_rate": 1.1,
+          "top2_rate": 2.5,
+          "place_rate": 5.7,
+          "win_roi": 55.0,
+          "place_roi": 51.5
+        },
+        {
+          "popularity": "10",
+          "age": "6歳",
+          "n": 1222,
+          "win_rate": 1.1,
+          "top2_rate": 3.8,
+          "place_rate": 7.1,
+          "win_roi": 38.9,
+          "place_roi": 58.7
+        },
+        {
+          "popularity": "10",
+          "age": "7歳",
+          "n": 942,
+          "win_rate": 1.0,
+          "top2_rate": 3.7,
+          "place_rate": 6.9,
+          "win_roi": 45.2,
+          "place_roi": 64.8
+        },
+        {
+          "popularity": "10",
+          "age": "8歳〜",
+          "n": 1704,
+          "win_rate": 1.2,
+          "top2_rate": 2.6,
+          "place_rate": 5.5,
+          "win_roi": 66.5,
+          "place_roi": 48.0
+        }
+      ],
+      "margins": {
+        "popularity": [
+          {
+            "popularity": "1",
+            "n": 32938,
+            "win_rate": 35.3,
+            "top2_rate": 55.5,
+            "place_rate": 68.1,
+            "win_roi": 79.1,
+            "place_roi": 87.3
+          },
+          {
+            "popularity": "2",
+            "n": 32983,
+            "win_rate": 20.0,
+            "top2_rate": 40.1,
+            "place_rate": 54.9,
+            "win_roi": 78.5,
+            "place_roi": 82.9
+          },
+          {
+            "popularity": "3",
+            "n": 32936,
+            "win_rate": 14.1,
+            "top2_rate": 30.1,
+            "place_rate": 44.2,
+            "win_roi": 77.2,
+            "place_roi": 78.3
+          },
+          {
+            "popularity": "4",
+            "n": 32994,
+            "win_rate": 9.9,
+            "top2_rate": 22.8,
+            "place_rate": 36.3,
+            "win_roi": 74.2,
+            "place_roi": 76.7
+          },
+          {
+            "popularity": "5",
+            "n": 32973,
+            "win_rate": 7.5,
+            "top2_rate": 17.4,
+            "place_rate": 28.6,
+            "win_roi": 76.9,
+            "place_roi": 74.0
+          },
+          {
+            "popularity": "6",
+            "n": 32991,
+            "win_rate": 5.2,
+            "top2_rate": 13.2,
+            "place_rate": 22.6,
+            "win_roi": 73.1,
+            "place_roi": 73.8
+          },
+          {
+            "popularity": "7",
+            "n": 32606,
+            "win_rate": 3.7,
+            "top2_rate": 9.4,
+            "place_rate": 17.3,
+            "win_roi": 71.6,
+            "place_roi": 71.7
+          },
+          {
+            "popularity": "8",
+            "n": 31050,
+            "win_rate": 2.4,
+            "top2_rate": 6.5,
+            "place_rate": 12.7,
+            "win_roi": 62.6,
+            "place_roi": 67.2
+          },
+          {
+            "popularity": "9",
+            "n": 25048,
+            "win_rate": 1.8,
+            "top2_rate": 4.9,
+            "place_rate": 9.8,
+            "win_roi": 64.0,
+            "place_roi": 66.7
+          },
+          {
+            "popularity": "10",
+            "n": 12928,
+            "win_rate": 1.2,
+            "top2_rate": 3.5,
+            "place_rate": 7.3,
+            "win_roi": 58.5,
+            "place_roi": 63.3
+          }
+        ],
+        "age": [
+          {
+            "age": "2歳",
+            "n": 61636,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 75.6,
+            "place_roi": 78.0
+          },
+          {
+            "age": "3歳",
+            "n": 69221,
+            "win_rate": 11.8,
+            "top2_rate": 23.1,
+            "place_rate": 33.6,
+            "win_roi": 73.3,
+            "place_roi": 75.9
+          },
+          {
+            "age": "4歳",
+            "n": 51557,
+            "win_rate": 13.0,
+            "top2_rate": 25.3,
+            "place_rate": 36.6,
+            "win_roi": 79.9,
+            "place_roi": 79.4
+          },
+          {
+            "age": "5歳",
+            "n": 35314,
+            "win_rate": 8.5,
+            "top2_rate": 18.2,
+            "place_rate": 27.8,
+            "win_roi": 62.6,
+            "place_roi": 67.9
+          },
+          {
+            "age": "6歳",
+            "n": 25337,
+            "win_rate": 9.8,
+            "top2_rate": 20.3,
+            "place_rate": 30.6,
+            "win_roi": 68.1,
+            "place_roi": 72.4
+          },
+          {
+            "age": "7歳",
+            "n": 19632,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.3,
+            "win_roi": 75.4,
+            "place_roi": 76.0
+          },
+          {
+            "age": "8歳〜",
+            "n": 36750,
+            "win_rate": 10.1,
+            "top2_rate": 20.3,
+            "place_rate": 30.2,
+            "win_roi": 68.1,
+            "place_roi": 71.4
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "popularity": "1",
+          "age": "2歳",
+          "n": 1128,
+          "win_rate": 30.7,
+          "top2_rate": 49.6,
+          "place_rate": 63.0,
+          "win_roi": 73.3,
+          "place_roi": 83.4
+        },
+        {
+          "popularity": "1",
+          "age": "3歳",
+          "n": 1468,
+          "win_rate": 36.4,
+          "top2_rate": 53.9,
+          "place_rate": 67.0,
+          "win_roi": 85.8,
+          "place_roi": 87.7
+        },
+        {
+          "popularity": "1",
+          "age": "4歳",
+          "n": 1109,
+          "win_rate": 37.3,
+          "top2_rate": 57.5,
+          "place_rate": 69.4,
+          "win_roi": 86.2,
+          "place_roi": 90.6
+        },
+        {
+          "popularity": "1",
+          "age": "5歳",
+          "n": 456,
+          "win_rate": 28.1,
+          "top2_rate": 51.3,
+          "place_rate": 64.9,
+          "win_roi": 69.6,
+          "place_roi": 85.4
+        },
+        {
+          "popularity": "1",
+          "age": "6歳",
+          "n": 370,
+          "win_rate": 35.9,
+          "top2_rate": 56.8,
+          "place_rate": 68.1,
+          "win_roi": 84.2,
+          "place_roi": 87.0
+        },
+        {
+          "popularity": "1",
+          "age": "7歳",
+          "n": 302,
+          "win_rate": 40.1,
+          "top2_rate": 61.6,
+          "place_rate": 74.2,
+          "win_roi": 90.5,
+          "place_roi": 94.0
+        },
+        {
+          "popularity": "1",
+          "age": "8歳〜",
+          "n": 400,
+          "win_rate": 36.5,
+          "top2_rate": 57.0,
+          "place_rate": 71.8,
+          "win_roi": 80.2,
+          "place_roi": 90.5
+        },
+        {
+          "popularity": "2",
+          "age": "2歳",
+          "n": 1127,
+          "win_rate": 20.3,
+          "top2_rate": 41.9,
+          "place_rate": 55.8,
+          "win_roi": 81.4,
+          "place_roi": 85.7
+        },
+        {
+          "popularity": "2",
+          "age": "3歳",
+          "n": 1364,
+          "win_rate": 18.5,
+          "top2_rate": 39.9,
+          "place_rate": 53.2,
+          "win_roi": 71.3,
+          "place_roi": 80.1
+        },
+        {
+          "popularity": "2",
+          "age": "4歳",
+          "n": 1090,
+          "win_rate": 20.8,
+          "top2_rate": 41.2,
+          "place_rate": 56.4,
+          "win_roi": 80.6,
+          "place_roi": 84.1
+        },
+        {
+          "popularity": "2",
+          "age": "5歳",
+          "n": 551,
+          "win_rate": 20.3,
+          "top2_rate": 42.3,
+          "place_rate": 59.0,
+          "win_roi": 80.3,
+          "place_roi": 88.3
+        },
+        {
+          "popularity": "2",
+          "age": "6歳",
+          "n": 403,
+          "win_rate": 18.1,
+          "top2_rate": 38.5,
+          "place_rate": 55.1,
+          "win_roi": 70.6,
+          "place_roi": 81.5
+        },
+        {
+          "popularity": "2",
+          "age": "7歳",
+          "n": 299,
+          "win_rate": 21.7,
+          "top2_rate": 40.1,
+          "place_rate": 55.9,
+          "win_roi": 86.7,
+          "place_roi": 83.0
+        },
+        {
+          "popularity": "2",
+          "age": "8歳〜",
+          "n": 397,
+          "win_rate": 16.9,
+          "top2_rate": 37.0,
+          "place_rate": 53.1,
+          "win_roi": 67.7,
+          "place_roi": 79.4
+        },
+        {
+          "popularity": "3",
+          "age": "2歳",
+          "n": 1127,
+          "win_rate": 15.0,
+          "top2_rate": 28.8,
+          "place_rate": 43.5,
+          "win_roi": 84.8,
+          "place_roi": 79.4
+        },
+        {
+          "popularity": "3",
+          "age": "3歳",
+          "n": 1347,
+          "win_rate": 13.9,
+          "top2_rate": 29.5,
+          "place_rate": 43.6,
+          "win_roi": 75.7,
+          "place_roi": 77.5
+        },
+        {
+          "popularity": "3",
+          "age": "4歳",
+          "n": 1012,
+          "win_rate": 16.1,
+          "top2_rate": 32.1,
+          "place_rate": 47.2,
+          "win_roi": 85.8,
+          "place_roi": 81.8
+        },
+        {
+          "popularity": "3",
+          "age": "5歳",
+          "n": 613,
+          "win_rate": 12.7,
+          "top2_rate": 27.6,
+          "place_rate": 43.9,
+          "win_roi": 67.7,
+          "place_roi": 73.8
+        },
+        {
+          "popularity": "3",
+          "age": "6歳",
+          "n": 425,
+          "win_rate": 15.3,
+          "top2_rate": 29.6,
+          "place_rate": 43.1,
+          "win_roi": 83.2,
+          "place_roi": 72.7
+        },
+        {
+          "popularity": "3",
+          "age": "7歳",
+          "n": 312,
+          "win_rate": 12.2,
+          "top2_rate": 26.3,
+          "place_rate": 42.6,
+          "win_roi": 67.9,
+          "place_roi": 70.4
+        },
+        {
+          "popularity": "3",
+          "age": "8歳〜",
+          "n": 395,
+          "win_rate": 14.9,
+          "top2_rate": 32.4,
+          "place_rate": 45.3,
+          "win_roi": 82.2,
+          "place_roi": 78.3
+        },
+        {
+          "popularity": "4",
+          "age": "2歳",
+          "n": 1126,
+          "win_rate": 10.6,
+          "top2_rate": 21.3,
+          "place_rate": 34.5,
+          "win_roi": 76.7,
+          "place_roi": 75.3
+        },
+        {
+          "popularity": "4",
+          "age": "3歳",
+          "n": 1318,
+          "win_rate": 10.6,
+          "top2_rate": 22.4,
+          "place_rate": 35.8,
+          "win_roi": 79.1,
+          "place_roi": 75.2
+        },
+        {
+          "popularity": "4",
+          "age": "4歳",
+          "n": 995,
+          "win_rate": 10.9,
+          "top2_rate": 24.5,
+          "place_rate": 37.7,
+          "win_roi": 75.8,
+          "place_roi": 77.1
+        },
+        {
+          "popularity": "4",
+          "age": "5歳",
+          "n": 591,
+          "win_rate": 8.3,
+          "top2_rate": 19.6,
+          "place_rate": 33.2,
+          "win_roi": 61.7,
+          "place_roi": 65.3
+        },
+        {
+          "popularity": "4",
+          "age": "6歳",
+          "n": 406,
+          "win_rate": 9.4,
+          "top2_rate": 25.1,
+          "place_rate": 40.6,
+          "win_roi": 64.0,
+          "place_roi": 82.2
+        },
+        {
+          "popularity": "4",
+          "age": "7歳",
+          "n": 354,
+          "win_rate": 11.3,
+          "top2_rate": 24.3,
+          "place_rate": 40.7,
+          "win_roi": 80.8,
+          "place_roi": 83.6
+        },
+        {
+          "popularity": "4",
+          "age": "8歳〜",
+          "n": 441,
+          "win_rate": 7.7,
+          "top2_rate": 18.8,
+          "place_rate": 35.1,
+          "win_roi": 57.7,
+          "place_roi": 71.2
+        },
+        {
+          "popularity": "5",
+          "age": "2歳",
+          "n": 1129,
+          "win_rate": 7.6,
+          "top2_rate": 16.7,
+          "place_rate": 28.0,
+          "win_roi": 74.2,
+          "place_roi": 73.2
+        },
+        {
+          "popularity": "5",
+          "age": "3歳",
+          "n": 1307,
+          "win_rate": 7.0,
+          "top2_rate": 19.0,
+          "place_rate": 30.6,
+          "win_roi": 65.9,
+          "place_roi": 77.4
+        },
+        {
+          "popularity": "5",
+          "age": "4歳",
+          "n": 901,
+          "win_rate": 7.9,
+          "top2_rate": 20.5,
+          "place_rate": 33.7,
+          "win_roi": 79.9,
+          "place_roi": 83.7
+        },
+        {
+          "popularity": "5",
+          "age": "5歳",
+          "n": 622,
+          "win_rate": 7.9,
+          "top2_rate": 16.2,
+          "place_rate": 26.8,
+          "win_roi": 76.7,
+          "place_roi": 63.2
+        },
+        {
+          "popularity": "5",
+          "age": "6歳",
+          "n": 479,
+          "win_rate": 8.8,
+          "top2_rate": 20.3,
+          "place_rate": 29.9,
+          "win_roi": 95.6,
+          "place_roi": 72.5
+        },
+        {
+          "popularity": "5",
+          "age": "7歳",
+          "n": 298,
+          "win_rate": 5.0,
+          "top2_rate": 15.8,
+          "place_rate": 31.9,
+          "win_roi": 50.9,
+          "place_roi": 75.2
+        },
+        {
+          "popularity": "5",
+          "age": "8歳〜",
+          "n": 497,
+          "win_rate": 6.0,
+          "top2_rate": 14.5,
+          "place_rate": 26.8,
+          "win_roi": 54.1,
+          "place_roi": 67.7
+        },
+        {
+          "popularity": "6",
+          "age": "2歳",
+          "n": 1128,
+          "win_rate": 6.1,
+          "top2_rate": 14.7,
+          "place_rate": 22.7,
+          "win_roi": 81.7,
+          "place_roi": 72.8
+        },
+        {
+          "popularity": "6",
+          "age": "3歳",
+          "n": 1294,
+          "win_rate": 6.6,
+          "top2_rate": 15.7,
+          "place_rate": 25.3,
+          "win_roi": 85.4,
+          "place_roi": 81.2
+        },
+        {
+          "popularity": "6",
+          "age": "4歳",
+          "n": 856,
+          "win_rate": 7.6,
+          "top2_rate": 16.1,
+          "place_rate": 28.6,
+          "win_roi": 105.6,
+          "place_roi": 92.0
+        },
+        {
+          "popularity": "6",
+          "age": "5歳",
+          "n": 675,
+          "win_rate": 4.6,
+          "top2_rate": 11.4,
+          "place_rate": 19.0,
+          "win_roi": 59.8,
+          "place_roi": 57.3
+        },
+        {
+          "popularity": "6",
+          "age": "6歳",
+          "n": 485,
+          "win_rate": 4.9,
+          "top2_rate": 12.6,
+          "place_rate": 21.6,
+          "win_roi": 72.0,
+          "place_roi": 64.8
+        },
+        {
+          "popularity": "6",
+          "age": "7歳",
+          "n": 332,
+          "win_rate": 6.0,
+          "top2_rate": 13.9,
+          "place_rate": 22.3,
+          "win_roi": 99.3,
+          "place_roi": 71.9
+        },
+        {
+          "popularity": "6",
+          "age": "8歳〜",
+          "n": 462,
+          "win_rate": 3.9,
+          "top2_rate": 12.1,
+          "place_rate": 21.9,
+          "win_roi": 61.0,
+          "place_roi": 68.7
+        },
+        {
+          "popularity": "7",
+          "age": "2歳",
+          "n": 1125,
+          "win_rate": 4.5,
+          "top2_rate": 10.5,
+          "place_rate": 18.0,
+          "win_roi": 88.6,
+          "place_roi": 70.7
+        },
+        {
+          "popularity": "7",
+          "age": "3歳",
+          "n": 1280,
+          "win_rate": 4.3,
+          "top2_rate": 10.7,
+          "place_rate": 18.9,
+          "win_roi": 68.1,
+          "place_roi": 76.4
+        },
+        {
+          "popularity": "7",
+          "age": "4歳",
+          "n": 837,
+          "win_rate": 3.5,
+          "top2_rate": 8.7,
+          "place_rate": 16.6,
+          "win_roi": 63.2,
+          "place_roi": 65.4
+        },
+        {
+          "popularity": "7",
+          "age": "5歳",
+          "n": 717,
+          "win_rate": 1.7,
+          "top2_rate": 7.5,
+          "place_rate": 15.3,
+          "win_roi": 39.7,
+          "place_roi": 66.4
+        },
+        {
+          "popularity": "7",
+          "age": "6歳",
+          "n": 462,
+          "win_rate": 4.1,
+          "top2_rate": 9.5,
+          "place_rate": 17.3,
+          "win_roi": 75.9,
+          "place_roi": 64.7
+        },
+        {
+          "popularity": "7",
+          "age": "7歳",
+          "n": 333,
+          "win_rate": 3.3,
+          "top2_rate": 9.3,
+          "place_rate": 16.8,
+          "win_roi": 63.0,
+          "place_roi": 70.4
+        },
+        {
+          "popularity": "7",
+          "age": "8歳〜",
+          "n": 441,
+          "win_rate": 1.8,
+          "top2_rate": 5.2,
+          "place_rate": 12.2,
+          "win_roi": 37.2,
+          "place_roi": 50.2
+        },
+        {
+          "popularity": "8",
+          "age": "2歳",
+          "n": 1105,
+          "win_rate": 2.6,
+          "top2_rate": 8.1,
+          "place_rate": 15.9,
+          "win_roi": 68.5,
+          "place_roi": 87.2
+        },
+        {
+          "popularity": "8",
+          "age": "3歳",
+          "n": 1216,
+          "win_rate": 3.3,
+          "top2_rate": 8.0,
+          "place_rate": 14.9,
+          "win_roi": 80.4,
+          "place_roi": 77.4
+        },
+        {
+          "popularity": "8",
+          "age": "4歳",
+          "n": 764,
+          "win_rate": 2.0,
+          "top2_rate": 6.7,
+          "place_rate": 13.4,
+          "win_roi": 52.1,
+          "place_roi": 77.5
+        },
+        {
+          "popularity": "8",
+          "age": "5歳",
+          "n": 705,
+          "win_rate": 1.0,
+          "top2_rate": 5.8,
+          "place_rate": 10.2,
+          "win_roi": 27.1,
+          "place_roi": 56.6
+        },
+        {
+          "popularity": "8",
+          "age": "6歳",
+          "n": 447,
+          "win_rate": 3.1,
+          "top2_rate": 5.8,
+          "place_rate": 12.1,
+          "win_roi": 91.3,
+          "place_roi": 62.8
+        },
+        {
+          "popularity": "8",
+          "age": "7歳",
+          "n": 334,
+          "win_rate": 1.2,
+          "top2_rate": 5.1,
+          "place_rate": 9.3,
+          "win_roi": 28.1,
+          "place_roi": 48.9
+        },
+        {
+          "popularity": "8",
+          "age": "8歳〜",
+          "n": 472,
+          "win_rate": 2.5,
+          "top2_rate": 5.1,
+          "place_rate": 10.2,
+          "win_roi": 75.0,
+          "place_roi": 57.6
+        },
+        {
+          "popularity": "9",
+          "age": "2歳",
+          "n": 1001,
+          "win_rate": 1.9,
+          "top2_rate": 6.9,
+          "place_rate": 13.1,
+          "win_roi": 69.6,
+          "place_roi": 90.1
+        },
+        {
+          "popularity": "9",
+          "age": "3歳",
+          "n": 1056,
+          "win_rate": 1.4,
+          "top2_rate": 3.6,
+          "place_rate": 7.8,
+          "win_roi": 53.2,
+          "place_roi": 59.4
+        },
+        {
+          "popularity": "9",
+          "age": "4歳",
+          "n": 647,
+          "win_rate": 2.0,
+          "top2_rate": 4.2,
+          "place_rate": 7.7,
+          "win_roi": 78.3,
+          "place_roi": 58.1
+        },
+        {
+          "popularity": "9",
+          "age": "5歳",
+          "n": 653,
+          "win_rate": 1.5,
+          "top2_rate": 3.5,
+          "place_rate": 6.9,
+          "win_roi": 60.0,
+          "place_roi": 59.0
+        },
+        {
+          "popularity": "9",
+          "age": "6歳",
+          "n": 403,
+          "win_rate": 1.0,
+          "top2_rate": 3.2,
+          "place_rate": 6.9,
+          "win_roi": 35.7,
+          "place_roi": 56.4
+        },
+        {
+          "popularity": "9",
+          "age": "7歳",
+          "n": 272,
+          "win_rate": 0.7,
+          "top2_rate": 2.9,
+          "place_rate": 8.8,
+          "win_roi": 47.8,
+          "place_roi": 72.9
+        },
+        {
+          "popularity": "9",
+          "age": "8歳〜",
+          "n": 386,
+          "win_rate": 1.8,
+          "top2_rate": 3.6,
+          "place_rate": 7.0,
+          "win_roi": 76.7,
+          "place_roi": 60.5
+        },
+        {
+          "popularity": "10",
+          "age": "2歳",
+          "n": 656,
+          "win_rate": 1.5,
+          "top2_rate": 4.0,
+          "place_rate": 9.0,
+          "win_roi": 71.8,
+          "place_roi": 86.4
+        },
+        {
+          "popularity": "10",
+          "age": "3歳",
+          "n": 621,
+          "win_rate": 1.4,
+          "top2_rate": 3.1,
+          "place_rate": 7.6,
+          "win_roi": 68.3,
+          "place_roi": 74.9
+        },
+        {
+          "popularity": "10",
+          "age": "4歳",
+          "n": 342,
+          "win_rate": 2.0,
+          "top2_rate": 4.1,
+          "place_rate": 8.5,
+          "win_roi": 114.5,
+          "place_roi": 94.3
+        },
+        {
+          "popularity": "10",
+          "age": "5歳",
+          "n": 319,
+          "win_rate": 0.3,
+          "top2_rate": 1.3,
+          "place_rate": 3.4,
+          "win_roi": 19.8,
+          "place_roi": 37.9
+        },
+        {
+          "popularity": "10",
+          "age": "6歳",
+          "n": 229,
+          "win_rate": 0.9,
+          "top2_rate": 3.1,
+          "place_rate": 6.1,
+          "win_roi": 25.2,
+          "place_roi": 64.8
+        },
+        {
+          "popularity": "10",
+          "age": "7歳",
+          "n": 184,
+          "win_rate": 1.1,
+          "top2_rate": 3.8,
+          "place_rate": 7.1,
+          "win_roi": 58.4,
+          "place_roi": 90.5
+        },
+        {
+          "popularity": "10",
+          "age": "8歳〜",
+          "n": 247,
+          "win_rate": 0.0,
+          "top2_rate": 0.8,
+          "place_rate": 1.6,
+          "win_roi": 0.0,
+          "place_roi": 14.2
+        }
+      ],
+      "margins": {
+        "popularity": [
+          {
+            "popularity": "1",
+            "n": 5233,
+            "win_rate": 34.8,
+            "top2_rate": 54.4,
+            "place_rate": 67.3,
+            "win_roi": 81.5,
+            "place_roi": 87.7
+          },
+          {
+            "popularity": "2",
+            "n": 5231,
+            "win_rate": 19.6,
+            "top2_rate": 40.5,
+            "place_rate": 55.3,
+            "win_roi": 76.9,
+            "place_roi": 83.2
+          },
+          {
+            "popularity": "3",
+            "n": 5231,
+            "win_rate": 14.5,
+            "top2_rate": 29.7,
+            "place_rate": 44.3,
+            "win_roi": 79.3,
+            "place_roi": 77.5
+          },
+          {
+            "popularity": "4",
+            "n": 5231,
+            "win_rate": 10.1,
+            "top2_rate": 22.3,
+            "place_rate": 36.2,
+            "win_roi": 73.1,
+            "place_roi": 75.2
+          },
+          {
+            "popularity": "5",
+            "n": 5233,
+            "win_rate": 7.3,
+            "top2_rate": 17.9,
+            "place_rate": 29.8,
+            "win_roi": 72.1,
+            "place_roi": 74.4
+          },
+          {
+            "popularity": "6",
+            "n": 5232,
+            "win_rate": 6.0,
+            "top2_rate": 14.3,
+            "place_rate": 23.6,
+            "win_roi": 82.1,
+            "place_roi": 74.9
+          },
+          {
+            "popularity": "7",
+            "n": 5195,
+            "win_rate": 3.6,
+            "top2_rate": 9.2,
+            "place_rate": 17.0,
+            "win_roi": 65.6,
+            "place_roi": 68.4
+          },
+          {
+            "popularity": "8",
+            "n": 5043,
+            "win_rate": 2.4,
+            "top2_rate": 6.9,
+            "place_rate": 13.2,
+            "win_roi": 63.1,
+            "place_roi": 71.6
+          },
+          {
+            "popularity": "9",
+            "n": 4418,
+            "win_rate": 1.6,
+            "top2_rate": 4.3,
+            "place_rate": 8.8,
+            "win_roi": 61.7,
+            "place_roi": 66.8
+          },
+          {
+            "popularity": "10",
+            "n": 2598,
+            "win_rate": 1.2,
+            "top2_rate": 3.0,
+            "place_rate": 6.8,
+            "win_roi": 58.3,
+            "place_roi": 70.3
+          }
+        ],
+        "age": [
+          {
+            "age": "2歳",
+            "n": 10652,
+            "win_rate": 10.6,
+            "top2_rate": 21.2,
+            "place_rate": 31.5,
+            "win_roi": 77.4,
+            "place_roi": 80.0
+          },
+          {
+            "age": "3歳",
+            "n": 12271,
+            "win_rate": 11.5,
+            "top2_rate": 22.6,
+            "place_rate": 33.0,
+            "win_roi": 74.1,
+            "place_roi": 77.3
+          },
+          {
+            "age": "4歳",
+            "n": 8553,
+            "win_rate": 13.0,
+            "top2_rate": 25.1,
+            "place_rate": 36.3,
+            "win_roi": 80.7,
+            "place_roi": 80.6
+          },
+          {
+            "age": "5歳",
+            "n": 5902,
+            "win_rate": 8.1,
+            "top2_rate": 17.8,
+            "place_rate": 27.4,
+            "win_roi": 56.8,
+            "place_roi": 65.6
+          },
+          {
+            "age": "6歳",
+            "n": 4109,
+            "win_rate": 10.1,
+            "top2_rate": 20.5,
+            "place_rate": 30.3,
+            "win_roi": 72.5,
+            "place_roi": 70.8
+          },
+          {
+            "age": "7歳",
+            "n": 3020,
+            "win_rate": 10.5,
+            "top2_rate": 20.9,
+            "place_rate": 31.8,
+            "win_roi": 68.0,
+            "place_roi": 75.3
+          },
+          {
+            "age": "8歳〜",
+            "n": 4138,
+            "win_rate": 9.2,
+            "top2_rate": 18.8,
+            "place_rate": 29.0,
+            "win_roi": 61.2,
+            "place_roi": 65.7
+          }
+        ]
+      }
+    }
+  }
+}

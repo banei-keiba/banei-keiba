@@ -1,0 +1,626 @@
+{
+  "axes": [
+    "weight_diff",
+    "moisture"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "weight_diff": [
+      "0kg",
+      "1〜10kg",
+      "11〜20kg",
+      "21kg〜"
+    ],
+    "moisture": [
+      "〜0.9",
+      "1.0〜1.4",
+      "1.5〜1.9",
+      "2.0〜2.4",
+      "2.5〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "moisture": "〜0.9",
+          "n": 6764,
+          "win_rate": 10.3,
+          "top2_rate": 21.5,
+          "place_rate": 31.7,
+          "win_roi": 68.6,
+          "place_roi": 76.8
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "1.0〜1.4",
+          "n": 12606,
+          "win_rate": 10.9,
+          "top2_rate": 22.2,
+          "place_rate": 32.4,
+          "win_roi": 74.4,
+          "place_roi": 75.9
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "1.5〜1.9",
+          "n": 16761,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.3,
+          "win_roi": 78.6,
+          "place_roi": 75.1
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "2.0〜2.4",
+          "n": 16550,
+          "win_rate": 11.2,
+          "top2_rate": 22.0,
+          "place_rate": 32.7,
+          "win_roi": 79.3,
+          "place_roi": 77.8
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "2.5〜",
+          "n": 29773,
+          "win_rate": 10.9,
+          "top2_rate": 21.6,
+          "place_rate": 32.1,
+          "win_roi": 72.7,
+          "place_roi": 76.1
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "〜0.9",
+          "n": 3725,
+          "win_rate": 11.4,
+          "top2_rate": 22.1,
+          "place_rate": 32.7,
+          "win_roi": 69.2,
+          "place_roi": 75.7
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "1.0〜1.4",
+          "n": 7354,
+          "win_rate": 10.4,
+          "top2_rate": 21.2,
+          "place_rate": 32.0,
+          "win_roi": 65.5,
+          "place_roi": 74.2
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "1.5〜1.9",
+          "n": 9573,
+          "win_rate": 10.9,
+          "top2_rate": 21.6,
+          "place_rate": 31.5,
+          "win_roi": 70.6,
+          "place_roi": 72.5
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "2.0〜2.4",
+          "n": 9134,
+          "win_rate": 11.0,
+          "top2_rate": 22.4,
+          "place_rate": 32.9,
+          "win_roi": 71.1,
+          "place_roi": 74.2
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "2.5〜",
+          "n": 18756,
+          "win_rate": 11.1,
+          "top2_rate": 22.3,
+          "place_rate": 32.5,
+          "win_roi": 73.6,
+          "place_roi": 75.8
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "〜0.9",
+          "n": 8960,
+          "win_rate": 11.9,
+          "top2_rate": 23.3,
+          "place_rate": 33.6,
+          "win_roi": 77.8,
+          "place_roi": 76.9
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "1.0〜1.4",
+          "n": 16855,
+          "win_rate": 11.5,
+          "top2_rate": 22.8,
+          "place_rate": 33.3,
+          "win_roi": 75.5,
+          "place_roi": 76.4
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "1.5〜1.9",
+          "n": 21478,
+          "win_rate": 11.4,
+          "top2_rate": 22.6,
+          "place_rate": 33.5,
+          "win_roi": 74.3,
+          "place_roi": 78.2
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "2.0〜2.4",
+          "n": 21626,
+          "win_rate": 11.3,
+          "top2_rate": 22.5,
+          "place_rate": 33.1,
+          "win_roi": 73.8,
+          "place_roi": 75.5
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "2.5〜",
+          "n": 39794,
+          "win_rate": 10.9,
+          "top2_rate": 21.9,
+          "place_rate": 32.6,
+          "win_roi": 75.0,
+          "place_roi": 76.2
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "〜0.9",
+          "n": 4939,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.2,
+          "win_roi": 62.6,
+          "place_roi": 71.0
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "1.0〜1.4",
+          "n": 8929,
+          "win_rate": 10.9,
+          "top2_rate": 21.4,
+          "place_rate": 31.5,
+          "win_roi": 67.8,
+          "place_roi": 69.9
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "1.5〜1.9",
+          "n": 11585,
+          "win_rate": 10.6,
+          "top2_rate": 21.5,
+          "place_rate": 31.7,
+          "win_roi": 64.3,
+          "place_roi": 72.2
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "2.0〜2.4",
+          "n": 10893,
+          "win_rate": 10.5,
+          "top2_rate": 21.2,
+          "place_rate": 30.9,
+          "win_roi": 68.1,
+          "place_roi": 71.6
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "2.5〜",
+          "n": 23392,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.4,
+          "win_roi": 67.9,
+          "place_roi": 71.9
+        }
+      ],
+      "margins": {
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 82454,
+            "win_rate": 10.9,
+            "top2_rate": 21.9,
+            "place_rate": 32.3,
+            "win_roi": 75.1,
+            "place_roi": 76.3
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 48542,
+            "win_rate": 10.9,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 71.0,
+            "place_roi": 74.6
+          },
+          {
+            "weight_diff": "11〜20kg",
+            "n": 108713,
+            "win_rate": 11.2,
+            "top2_rate": 22.4,
+            "place_rate": 33.0,
+            "win_roi": 74.9,
+            "place_roi": 76.6
+          },
+          {
+            "weight_diff": "21kg〜",
+            "n": 59738,
+            "win_rate": 10.6,
+            "top2_rate": 21.3,
+            "place_rate": 31.4,
+            "win_roi": 66.8,
+            "place_roi": 71.5
+          }
+        ],
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 24388,
+            "win_rate": 11.1,
+            "top2_rate": 22.2,
+            "place_rate": 32.4,
+            "win_roi": 70.9,
+            "place_roi": 75.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 45744,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.1,
+            "place_roi": 74.7
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 59397,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 72.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 58203,
+            "win_rate": 11.1,
+            "top2_rate": 22.1,
+            "place_rate": 32.5,
+            "win_roi": 73.9,
+            "place_roi": 75.2
+          },
+          {
+            "moisture": "2.5〜",
+            "n": 111715,
+            "win_rate": 10.9,
+            "top2_rate": 21.8,
+            "place_rate": 32.2,
+            "win_roi": 72.6,
+            "place_roi": 75.2
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "moisture": "〜0.9",
+          "n": 905,
+          "win_rate": 10.6,
+          "top2_rate": 24.9,
+          "place_rate": 35.9,
+          "win_roi": 66.0,
+          "place_roi": 83.3
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "1.0〜1.4",
+          "n": 2500,
+          "win_rate": 11.6,
+          "top2_rate": 23.6,
+          "place_rate": 34.2,
+          "win_roi": 71.1,
+          "place_roi": 79.7
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "1.5〜1.9",
+          "n": 3979,
+          "win_rate": 11.5,
+          "top2_rate": 22.6,
+          "place_rate": 32.9,
+          "win_roi": 80.7,
+          "place_roi": 74.8
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "2.0〜2.4",
+          "n": 2794,
+          "win_rate": 12.2,
+          "top2_rate": 22.5,
+          "place_rate": 33.6,
+          "win_roi": 85.7,
+          "place_roi": 81.5
+        },
+        {
+          "weight_diff": "0kg",
+          "moisture": "2.5〜",
+          "n": 1490,
+          "win_rate": 11.1,
+          "top2_rate": 21.9,
+          "place_rate": 33.0,
+          "win_roi": 60.6,
+          "place_roi": 78.4
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "〜0.9",
+          "n": 851,
+          "win_rate": 10.5,
+          "top2_rate": 20.6,
+          "place_rate": 30.3,
+          "win_roi": 58.6,
+          "place_roi": 70.8
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "1.0〜1.4",
+          "n": 2436,
+          "win_rate": 10.6,
+          "top2_rate": 20.5,
+          "place_rate": 30.7,
+          "win_roi": 61.3,
+          "place_roi": 68.5
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "1.5〜1.9",
+          "n": 3400,
+          "win_rate": 11.0,
+          "top2_rate": 21.3,
+          "place_rate": 31.3,
+          "win_roi": 79.3,
+          "place_roi": 74.2
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "2.0〜2.4",
+          "n": 2493,
+          "win_rate": 10.2,
+          "top2_rate": 21.0,
+          "place_rate": 31.8,
+          "win_roi": 71.0,
+          "place_roi": 77.5
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "moisture": "2.5〜",
+          "n": 1495,
+          "win_rate": 9.8,
+          "top2_rate": 21.5,
+          "place_rate": 31.7,
+          "win_roi": 74.9,
+          "place_roi": 77.8
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "〜0.9",
+          "n": 1110,
+          "win_rate": 12.0,
+          "top2_rate": 23.2,
+          "place_rate": 33.6,
+          "win_roi": 79.6,
+          "place_roi": 74.4
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "1.0〜1.4",
+          "n": 3109,
+          "win_rate": 10.7,
+          "top2_rate": 21.8,
+          "place_rate": 32.3,
+          "win_roi": 77.2,
+          "place_roi": 74.5
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "1.5〜1.9",
+          "n": 4750,
+          "win_rate": 10.4,
+          "top2_rate": 21.4,
+          "place_rate": 32.5,
+          "win_roi": 78.8,
+          "place_roi": 82.3
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "2.0〜2.4",
+          "n": 3273,
+          "win_rate": 10.6,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 70.7,
+          "place_roi": 76.3
+        },
+        {
+          "weight_diff": "11〜20kg",
+          "moisture": "2.5〜",
+          "n": 1788,
+          "win_rate": 10.9,
+          "top2_rate": 20.9,
+          "place_rate": 31.8,
+          "win_roi": 67.3,
+          "place_roi": 72.8
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "〜0.9",
+          "n": 988,
+          "win_rate": 10.8,
+          "top2_rate": 19.2,
+          "place_rate": 28.4,
+          "win_roi": 66.3,
+          "place_roi": 65.6
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "1.0〜1.4",
+          "n": 2791,
+          "win_rate": 10.5,
+          "top2_rate": 20.9,
+          "place_rate": 31.2,
+          "win_roi": 67.2,
+          "place_roi": 71.6
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "1.5〜1.9",
+          "n": 4067,
+          "win_rate": 10.2,
+          "top2_rate": 20.3,
+          "place_rate": 30.7,
+          "win_roi": 66.3,
+          "place_roi": 72.7
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "2.0〜2.4",
+          "n": 2778,
+          "win_rate": 9.8,
+          "top2_rate": 20.5,
+          "place_rate": 30.1,
+          "win_roi": 58.2,
+          "place_roi": 71.4
+        },
+        {
+          "weight_diff": "21kg〜",
+          "moisture": "2.5〜",
+          "n": 1648,
+          "win_rate": 11.0,
+          "top2_rate": 21.5,
+          "place_rate": 31.1,
+          "win_roi": 79.6,
+          "place_roi": 72.3
+        }
+      ],
+      "margins": {
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 11668,
+            "win_rate": 11.6,
+            "top2_rate": 22.9,
+            "place_rate": 33.6,
+            "win_roi": 76.1,
+            "place_roi": 78.6
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 10675,
+            "win_rate": 10.5,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.0,
+            "place_roi": 73.9
+          },
+          {
+            "weight_diff": "11〜20kg",
+            "n": 14030,
+            "win_rate": 10.7,
+            "top2_rate": 21.6,
+            "place_rate": 32.3,
+            "win_roi": 75.1,
+            "place_roi": 77.3
+          },
+          {
+            "weight_diff": "21kg〜",
+            "n": 12272,
+            "win_rate": 10.3,
+            "top2_rate": 20.6,
+            "place_rate": 30.5,
+            "win_roi": 66.5,
+            "place_roi": 71.5
+          }
+        ],
+        "moisture": [
+          {
+            "moisture": "〜0.9",
+            "n": 3854,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.1,
+            "win_roi": 68.4,
+            "place_roi": 73.5
+          },
+          {
+            "moisture": "1.0〜1.4",
+            "n": 10836,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.1,
+            "win_roi": 69.7,
+            "place_roi": 73.6
+          },
+          {
+            "moisture": "1.5〜1.9",
+            "n": 16196,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 76.2,
+            "place_roi": 76.3
+          },
+          {
+            "moisture": "2.0〜2.4",
+            "n": 11338,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 71.4,
+            "place_roi": 76.7
+          },
+          {
+            "moisture": "2.5〜",
+            "n": 6421,
+            "win_rate": 10.7,
+            "top2_rate": 21.4,
+            "place_rate": 31.9,
+            "win_roi": 70.7,
+            "place_roi": 75.1
+          }
+        ]
+      }
+    }
+  }
+}

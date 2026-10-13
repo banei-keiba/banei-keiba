@@ -1,0 +1,97 @@
+{
+  "axes": [
+    "sex"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "sex": [
+      "牝",
+      "牡",
+      "セン"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "n": 95054,
+          "win_rate": 10.4,
+          "top2_rate": 21.0,
+          "place_rate": 31.3,
+          "win_roi": 71.9,
+          "place_roi": 74.3
+        },
+        {
+          "sex": "牡",
+          "n": 197683,
+          "win_rate": 11.2,
+          "top2_rate": 22.4,
+          "place_rate": 32.9,
+          "win_roi": 73.2,
+          "place_roi": 75.6
+        },
+        {
+          "sex": "セン",
+          "n": 6710,
+          "win_rate": 12.1,
+          "top2_rate": 23.4,
+          "place_rate": 34.1,
+          "win_roi": 70.6,
+          "place_roi": 74.9
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "sex": "牝",
+          "n": 15957,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.4,
+          "win_roi": 71.4,
+          "place_roi": 75.2
+        },
+        {
+          "sex": "牡",
+          "n": 31132,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.1,
+          "win_roi": 72.5,
+          "place_roi": 75.4
+        },
+        {
+          "sex": "セン",
+          "n": 1556,
+          "win_rate": 12.8,
+          "top2_rate": 23.0,
+          "place_rate": 33.7,
+          "win_roi": 77.6,
+          "place_roi": 77.3
+        }
+      ]
+    }
+  }
+}

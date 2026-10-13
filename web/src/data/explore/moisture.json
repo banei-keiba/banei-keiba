@@ -1,0 +1,154 @@
+{
+  "axes": [
+    "moisture"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "moisture": [
+      "〜0.9",
+      "1.0〜1.4",
+      "1.5〜1.9",
+      "2.0〜2.4",
+      "2.5〜2.9",
+      "3.0〜"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "moisture": "〜0.9",
+          "n": 24388,
+          "win_rate": 11.1,
+          "top2_rate": 22.2,
+          "place_rate": 32.4,
+          "win_roi": 70.9,
+          "place_roi": 75.5
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "n": 45744,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 72.1,
+          "place_roi": 74.7
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "n": 59397,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 72.9,
+          "place_roi": 75.2
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "n": 58203,
+          "win_rate": 11.1,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 73.9,
+          "place_roi": 75.2
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "n": 34837,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 70.4,
+          "place_roi": 75.1
+        },
+        {
+          "moisture": "3.0〜",
+          "n": 76878,
+          "win_rate": 10.8,
+          "top2_rate": 21.6,
+          "place_rate": 32.0,
+          "win_roi": 73.7,
+          "place_roi": 75.2
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "moisture": "〜0.9",
+          "n": 3854,
+          "win_rate": 11.0,
+          "top2_rate": 22.0,
+          "place_rate": 32.1,
+          "win_roi": 68.4,
+          "place_roi": 73.5
+        },
+        {
+          "moisture": "1.0〜1.4",
+          "n": 10836,
+          "win_rate": 10.9,
+          "top2_rate": 21.7,
+          "place_rate": 32.1,
+          "win_roi": 69.7,
+          "place_roi": 73.6
+        },
+        {
+          "moisture": "1.5〜1.9",
+          "n": 16196,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 76.2,
+          "place_roi": 76.3
+        },
+        {
+          "moisture": "2.0〜2.4",
+          "n": 11338,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.9,
+          "win_roi": 71.4,
+          "place_roi": 76.7
+        },
+        {
+          "moisture": "2.5〜2.9",
+          "n": 4395,
+          "win_rate": 10.7,
+          "top2_rate": 21.5,
+          "place_rate": 31.9,
+          "win_roi": 69.7,
+          "place_roi": 75.6
+        },
+        {
+          "moisture": "3.0〜",
+          "n": 2026,
+          "win_rate": 10.7,
+          "top2_rate": 21.4,
+          "place_rate": 31.7,
+          "win_roi": 72.7,
+          "place_roi": 74.2
+        }
+      ]
+    }
+  }
+}

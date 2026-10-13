@@ -1,0 +1,270 @@
+{
+  "axes": [
+    "weight_diff",
+    "sex"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "weight_diff": [
+      "0kg",
+      "1〜10kg",
+      "11kg〜"
+    ],
+    "sex": [
+      "牝",
+      "牡・セン"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "sex": "牝",
+          "n": 69466,
+          "win_rate": 10.6,
+          "top2_rate": 21.3,
+          "place_rate": 31.7,
+          "win_roi": 73.7,
+          "place_roi": 75.5
+        },
+        {
+          "weight_diff": "0kg",
+          "sex": "牡・セン",
+          "n": 12988,
+          "win_rate": 12.7,
+          "top2_rate": 24.7,
+          "place_rate": 35.2,
+          "win_roi": 82.9,
+          "place_roi": 80.3
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "sex": "牝",
+          "n": 22529,
+          "win_rate": 9.7,
+          "top2_rate": 19.8,
+          "place_rate": 29.8,
+          "win_roi": 67.6,
+          "place_roi": 71.2
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "sex": "牡・セン",
+          "n": 26013,
+          "win_rate": 12.0,
+          "top2_rate": 23.9,
+          "place_rate": 34.4,
+          "win_roi": 73.9,
+          "place_roi": 77.5
+        },
+        {
+          "weight_diff": "11kg〜",
+          "sex": "牝",
+          "n": 3059,
+          "win_rate": 10.2,
+          "top2_rate": 21.1,
+          "place_rate": 30.9,
+          "win_roi": 65.4,
+          "place_roi": 69.6
+        },
+        {
+          "weight_diff": "11kg〜",
+          "sex": "牡・セン",
+          "n": 165392,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.5,
+          "win_roi": 72.2,
+          "place_roi": 74.9
+        }
+      ],
+      "margins": {
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 82454,
+            "win_rate": 10.9,
+            "top2_rate": 21.9,
+            "place_rate": 32.3,
+            "win_roi": 75.1,
+            "place_roi": 76.3
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 48542,
+            "win_rate": 10.9,
+            "top2_rate": 22.0,
+            "place_rate": 32.3,
+            "win_roi": 71.0,
+            "place_roi": 74.6
+          },
+          {
+            "weight_diff": "11kg〜",
+            "n": 168451,
+            "win_rate": 11.0,
+            "top2_rate": 22.0,
+            "place_rate": 32.5,
+            "win_roi": 72.0,
+            "place_roi": 74.8
+          }
+        ],
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 95054,
+            "win_rate": 10.4,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.9,
+            "place_roi": 74.3
+          },
+          {
+            "sex": "牡・セン",
+            "n": 204393,
+            "win_rate": 11.3,
+            "top2_rate": 22.5,
+            "place_rate": 32.9,
+            "win_roi": 73.1,
+            "place_roi": 75.6
+          }
+        ]
+      }
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "weight_diff": "0kg",
+          "sex": "牝",
+          "n": 9701,
+          "win_rate": 11.1,
+          "top2_rate": 22.4,
+          "place_rate": 33.1,
+          "win_roi": 74.0,
+          "place_roi": 77.5
+        },
+        {
+          "weight_diff": "0kg",
+          "sex": "牡・セン",
+          "n": 1967,
+          "win_rate": 13.6,
+          "top2_rate": 25.4,
+          "place_rate": 36.2,
+          "win_roi": 86.8,
+          "place_roi": 84.0
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "sex": "牝",
+          "n": 5874,
+          "win_rate": 9.4,
+          "top2_rate": 19.0,
+          "place_rate": 28.9,
+          "win_roi": 68.7,
+          "place_roi": 72.2
+        },
+        {
+          "weight_diff": "1〜10kg",
+          "sex": "牡・セン",
+          "n": 4801,
+          "win_rate": 11.8,
+          "top2_rate": 23.5,
+          "place_rate": 34.2,
+          "win_roi": 73.7,
+          "place_roi": 76.0
+        },
+        {
+          "weight_diff": "11kg〜",
+          "sex": "牝",
+          "n": 382,
+          "win_rate": 9.2,
+          "top2_rate": 20.7,
+          "place_rate": 28.8,
+          "win_roi": 45.6,
+          "place_roi": 66.0
+        },
+        {
+          "weight_diff": "11kg〜",
+          "sex": "牡・セン",
+          "n": 25920,
+          "win_rate": 10.5,
+          "top2_rate": 21.1,
+          "place_rate": 31.5,
+          "win_roi": 71.5,
+          "place_roi": 74.8
+        }
+      ],
+      "margins": {
+        "weight_diff": [
+          {
+            "weight_diff": "0kg",
+            "n": 11668,
+            "win_rate": 11.6,
+            "top2_rate": 22.9,
+            "place_rate": 33.6,
+            "win_roi": 76.1,
+            "place_roi": 78.6
+          },
+          {
+            "weight_diff": "1〜10kg",
+            "n": 10675,
+            "win_rate": 10.5,
+            "top2_rate": 21.0,
+            "place_rate": 31.3,
+            "win_roi": 71.0,
+            "place_roi": 73.9
+          },
+          {
+            "weight_diff": "11kg〜",
+            "n": 26302,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.5,
+            "win_roi": 71.1,
+            "place_roi": 74.6
+          }
+        ],
+        "sex": [
+          {
+            "sex": "牝",
+            "n": 15957,
+            "win_rate": 10.5,
+            "top2_rate": 21.1,
+            "place_rate": 31.4,
+            "win_roi": 71.4,
+            "place_roi": 75.2
+          },
+          {
+            "sex": "牡・セン",
+            "n": 32688,
+            "win_rate": 10.9,
+            "top2_rate": 21.7,
+            "place_rate": 32.2,
+            "win_roi": 72.7,
+            "place_roi": 75.5
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "axes": [
+    "post"
+  ],
+  "through_season": 2025,
+  "bins": {
+    "post": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ]
+  },
+  "periods": {
+    "all": {
+      "first_season": 2007,
+      "last_season": 2025,
+      "total": {
+        "n": 299447,
+        "win_rate": 11.0,
+        "top2_rate": 22.0,
+        "place_rate": 32.4,
+        "win_roi": 72.7,
+        "place_roi": 75.2
+      },
+      "cells": [
+        {
+          "post": "1",
+          "n": 32570,
+          "win_rate": 10.7,
+          "top2_rate": 20.7,
+          "place_rate": 30.4,
+          "win_roi": 68.8,
+          "place_roi": 69.5
+        },
+        {
+          "post": "2",
+          "n": 32579,
+          "win_rate": 11.4,
+          "top2_rate": 22.9,
+          "place_rate": 33.4,
+          "win_roi": 73.7,
+          "place_roi": 77.3
+        },
+        {
+          "post": "3",
+          "n": 32571,
+          "win_rate": 11.5,
+          "top2_rate": 23.0,
+          "place_rate": 33.7,
+          "win_roi": 74.3,
+          "place_roi": 77.3
+        },
+        {
+          "post": "4",
+          "n": 32556,
+          "win_rate": 11.6,
+          "top2_rate": 23.4,
+          "place_rate": 33.9,
+          "win_roi": 75.5,
+          "place_roi": 78.6
+        },
+        {
+          "post": "5",
+          "n": 32605,
+          "win_rate": 11.5,
+          "top2_rate": 22.9,
+          "place_rate": 33.4,
+          "win_roi": 76.1,
+          "place_roi": 76.6
+        },
+        {
+          "post": "6",
+          "n": 32578,
+          "win_rate": 11.2,
+          "top2_rate": 22.2,
+          "place_rate": 32.7,
+          "win_roi": 73.0,
+          "place_roi": 76.0
+        },
+        {
+          "post": "7",
+          "n": 32368,
+          "win_rate": 10.9,
+          "top2_rate": 22.3,
+          "place_rate": 32.9,
+          "win_roi": 71.8,
+          "place_roi": 75.1
+        },
+        {
+          "post": "8",
+          "n": 31182,
+          "win_rate": 10.7,
+          "top2_rate": 21.6,
+          "place_rate": 32.3,
+          "win_roi": 72.4,
+          "place_roi": 74.8
+        },
+        {
+          "post": "9",
+          "n": 26021,
+          "win_rate": 10.2,
+          "top2_rate": 20.3,
+          "place_rate": 31.0,
+          "win_roi": 69.5,
+          "place_roi": 73.1
+        },
+        {
+          "post": "10",
+          "n": 14417,
+          "win_rate": 9.0,
+          "top2_rate": 17.9,
+          "place_rate": 26.7,
+          "win_roi": 69.5,
+          "place_roi": 69.8
+        }
+      ]
+    },
+    "recent3": {
+      "first_season": 2023,
+      "last_season": 2025,
+      "total": {
+        "n": 48645,
+        "win_rate": 10.8,
+        "top2_rate": 21.5,
+        "place_rate": 31.9,
+        "win_roi": 72.3,
+        "place_roi": 75.4
+      },
+      "cells": [
+        {
+          "post": "1",
+          "n": 5187,
+          "win_rate": 10.3,
+          "top2_rate": 20.8,
+          "place_rate": 30.7,
+          "win_roi": 66.8,
+          "place_roi": 74.0
+        },
+        {
+          "post": "2",
+          "n": 5179,
+          "win_rate": 12.0,
+          "top2_rate": 22.7,
+          "place_rate": 33.2,
+          "win_roi": 76.7,
+          "place_roi": 76.6
+        },
+        {
+          "post": "3",
+          "n": 5188,
+          "win_rate": 11.6,
+          "top2_rate": 22.5,
+          "place_rate": 33.1,
+          "win_roi": 78.7,
+          "place_roi": 77.7
+        },
+        {
+          "post": "4",
+          "n": 5181,
+          "win_rate": 11.0,
+          "top2_rate": 22.1,
+          "place_rate": 32.9,
+          "win_roi": 76.7,
+          "place_roi": 78.8
+        },
+        {
+          "post": "5",
+          "n": 5190,
+          "win_rate": 10.8,
+          "top2_rate": 21.0,
+          "place_rate": 31.7,
+          "win_roi": 71.9,
+          "place_roi": 73.3
+        },
+        {
+          "post": "6",
+          "n": 5196,
+          "win_rate": 10.3,
+          "top2_rate": 21.0,
+          "place_rate": 31.0,
+          "win_roi": 66.4,
+          "place_roi": 72.5
+        },
+        {
+          "post": "7",
+          "n": 5161,
+          "win_rate": 10.6,
+          "top2_rate": 22.0,
+          "place_rate": 32.7,
+          "win_roi": 72.0,
+          "place_roi": 75.4
+        },
+        {
+          "post": "8",
+          "n": 5055,
+          "win_rate": 10.3,
+          "top2_rate": 21.8,
+          "place_rate": 32.8,
+          "win_roi": 63.6,
+          "place_roi": 76.3
+        },
+        {
+          "post": "9",
+          "n": 4519,
+          "win_rate": 10.7,
+          "top2_rate": 21.0,
+          "place_rate": 31.2,
+          "win_roi": 71.3,
+          "place_roi": 72.9
+        },
+        {
+          "post": "10",
+          "n": 2789,
+          "win_rate": 9.6,
+          "top2_rate": 19.0,
+          "place_rate": 28.5,
+          "win_roi": 83.7,
+          "place_roi": 77.1
+        }
+      ]
+    }
+  }
+}
