@@ -19,7 +19,7 @@ from pathlib import Path
 
 from banei.config import JST
 from banei.export.aggregates import MIN_GROUP_SIZE
-from banei.export.merge import merge_bins, regroup, violations
+from banei.export.merge import is_coarsening, merge_bins, regroup, violations
 
 # 初回公開（2025 シーズンまで）の直近 3 シーズンの始まり。これより前のシーズンは
 # 1 つの期間帯にまとめる。版の差で切り出される単位を決めているので、後から変えては
@@ -60,6 +60,23 @@ class Axis:
         if lo is None:
             return f"〜{hi}{self.unit}"
         return f"{lo}〜{hi}{self.unit}"
+
+    def decode(self, labels) -> list[list[int]] | None:
+        """label の逆。前回の出力の区分（表示名）を、基本区分のまとまりに戻す。
+
+        隣り合う区分のまとまりの表示名は軸の中で重複しない（テストで確かめている）。
+        基本区分を順に覆う並びに戻せなければ None。
+        """
+        if not isinstance(labels, list) or not all(isinstance(lb, str) for lb in labels):
+            return None
+        ranges = {
+            self.label(list(range(i, j + 1))): list(range(i, j + 1))
+            for i in range(self.n_bins) for j in range(i, self.n_bins)
+        }
+        groups = [ranges.get(lb) for lb in labels]
+        if None in groups or [b for g in groups for b in g] != list(range(self.n_bins)):
+            return None
+        return groups
 
 
 def _each(values) -> tuple[tuple[str, str], ...]:
@@ -241,38 +258,26 @@ def _period_payload(axes, groups, merged, lo: int, hi: int) -> dict:
     return out
 
 
-def build_table(
-    axes: tuple[Axis, ...],
-    base: dict[tuple[int, ...], list[int]],
-    pop: dict[int, int],
-    through: int,
-) -> tuple[dict, list[str]]:
-    """1 つの表を作る。戻り値は (JSON にする中身, 検査 1・2 の違反)。
-
-    区分をまとめ切れない（ある期間帯の合計そのものが 30 件未満）ときは ValueError。
-    """
-    name = table_name(axes)
+def _by_season(axes: tuple[Axis, ...], base: dict) -> dict[int, dict[tuple[int, ...], list[int]]]:
+    """基本区分の集計（全軸）を、この表の軸だけの (シーズン → マス → 集計値) にする。"""
     pos = [AXES.index(a) for a in axes]
     by_season: dict[int, dict[tuple[int, ...], list[int]]] = {}
     for (season, *idx), m in base.items():
         key = tuple(idx[p] for p in pos)
         _add(by_season.setdefault(season, {}).setdefault(key, [0] * 6), m)
+    return by_season
 
-    # まとめ方は期間帯ごとの出走数で決め、両方の期間で同じものを使う
-    bands = sorted({band_of(s) for s in pop})
-    counts: dict[tuple[int, ...], list[int]] = {}
-    for season, cells in by_season.items():
-        b = bands.index(band_of(season))
-        for key, m in cells.items():
-            counts.setdefault(key, [0] * len(bands))[b] += m[N]
-    groups = merge_bins(counts, [a.n_bins for a in axes], floor=MIN_GROUP_SIZE)
 
-    # 検査 1: まとめた後、どの期間帯でも全マスが 0 か 30 以上
-    problems = [
-        f"{name}: 期間帯 {bands[b]} のマス {key} が {n} 件（0 か {MIN_GROUP_SIZE} 以上が必要）"
-        for n, b, key in violations(regroup(counts, groups), MIN_GROUP_SIZE)
-    ]
-
+def _render(
+    axes: tuple[Axis, ...],
+    groups: list[list[list[int]]],
+    by_season: dict[int, dict[tuple[int, ...], list[int]]],
+    pop: dict[int, int],
+    through: int,
+) -> tuple[dict, list[str]]:
+    """決まった区分で JSON にする中身を作る。戻り値は (中身, 検査 2 の違反)。"""
+    name = table_name(axes)
+    problems: list[str] = []
     spans = {"all": (min(pop), through), "recent3": (through - RECENT_SEASONS + 1, through)}
     periods = {}
     for period, (lo, hi) in spans.items():
@@ -299,9 +304,105 @@ def build_table(
     return payload, problems
 
 
-def build(con: sqlite3.Connection, today: dt.date) -> tuple[dict[str, dict], list[str]]:
+def build_table(
+    axes: tuple[Axis, ...],
+    base: dict[tuple[int, ...], list[int]],
+    pop: dict[int, int],
+    through: int,
+    start: list[list[list[int]]] | None = None,
+) -> tuple[dict, list[str]]:
+    """1 つの表を作る。戻り値は (JSON にする中身, 検査 1・2 の違反)。
+
+    start は前回の版の区分。あればそこからまとめ、区分を細かくしない（merge.merge_bins）。
+    区分をまとめ切れない（ある期間帯の合計そのものが 30 件未満）ときは ValueError。
+    """
+    name = table_name(axes)
+    by_season = _by_season(axes, base)
+
+    # まとめ方は期間帯ごとの出走数で決め、両方の期間で同じものを使う
+    bands = sorted({band_of(s) for s in pop})
+    counts: dict[tuple[int, ...], list[int]] = {}
+    for season, cells in by_season.items():
+        b = bands.index(band_of(season))
+        for key, m in cells.items():
+            counts.setdefault(key, [0] * len(bands))[b] += m[N]
+    groups = merge_bins(counts, [a.n_bins for a in axes], floor=MIN_GROUP_SIZE, start=start)
+
+    # 検査 1: まとめた後、どの期間帯でも全マスが 0 か 30 以上
+    problems = [
+        f"{name}: 期間帯 {bands[b]} のマス {key} が {n} 件（0 か {MIN_GROUP_SIZE} 以上が必要）"
+        for n, b, key in violations(regroup(counts, groups), MIN_GROUP_SIZE)
+    ]
+    payload, found = _render(axes, groups, by_season, pop, through)
+    return payload, problems + found
+
+
+def _previous(
+    axes: tuple[Axis, ...], name: str, previous_dir: Path | None
+) -> tuple[tuple[dict, list[list[list[int]]]] | None, list[str]]:
+    """前回の出力と、その区分（基本区分のまとまり）。戻り値は ((中身, 区分) か None, 違反)。
+
+    無ければ（初回）None。読めない・締めや区分が想定外なら、上書きせず止めるため違反にする。
+    """
+    if previous_dir is None:
+        return None, []
+    path = previous_dir / f"{name}.json"
+    if not path.exists():
+        return None, []
+    unreadable = f"{name}: 前回の出力を読めない（{{}}）。中身を確かめるまで上書きしない"
+    try:
+        prev = json.loads(path.read_text(encoding="utf-8"))
+        prev_through = prev["through_season"]
+        groups = [a.decode(prev["bins"][a.key]) for a in axes]
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        return None, [unreadable.format(repr(e))]
+    if type(prev_through) is not int:
+        return None, [unreadable.format(f"締め {prev_through!r} が整数でない")]
+    if None in groups:
+        return None, [unreadable.format("区分の表示名を基本区分に戻せない")]
+    return (prev, groups), []
+
+
+def _history_problems(
+    axes: tuple[Axis, ...],
+    payload: dict,
+    prev: dict,
+    prev_groups: list[list[list[int]]],
+    rebuild,
+) -> list[str]:
+    """前回の出力との比較（検査 3・4）。
+
+    検査 3: 締めたシーズンのデータが後から変わっていない。締めが同じなら中身が同じこと。
+      締めが進んだときも、今の DB から前回の締めの表を前回の区分で作り直して前回と比べる
+      （締めの進む 5/1 に、保留中の過去データの修正が素通りしないように）。変わっていれば
+      修正・取りこぼしの補完があったということで、その差は小さな集計の漏れになるので、
+      人が判断するまで公開しない（CLAUDE.md の手順）
+    検査 4: 区分は前回と同じか、前回の区分をまとめたもの。細かくなったり交差したりすると、
+      版と版の差でどの版でも検査していない切れ端が割り出せる
+    """
+    name = table_name(axes)
+    through, prev_through = payload["through_season"], prev["through_season"]
+    problems = []
+    groups = [a.decode(payload["bins"][a.key]) for a in axes]
+    if not is_coarsening(prev_groups, groups):
+        problems.append(f"{name}: 区分が前回より細かくなった（または交差した）。"
+                        f"前回 {prev['bins']} → 今回 {payload['bins']}")
+    if through == prev_through:
+        if payload != prev:
+            problems.append(f"{name}: 締めたシーズン（{through} まで）が同じなのに内容が変わった。"
+                            "過去のデータが修正・補完された可能性がある")
+    elif rebuild(prev_through, prev_groups) != prev:
+        problems.append(f"{name}: 締めたシーズン（{prev_through} まで）の内容が前回の出力と違う。"
+                        "過去のデータが修正・補完された可能性がある")
+    return problems
+
+
+def build(
+    con: sqlite3.Connection, today: dt.date, previous_dir: Path | None = None
+) -> tuple[dict[str, dict], list[str]]:
     """全表を作る。戻り値は ({出力名: 中身}, 違反の一覧)。
 
+    previous_dir に前回の出力があれば、その区分からまとめ、前回と比べる（検査 3・4）。
     締めたシーズンの出走が 1 件も無ければ何も作らない（テスト用の小さな DB など）。
     """
     through = through_season(today)
@@ -312,17 +413,41 @@ def build(con: sqlite3.Connection, today: dt.date) -> tuple[dict[str, dict], lis
     if not pop:
         return {}, []
     base = load_cells(con, through)
+    earlier: dict[int, tuple[dict, dict]] = {}  # 前回の締め → (基本区分の集計, 対象出走数)
+
+    def rebuild_for(axes):
+        def rebuild(prev_through, prev_groups):
+            if prev_through not in earlier:
+                earlier[prev_through] = (load_cells(con, prev_through),
+                                         population(con, prev_through))
+            prev_base, prev_pop = earlier[prev_through]
+            if not prev_pop:
+                return None
+            return _render(axes, prev_groups, _by_season(axes, prev_base), prev_pop,
+                           prev_through)[0]
+        return rebuild
+
     out: dict[str, dict] = {}
     problems: list[str] = []
     for axes in TABLES:
         name = table_name(axes)
+        prev, found = _previous(axes, name, previous_dir)
+        if found:
+            problems += found
+            continue
+        if prev is not None and (prev_through := prev[0]["through_season"]) > through:
+            problems.append(f"{name}: 締めが {prev_through} から {through} に戻っている")
+            continue
         try:
-            payload, found = build_table(axes, base, pop, through)
+            payload, found = build_table(axes, base, pop, through,
+                                         start=prev[1] if prev else None)
         except ValueError as e:
             problems.append(f"{name}: {e}")
             continue
         out[name] = payload
         problems += found
+        if prev is not None:
+            problems += _history_problems(axes, payload, *prev, rebuild_for(axes))
     return out, problems
 
 
@@ -336,27 +461,3 @@ def flatten(payload: dict) -> list[dict]:
         if p["total"] is not None:
             rows.append(p["total"])
     return rows
-
-
-def previous_problems(name: str, payload: dict, previous_dir: Path) -> list[str]:
-    """検査 3: 締めたシーズンが同じなのに、前回の出力と内容が違えば違反。
-
-    締めたシーズンのデータが後から変わった（修正・取りこぼしの補完）ことを意味する。
-    その差は小さな集計の漏れになるので、人が判断するまで公開しない（CLAUDE.md の手順）。
-    前回の出力が無い（初回）・締めが進んだ場合は通す。読めない・締めが戻った場合は止める。
-    """
-    path = previous_dir / f"{name}.json"
-    if not path.exists():
-        return []
-    try:
-        prev = json.loads(path.read_text(encoding="utf-8"))
-        prev_through = prev["through_season"]
-    except (OSError, ValueError, KeyError, TypeError) as e:
-        return [f"{name}: 前回の出力を読めない（{e!r}）。中身を確かめるまで上書きしない"]
-    through = payload["through_season"]
-    if through < prev_through:
-        return [f"{name}: 締めが {prev_through} から {through} に戻っている"]
-    if through == prev_through and prev != payload:
-        return [f"{name}: 締めたシーズン（{through} まで）が同じなのに内容が変わった。"
-                "過去のデータが修正・補完された可能性がある"]
-    return []

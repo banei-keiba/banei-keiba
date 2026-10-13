@@ -31,7 +31,7 @@ def build(
     生データが 1 度でも公開側へ出ると取り返しがつかないので、ここで落とす。
 
     探索 UI の表（出力名 explore/…）は today（省略時は JST の今日）で締めを決め、
-    previous_dir にある前回の出力と比べる（締めたシーズンが後から変わっていないか）。
+    previous_dir にある前回の出力の区分からまとめ、前回と比べる（explore.build）。
     """
     con = connect(db_path)
     try:
@@ -43,7 +43,9 @@ def build(
         }
         for name, fn in AGGREGATES.items():
             out[name] = fn(con)
-        tables, problems = explore.build(con, today or explore.today_jst())
+        tables, problems = explore.build(
+            con, today or explore.today_jst(),
+            Path(previous_dir) if previous_dir is not None else None)
     finally:
         con.close()
 
@@ -54,8 +56,6 @@ def build(
         problems += policy_violations(name, rows, check_group_size=(name != "summary"))
     for name, payload in tables.items():
         problems += policy_violations(name, explore.flatten(payload))
-        if previous_dir is not None:
-            problems += explore.previous_problems(name, payload, Path(previous_dir))
     if problems:
         raise PolicyError(
             "公開ポリシー違反のため書き出しを中止した:\n  " + "\n  ".join(problems))

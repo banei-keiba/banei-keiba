@@ -9,7 +9,7 @@ import random
 
 import pytest
 
-from banei.export.merge import merge_bins, regroup, violations
+from banei.export.merge import is_coarsening, merge_bins, regroup, violations
 
 FLOOR = 30
 
@@ -80,3 +80,46 @@ def test_merged_cells_always_satisfy_the_rule(seed):
     assert violations(cells, FLOOR) == []
     for b in range(n_bands):
         assert sum(ns[b] for ns in cells.values()) == band_totals[b]
+
+
+def test_start_groups_are_kept_when_no_violation():
+    # 前回の版でまとめた区分は、違反が無くても分け直さない（細かくすると版の差で切れ端が出る）
+    counts = {(0,): [40], (1,): [40], (2,): [40]}
+    assert merge_bins(counts, [3], floor=FLOOR, start=[[[0, 1], [2]]]) == [[[0, 1], [2]]]
+
+
+def test_merging_continues_from_start_groups():
+    counts = {(0,): [100], (1,): [40], (2,): [10]}
+    assert merge_bins(counts, [3], floor=FLOOR, start=[[[0, 1], [2]]]) == [[[0, 1, 2]]]
+
+
+@pytest.mark.parametrize(("old", "new", "expected"), [
+    ([[0], [1], [2]], [[0, 1], [2]], True),
+    ([[0, 1], [2]], [[0, 1], [2]], True),
+    ([[0, 1], [2]], [[0, 1, 2]], True),
+    ([[0, 1], [2]], [[0], [1], [2]], False),  # 細かくなった
+    ([[0, 1], [2]], [[0], [1, 2]], False),  # 交差した
+])
+def test_is_coarsening(old, new, expected):
+    assert is_coarsening([old], [new]) is expected
+
+
+@pytest.mark.parametrize("seed", range(100))
+def test_merging_from_start_only_coarsens(seed):
+    rng = random.Random(seed)
+    n_bins = [rng.randint(1, 6) for _ in range(rng.choice([1, 2]))]
+    counts = {
+        key: [rng.choice([0, rng.randint(1, 29), rng.randint(30, 300)]) for _ in range(3)]
+        for key in itertools.product(*(range(n) for n in n_bins))
+    }
+    if any(0 < sum(ns[b] for ns in counts.values()) < FLOOR for b in range(3)):
+        return
+    start = []
+    for n in n_bins:  # 隣り合う区分をランダムにまとめた前回の区分
+        cuts = [0] + sorted(rng.sample(range(1, n), rng.randint(0, n - 1))) + [n]
+        start.append([list(range(a, b)) for a, b in itertools.pairwise(cuts)])
+
+    groups = merge_bins(counts, n_bins, floor=FLOOR, start=start)
+
+    assert is_coarsening(start, groups)
+    assert violations(regroup(counts, groups), FLOOR) == []

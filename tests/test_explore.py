@@ -159,6 +159,19 @@ class TestAxisLabels:
         axis = next(a for a in explore.AXES if a.key == key)
         assert axis.label(group) == label
 
+    @pytest.mark.parametrize("axis", explore.AXES, ids=lambda a: a.key)
+    def test_every_range_label_decodes_back(self, axis):
+        # 前回の出力の区分を表示名から戻すので、隣り合う区分のまとまりの表示名は軸の中で重複しない
+        n = axis.n_bins
+        ranges = [list(range(i, j + 1)) for i in range(n) for j in range(i, n)]
+        assert len({axis.label(r) for r in ranges}) == len(ranges)
+        groups = [[0], list(range(1, n))]
+        assert axis.decode([axis.label(g) for g in groups]) == groups
+
+    @pytest.mark.parametrize("labels", [["1", "3"], ["x"], [1], None, [["1"]]])
+    def test_decode_rejects_what_is_not_a_partition(self, labels):
+        assert explore.AXES[0].decode(labels) is None
+
 
 TODAY = dt.date(2026, 10, 13)  # 2025 シーズンまで締めている
 
@@ -249,7 +262,7 @@ class TestBuildChecks:
     def test_check_1_catches_a_small_cell(self, big, monkeypatch):
         # まとめ方が壊れても、書き出し前の検査 1 で止まること
         monkeypatch.setattr(explore, "merge_bins",
-                            lambda counts, n_bins, floor: [[[b] for b in range(n)] for n in n_bins])
+                            identity_merge)
         add_rare_third_favorite(big)
         _, problems = explore.build(big, TODAY)
         assert any("0 か 30 以上" in p for p in problems)
@@ -277,9 +290,15 @@ class TestBuildChecks:
         assert out == {} and "FIRST_RECENT_SEASON" in problems[0]
 
 
-def identity_merge(counts, n_bins, floor):
+def identity_merge(counts, n_bins, floor, start=None):
     """まとめ方が壊れた状態（何もまとめない）。"""
     return [[[b] for b in range(n)] for n in n_bins]
+
+
+def merge_second_and_third(counts, n_bins, floor, start=None):
+    """10 区分の軸の 2 番目と 3 番目をまとめる（過去の版でまとめる必要があった状態を作る）。"""
+    return [[[0], [1, 2], *([b] for b in range(3, n))] if n == 10 else [[b] for b in range(n)]
+            for n in n_bins]
 
 
 def read(out_dir, name):
@@ -352,3 +371,58 @@ class TestExport:
             explore, "flatten", lambda p: [*real(p), {"race_date": "2025-05-01", "n": 99}])
         with pytest.raises(export.PolicyError, match="race_date"):
             export.build(db_path, today=TODAY)
+
+    def test_bins_never_get_finer_across_versions(self, big, db_path, tmp_path, monkeypatch):
+        # 前回の版でまとめた区分を分け直すと、版と版の差でどの版でも検査していない切れ端が出る
+        out_dir = tmp_path / "out"
+        with monkeypatch.context() as m:
+            m.setattr(explore, "merge_bins", merge_second_and_third)
+            export.run(db_path, out_dir, today=TODAY)
+        assert read(out_dir, "popularity")["bins"]["popularity"][:2] == ["1", "2〜3"]
+        add_season(big, 2026, start_no=3)
+        export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+        assert read(out_dir, "popularity")["bins"]["popularity"][:2] == ["1", "2〜3"]
+
+    def test_finer_bins_than_previous_stop_export(self, big, db_path, tmp_path, monkeypatch):
+        # 検査 4: まとめ方が前回の区分を無視しても、書き出し前に止まる
+        out_dir = tmp_path / "out"
+        with monkeypatch.context() as m:
+            m.setattr(explore, "merge_bins", merge_second_and_third)
+            export.run(db_path, out_dir, today=TODAY)
+        add_season(big, 2026, start_no=3)
+        monkeypatch.setattr(explore, "merge_bins", identity_merge)
+        with pytest.raises(export.PolicyError, match="細かく"):
+            export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+
+    def test_changed_closed_season_stops_export_when_through_advances(self, big, db_path, tmp_path):
+        # 4 月に締めた 2024 シーズンが補完されて止まったまま 5/1 を迎えても、素通りしない
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        add_race(big, "2024-09-01", 1, [horse(1, 1), horse(2, 2)],
+                 win={1: 340}, place={1: 120, 2: 150})
+        add_season(big, 2026, start_no=3)
+        with pytest.raises(export.PolicyError, match="締めたシーズン（2025 まで）"):
+            export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+
+    @pytest.mark.parametrize("through", ['"2025"', "null", "true"])
+    def test_malformed_previous_through_season_stops_export(
+        self, big, db_path, tmp_path, through
+    ):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        path = out_dir / "explore/popularity.json"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace('"through_season": 2025', f'"through_season": {through}'),
+                        encoding="utf-8")
+        with pytest.raises(export.PolicyError, match="読めない"):
+            export.run(db_path, out_dir, today=TODAY)
+
+    def test_undecodable_previous_bins_stop_export(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        path = out_dir / "explore/popularity.json"
+        t = json.loads(path.read_text(encoding="utf-8"))
+        t["bins"]["popularity"][0] = "1番人気"
+        path.write_text(json.dumps(t, ensure_ascii=False), encoding="utf-8")
+        with pytest.raises(export.PolicyError, match="読めない"):
+            export.run(db_path, out_dir, today=TODAY)

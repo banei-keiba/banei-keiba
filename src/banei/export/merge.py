@@ -31,11 +31,18 @@ def violations(cells: dict[Key, list[int]], floor: int) -> list[tuple[int, int, 
 
 
 def merge_bins(
-    counts: dict[Key, list[int]], n_bins: list[int], *, floor: int
+    counts: dict[Key, list[int]],
+    n_bins: list[int],
+    *,
+    floor: int,
+    start: list[list[list[int]]] | None = None,
 ) -> list[list[list[int]]]:
     """規則を満たすまで区分をまとめ、軸ごとに「まとめた区分」の並びを返す。
 
-    counts は基本区分の組 → 期間帯ごとの出走数。手順（同じ入力なら同じ出力）:
+    counts は基本区分の組 → 期間帯ごとの出走数。start（前回の版の区分）があればそこから、
+    無ければ基本区分から始める。前回の区分から始めるのは、版をまたいで区分が細かくなったり
+    交差したりすると、版と版の差でどの版でも検査していない切れ端が割り出せるため。
+    手順（同じ入力なら同じ出力）:
 
     1. 違反マスのうち n が最小のものを選ぶ（同値なら期間帯 → 軸の順 → 区分の順）
     2. その期間帯で、違反マスが属する各軸の区分の出走数を比べ、少ない軸を選ぶ
@@ -45,7 +52,10 @@ def merge_bins(
 
     ある期間帯の合計そのものが floor 未満だと、全部まとめても満たせないので ValueError。
     """
-    groups = [[[b] for b in range(n)] for n in n_bins]
+    if start is None:
+        groups = [[[b] for b in range(n)] for n in n_bins]
+    else:
+        groups = [[list(g) for g in gs] for gs in start]
     while True:
         cells = regroup(counts, groups)
         found = violations(cells, floor)
@@ -66,3 +76,17 @@ def merge_bins(
         j = min(neighbors, key=lambda j: (totals[ax][j] == 0, totals[ax][j], j))
         lo, hi = min(gi, j), max(gi, j)
         groups[ax][lo:hi + 1] = [groups[ax][lo] + groups[ax][hi]]
+
+
+def is_coarsening(old: list[list[list[int]]], new: list[list[list[int]]]) -> bool:
+    """new の各軸の区分が、old の隣り合う区分をまとめたもの（同じでもよい）か。
+
+    どちらも基本区分を順に覆うので、new の区分の境目がすべて old の境目にあればよい。
+    """
+    def flat(gs):
+        return [b for g in gs for b in g]
+
+    return len(old) == len(new) and all(
+        flat(o) == flat(n) and {g[0] for g in n} <= {g[0] for g in o}
+        for o, n in zip(old, new, strict=False)
+    )
