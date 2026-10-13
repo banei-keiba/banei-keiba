@@ -11,10 +11,13 @@
 """
 
 import datetime as dt
+import itertools
 import sqlite3
 from dataclasses import dataclass
 
 from banei.config import JST
+from banei.export.aggregates import MIN_GROUP_SIZE
+from banei.export.merge import merge_bins, regroup, violations
 
 # 初回公開（2025 シーズンまで）の直近 3 シーズンの始まり。これより前のシーズンは
 # 1 つの期間帯にまとめる。版の差で切り出される単位を決めているので、後から変えては
@@ -179,3 +182,155 @@ def load_cells(con: sqlite3.Connection, through: int) -> dict[tuple[int, ...], l
         for i, v in enumerate(values, start=WIN):
             acc[i] += v
     return cells
+
+
+# 1 軸 8 表 + 2 軸 28 表
+TABLES: tuple[tuple[Axis, ...], ...] = (
+    *((a,) for a in AXES),
+    *itertools.combinations(AXES, 2),
+)
+
+
+def table_name(axes: tuple[Axis, ...]) -> str:
+    return "explore/" + "__".join(a.key for a in axes)
+
+
+def _add(acc: list[int], m: list[int]) -> None:
+    for i, v in enumerate(m):
+        acc[i] += v
+
+
+def _metrics(m: list[int]) -> dict:
+    n = m[N]
+    return {
+        "n": n,
+        "win_rate": round(100 * m[WIN] / n, 1),
+        "top2_rate": round(100 * m[TOP2] / n, 1),
+        "place_rate": round(100 * m[PLACE] / n, 1),
+        # 払戻は 100 円あたりなので、払戻合計 ÷ (n × 100 円) × 100% = 払戻合計 ÷ n
+        "win_roi": round(m[WIN_PAY] / n, 1),
+        "place_roi": round(m[PLACE_PAY] / n, 1),
+    }
+
+
+def _period_payload(axes, groups, merged, lo: int, hi: int) -> dict:
+    total = [0] * 6
+    for m in merged.values():
+        _add(total, m)
+    out = {
+        "first_season": lo,
+        "last_season": hi,
+        "total": _metrics(total) if total[N] else None,
+        # 0 件のマスは入れない（画面では「—」）
+        "cells": [
+            {**{a.key: a.label(groups[i][key[i]]) for i, a in enumerate(axes)}, **_metrics(m)}
+            for key, m in sorted(merged.items())
+        ],
+    }
+    if len(axes) == 2:
+        # 全体の行と列。まとめた区分でのマスの合計なので、新たな数字は出ない
+        out["margins"] = {}
+        for i, a in enumerate(axes):
+            side: dict[int, list[int]] = {}
+            for key, m in merged.items():
+                _add(side.setdefault(key[i], [0] * 6), m)
+            out["margins"][a.key] = [
+                {a.key: a.label(groups[i][g]), **_metrics(m)} for g, m in sorted(side.items())]
+    return out
+
+
+def build_table(
+    axes: tuple[Axis, ...],
+    base: dict[tuple[int, ...], list[int]],
+    pop: dict[int, int],
+    through: int,
+) -> tuple[dict, list[str]]:
+    """1 つの表を作る。戻り値は (JSON にする中身, 検査 1・2 の違反)。
+
+    区分をまとめ切れない（ある期間帯の合計そのものが 30 件未満）ときは ValueError。
+    """
+    name = table_name(axes)
+    pos = [AXES.index(a) for a in axes]
+    by_season: dict[int, dict[tuple[int, ...], list[int]]] = {}
+    for (season, *idx), m in base.items():
+        key = tuple(idx[p] for p in pos)
+        _add(by_season.setdefault(season, {}).setdefault(key, [0] * 6), m)
+
+    # まとめ方は期間帯ごとの出走数で決め、両方の期間で同じものを使う
+    bands = sorted({band_of(s) for s in pop})
+    counts: dict[tuple[int, ...], list[int]] = {}
+    for season, cells in by_season.items():
+        b = bands.index(band_of(season))
+        for key, m in cells.items():
+            counts.setdefault(key, [0] * len(bands))[b] += m[N]
+    groups = merge_bins(counts, [a.n_bins for a in axes], floor=MIN_GROUP_SIZE)
+
+    # 検査 1: まとめた後、どの期間帯でも全マスが 0 か 30 以上
+    problems = [
+        f"{name}: 期間帯 {bands[b]} のマス {key} が {n} 件（0 か {MIN_GROUP_SIZE} 以上が必要）"
+        for n, b, key in violations(regroup(counts, groups), MIN_GROUP_SIZE)
+    ]
+
+    spans = {"all": (min(pop), through), "recent3": (through - RECENT_SEASONS + 1, through)}
+    periods = {}
+    for period, (lo, hi) in spans.items():
+        summed: dict[tuple[int, ...], list[int]] = {}
+        for season, cells in by_season.items():
+            if lo <= season <= hi:
+                for key, m in cells.items():
+                    _add(summed.setdefault(key, [0] * 6), m)
+        merged = regroup(summed, groups)
+        # 検査 2: マスの合計が対象出走数と一致する（もれなく分けている）
+        expected = sum(n for s, n in pop.items() if lo <= s <= hi)
+        got = sum(m[N] for m in merged.values())
+        if got != expected:
+            problems.append(f"{name}（{period}）: マスの合計 {got} が対象出走数 {expected} と"
+                            "一致しない（軸の値が想定外の出走がある）")
+        periods[period] = _period_payload(axes, groups, merged, lo, hi)
+
+    payload = {
+        "axes": [a.key for a in axes],
+        "through_season": through,
+        "bins": {a.key: [a.label(g) for g in groups[i]] for i, a in enumerate(axes)},
+        "periods": periods,
+    }
+    return payload, problems
+
+
+def build(con: sqlite3.Connection, today: dt.date) -> tuple[dict[str, dict], list[str]]:
+    """全表を作る。戻り値は ({出力名: 中身}, 違反の一覧)。
+
+    締めたシーズンの出走が 1 件も無ければ何も作らない（テスト用の小さな DB など）。
+    """
+    through = through_season(today)
+    if through - RECENT_SEASONS + 1 < FIRST_RECENT_SEASON:
+        return {}, [f"直近 {RECENT_SEASONS} シーズンが {FIRST_RECENT_SEASON} より前から始まる"
+                    f"（締め {through}）。FIRST_RECENT_SEASON の設定か日付が誤っている"]
+    pop = population(con, through)
+    if not pop:
+        return {}, []
+    base = load_cells(con, through)
+    out: dict[str, dict] = {}
+    problems: list[str] = []
+    for axes in TABLES:
+        name = table_name(axes)
+        try:
+            payload, found = build_table(axes, base, pop, through)
+        except ValueError as e:
+            problems.append(f"{name}: {e}")
+            continue
+        out[name] = payload
+        problems += found
+    return out, problems
+
+
+def flatten(payload: dict) -> list[dict]:
+    """公開ポリシーの検査（aggregates.policy_violations）にかける行。マス・全体の行と列・合計。"""
+    rows: list[dict] = []
+    for p in payload["periods"].values():
+        rows += p["cells"]
+        for side in p.get("margins", {}).values():
+            rows += side
+        if p["total"] is not None:
+            rows.append(p["total"])
+    return rows
