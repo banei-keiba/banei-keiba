@@ -309,3 +309,143 @@ ul.articles p {
   color: var(--ink-2);
   font-size: 0.9375rem;
 }
+
+/* --- 探索 --- */
+
+/* マスの濃淡。--data を --card に混ぜる。上限 48% は、マス内の文字（--ink）の
+   コントラスト比が両モードで 4.5:1 以上になる範囲（tests/test_heat_contrast.py で検査）。
+   出走数 100 未満のマスには付けない（.low-n の --ink-2 は濃いマスの上で 4.5:1 を下回る。
+   振れの大きいマスが色で目を引かないようにする意味もある）。 */
+.heat-1 {
+  background: color-mix(in srgb, var(--data) 12%, var(--card));
+}
+
+.heat-2 {
+  background: color-mix(in srgb, var(--data) 24%, var(--card));
+}
+
+.heat-3 {
+  background: color-mix(in srgb, var(--data) 36%, var(--card));
+}
+
+.heat-4 {
+  background: color-mix(in srgb, var(--data) 48%, var(--card));
+}
+
+.matrix {
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+}
+
+.matrix table {
+  width: auto;
+  min-width: 100%;
+  margin: 0;
+}
+
+.matrix th,
+.matrix td {
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+}
+
+.matrix tbody th {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.matrix td .v {
+  display: block;
+  font-weight: 600;
+}
+
+/* --ink-2 は濃いマスの上で 4.5:1 を下回るので、出走数も --ink のまま小さくする */
+.matrix td .n {
+  display: block;
+  font-size: 0.75rem;
+}
+
+.matrix .low-n,
+.matrix .low-n .v {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.matrix .empty {
+  color: var(--ink-3);
+}
+
+.matrix .total {
+  border-left: 1px solid var(--line);
+}
+
+.matrix tr.total th,
+.matrix tr.total td {
+  border-top: 2px solid var(--line);
+}
+
+/* 指標のタブ。ラジオボタンと CSS だけで切り替える（JS を配信しない）。
+   input・label・.panels は兄弟に置く。n 番目の input が n 番目の .panel を表示する。 */
+.metric-tabs > input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.metric-tabs > label {
+  display: inline-block;
+  margin: 0 0.25rem 0.375rem 0;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.metric-tabs > input:checked + label {
+  background: var(--data);
+  border-color: var(--data);
+  color: var(--card);
+}
+
+.metric-tabs > input:focus-visible + label {
+  outline: 2px solid var(--data);
+  outline-offset: 2px;
+}
+
+.metric-tabs .panel {
+  display: none;
+}
+
+.metric-tabs > input:nth-of-type(1):checked ~ .panels > .panel:nth-child(1),
+.metric-tabs > input:nth-of-type(2):checked ~ .panels > .panel:nth-child(2),
+.metric-tabs > input:nth-of-type(3):checked ~ .panels > .panel:nth-child(3),
+.metric-tabs > input:nth-of-type(4):checked ~ .panels > .panel:nth-child(4),
+.metric-tabs > input:nth-of-type(5):checked ~ .panels > .panel:nth-child(5) {
+  display: block;
+}
+
+.axis-links {
+  margin: 0 0 0.375rem;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.axis-links a {
+  margin-right: 0.75rem;
+}
+
+.axis-links a[aria-current='page'] {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+ul.explore-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  list-style: none;
+  padding: 0;
+}
