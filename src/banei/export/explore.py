@@ -12,8 +12,10 @@
 
 import datetime as dt
 import itertools
+import json
 import sqlite3
 from dataclasses import dataclass
+from pathlib import Path
 
 from banei.config import JST
 from banei.export.aggregates import MIN_GROUP_SIZE
@@ -334,3 +336,27 @@ def flatten(payload: dict) -> list[dict]:
         if p["total"] is not None:
             rows.append(p["total"])
     return rows
+
+
+def previous_problems(name: str, payload: dict, previous_dir: Path) -> list[str]:
+    """検査 3: 締めたシーズンが同じなのに、前回の出力と内容が違えば違反。
+
+    締めたシーズンのデータが後から変わった（修正・取りこぼしの補完）ことを意味する。
+    その差は小さな集計の漏れになるので、人が判断するまで公開しない（CLAUDE.md の手順）。
+    前回の出力が無い（初回）・締めが進んだ場合は通す。読めない・締めが戻った場合は止める。
+    """
+    path = previous_dir / f"{name}.json"
+    if not path.exists():
+        return []
+    try:
+        prev = json.loads(path.read_text(encoding="utf-8"))
+        prev_through = prev["through_season"]
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        return [f"{name}: 前回の出力を読めない（{e!r}）。中身を確かめるまで上書きしない"]
+    through = payload["through_season"]
+    if through < prev_through:
+        return [f"{name}: 締めが {prev_through} から {through} に戻っている"]
+    if through == prev_through and prev != payload:
+        return [f"{name}: 締めたシーズン（{through} まで）が同じなのに内容が変わった。"
+                "過去のデータが修正・補完された可能性がある"]
+    return []

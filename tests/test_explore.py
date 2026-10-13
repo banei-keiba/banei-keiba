@@ -1,10 +1,12 @@
 """探索 UI の集計（explore.py）のテスト。合成データのみ（実データ・実ページは使わない）。"""
 
 import datetime as dt
+import json
 import sqlite3
 
 import pytest
 
+from banei import export
 from banei.db.schema import RACES_SCHEMA
 from banei.export import explore
 
@@ -273,3 +275,80 @@ class TestBuildChecks:
         monkeypatch.setattr(explore, "FIRST_RECENT_SEASON", 2024)
         out, problems = explore.build(big, TODAY)
         assert out == {} and "FIRST_RECENT_SEASON" in problems[0]
+
+
+def identity_merge(counts, n_bins, floor):
+    """まとめ方が壊れた状態（何もまとめない）。"""
+    return [[[b] for b in range(n)] for n in n_bins]
+
+
+def read(out_dir, name):
+    return json.loads((out_dir / f"explore/{name}.json").read_text(encoding="utf-8"))
+
+
+class TestExport:
+    """export に組み込まれ、違反があれば書き出し全体が止まること。"""
+
+    def test_tables_are_written_under_explore(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        files = sorted(p.name for p in (out_dir / "explore").glob("*.json"))
+        assert len(files) == 36 and "popularity__moisture.json" in files
+        t = read(out_dir, "popularity")
+        assert t["through_season"] == 2025
+        # 生成時刻を入れない。入れると毎日内容が変わり、検査 3 が成り立たない
+        assert "generated_at" not in json.dumps(t)
+
+    def test_rerun_on_same_data_passes_check_3(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        export.run(db_path, out_dir, today=dt.date(2026, 12, 1))  # 毎日回しても通る
+
+    def test_changed_closed_season_stops_export(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        before = (out_dir / "explore/popularity.json").read_text(encoding="utf-8")
+        # 締めた 2024 シーズンに、後から 1 レース補完された
+        add_race(big, "2024-09-01", 1, [horse(1, 1), horse(2, 2)],
+                 win={1: 340}, place={1: 120, 2: 150})
+        with pytest.raises(export.PolicyError, match="締めたシーズン"):
+            export.run(db_path, out_dir, today=TODAY)
+        assert (out_dir / "explore/popularity.json").read_text(encoding="utf-8") == before
+
+    def test_new_closed_season_passes_check_3(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        add_season(big, 2026, start_no=3)
+        export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+        assert read(out_dir, "popularity")["through_season"] == 2026
+
+    def test_rewound_through_season_stops_export(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        add_season(big, 2026, start_no=3)
+        export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+        with pytest.raises(export.PolicyError, match="戻っている"):
+            export.run(db_path, out_dir, today=TODAY)
+
+    def test_unreadable_previous_output_stops_export(self, big, db_path, tmp_path):
+        out_dir = tmp_path / "out"
+        (out_dir / "explore").mkdir(parents=True)
+        (out_dir / "explore/popularity.json").write_text("{壊れた", encoding="utf-8")
+        with pytest.raises(export.PolicyError, match="読めない"):
+            export.run(db_path, out_dir, today=TODAY)
+        assert (out_dir / "explore/popularity.json").read_text(encoding="utf-8") == "{壊れた"
+
+    def test_explore_violation_stops_all_output(self, big, db_path, tmp_path, monkeypatch):
+        monkeypatch.setattr(explore, "merge_bins", identity_merge)
+        add_rare_third_favorite(big)
+        out_dir = tmp_path / "out"
+        with pytest.raises(export.PolicyError, match="0 か 30 以上"):
+            export.run(db_path, out_dir, today=TODAY)
+        assert not out_dir.exists() or not any(out_dir.rglob("*.json"))
+
+    def test_policy_checker_also_runs_on_tables(self, big, db_path, monkeypatch):
+        # 個体キーが混ざったら、explore の中の検査とは別に既存の検査でも止まる
+        real = explore.flatten
+        monkeypatch.setattr(
+            explore, "flatten", lambda p: [*real(p), {"race_date": "2025-05-01", "n": 99}])
+        with pytest.raises(export.PolicyError, match="race_date"):
+            export.build(db_path, today=TODAY)
