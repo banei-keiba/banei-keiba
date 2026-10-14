@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { count, pct } from '../../lib/explore';
+import { PEOPLE, ROLES, pageOf, pageUrl, rolesLabel, seasonSpan, signed } from '../../lib/people';
+
+const through = PEOPLE.through_season;
+const boards = ROLES.map((role) => {
+  const rows = PEOPLE.roles[role.key].people
+    .flatMap((person) => {
+      const row = person.seasons.find((s) => s.season === through);
+      return row ? [{ row, page: pageOf(role.key, person.key) }] : [];
+    })
+    .sort((a, b) => b.row.wins - a.row.wins || b.row.win_rate - a.row.win_rate);
+  const other = PEOPLE.roles[role.key].seasons.find((s) => s.season === through)?.other ?? null;
+  return { role, rows, other };
+});
+const active = PEOPLE.pages.filter((p) => p.active);
+const past = PEOPLE.pages.filter((p) => !p.active);
+---
+
+<Base
+  title="騎手・調教師の成績"
+  description="ばんえい競馬の騎手・調教師ごとの、シーズン別の勝率・回収率と、人気から見込まれる勝ち数との差。"
+>
+  <h1>騎手・調教師の成績</h1>
+  <p class="meta">
+    {through} シーズン（{seasonSpan(through)}）まで・毎年 5/1 に前のシーズンを締めて更新
+  </p>
+  {
+    boards.map(({ role, rows, other }) => (
+      <section>
+        <h2>
+          {through} シーズンの{role.name}
+        </h2>
+        <div class="matrix">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">順位</th>
+                <th scope="col">名前</th>
+                <th scope="col">{role.runs}</th>
+                <th scope="col">勝ち数</th>
+                <th scope="col">勝率</th>
+                <th scope="col">単勝回収率</th>
+                <th scope="col">複勝回収率</th>
+                <th scope="col">見込みとの差</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(({ row, page }, i) => (
+                <tr>
+                  <td>{i + 1}</td>
+                  <th scope="row">
+                    <a href={pageUrl(page)}>{page.name}</a>
+                  </th>
+                  <td>{count(row.n)}</td>
+                  <td>{count(row.wins)}</td>
+                  <td>{pct(row.win_rate)}</td>
+                  <td>{pct(row.win_roi)}</td>
+                  <td>{pct(row.place_roi)}</td>
+                  <td>{signed(row.wins_over_expected)}</td>
+                </tr>
+              ))}
+              {other && (
+                <tr class="total">
+                  <td />
+                  <th scope="row">その他（{other.people_count} 人）</th>
+                  <td>{count(other.n)}</td>
+                  <td>{count(other.wins)}</td>
+                  <td>{pct(other.win_rate)}</td>
+                  <td>{pct(other.win_roi)}</td>
+                  <td>{pct(other.place_roi)}</td>
+                  <td>{signed(other.wins_over_expected)}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))
+  }
+  <h2>全員</h2>
+  <h3>{through} シーズンに出走あり</h3>
+  <ul>
+    {
+      active.map((p) => (
+        <li>
+          <a href={pageUrl(p)}>{p.name}</a>（{rolesLabel(p)}）
+        </li>
+      ))
+    }
+  </ul>
+  <h3>それより前</h3>
+  <ul>
+    {
+      past.map((p) => (
+        <li>
+          <a href={pageUrl(p)}>{p.name}</a>（{rolesLabel(p)}）
+        </li>
+      ))
+    }
+  </ul>
+  <div class="note">
+    <p>
+      <strong>見込みとの差</strong>は、実際の勝ち数から「乗った（管理する）馬の人気から見込まれる
+      勝ち数」を引いたものです。見込みは、出走ごとにそのシーズン全体のその人気の勝率を足し上げます。
+    </p>
+    <p>
+      あるシーズンの出走が 30 件に満たない人は、そのシーズンだけ個人の欄に載せず「その他」に
+      まとめています。消すと全体からの引き算で値が分かってしまうためです。「その他」も 30 件に
+      満たないときは、そのシーズンの出走が少ない人から順に加えます。
+    </p>
+    <p>名前の一部は、レース結果の略称表記（3 文字）のままです。</p>
+  </div>
+</Base>
