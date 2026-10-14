@@ -14,10 +14,25 @@ interface Props {
   xUnit?: string;
   yUnit?: string;
   tooltip?: (row: Record<string, number>) => string;
+  /** x 軸の目盛りの書式。既定は toLocaleString。シーズン（2025）は「2,025」になるので String を渡す */
+  xFormat?: (v: number) => string;
+  /** 参照線の値（0 など）。ラベルは置かない（端点のラベルと重なる）ので、意味は副題で説明する */
+  refValue?: number;
 }
 
-const { data, xKey, yKey, title, subtitle, caption, xUnit = '', yUnit = '', tooltip } =
-  Astro.props;
+const {
+  data,
+  xKey,
+  yKey,
+  title,
+  subtitle,
+  caption,
+  xUnit = '',
+  yUnit = '',
+  tooltip,
+  xFormat = (v: number) => v.toLocaleString('ja-JP'),
+  refValue,
+} = Astro.props;
 
 const W = 720;
 const H = 340;
@@ -29,7 +44,7 @@ const xs = data.map((d) => d[xKey]);
 const ys = data.map((d) => d[yKey]);
 const xMin = Math.min(...xs);
 const xMax = Math.max(...xs);
-const yTicks = niceTicks(Math.min(...ys), Math.max(...ys));
+const yTicks = niceTicks(Math.min(...ys, refValue ?? Infinity), Math.max(...ys, refValue ?? -Infinity));
 const yMin = yTicks[0];
 const yMax = yTicks[yTicks.length - 1];
 
@@ -67,7 +82,7 @@ const titleId = `t-${title.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 12)}-${data.l
     {
       data.map((d) => (
         <text class="tick" x={sx(d[xKey])} y={M.top + ph + 20} text-anchor="middle">
-          {d[xKey].toLocaleString('ja-JP')}
+          {xFormat(d[xKey])}
         </text>
       ))
     }
@@ -75,6 +90,19 @@ const titleId = `t-${title.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 12)}-${data.l
     <text class="axis-label" x={M.left + pw / 2} y={H - 6} text-anchor="middle">{xUnit}</text>
     {/* y 軸の単位は左端に寄せる。目盛りラベルの右端に置くと長い単位が画面外へ出る */}
     <text class="axis-label" x="0" y="16">{yUnit}</text>
+
+    {
+      refValue !== undefined && (
+        <line
+          x1={M.left}
+          x2={M.left + pw}
+          y1={sy(refValue)}
+          y2={sy(refValue)}
+          stroke="var(--accent)"
+          stroke-width="2"
+        />
+      )
+    }
 
     <path d={path} fill="none" stroke="var(--data)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
 
