@@ -12,3 +12,447 @@
 # jockey = "騎手の略称"      # 騎手でなければ書かない
 # trainer = "調教師の略称"   # 調教師でなければ書かない
 # source = "https://… (YYYY-MM-DD 確認)"
+
+# 以下 86 人: 地方競馬情報サイト（NAR）の騎手・調教師一覧（所属ばんえい、引退者を含む）で、
+# 略称の付け方（姓 1 字なら 姓 + 名の先頭 2 字、姓 2 字以上なら 姓の先頭 2 字 + 名の先頭 1 字）で 1 人に定まり、
+# 名鑑の現役・引退と DB の最後の出走日が食い違わなかった人。2026-10-14 確認
+# 書かなかった人（略称のまま表示）: 騎手「尾瀬馨」・調教師「尾瀬富」「大友人」（名鑑の表記が規則と合わない）、
+# 調教師「松井浩」（名鑑に松井浩・松井浩文の 2 人がいて定まらない）
+
+[[person]]
+name = "三浦孝幸"
+trainer = "三浦孝"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18038 (2026-10-14 確認)"
+
+[[person]]
+name = "中原蓮"
+jockey = "中原蓮"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38089 (2026-10-14 確認)"
+
+[[person]]
+name = "中山直樹"
+jockey = "中山直"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38053 (2026-10-14 確認)"
+
+[[person]]
+name = "中島敏博"
+trainer = "中島敏"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18075 (2026-10-14 確認)"
+
+[[person]]
+name = "中村太陽"
+jockey = "中村太"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38086 (2026-10-14 確認)"
+
+[[person]]
+name = "久保正吉"
+trainer = "久保正"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18014 (2026-10-14 確認)"
+
+[[person]]
+name = "久田守"
+trainer = "久田守"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18058 (2026-10-14 確認)"
+
+[[person]]
+name = "井上真司"
+jockey = "井上真"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38078 (2026-10-14 確認)"
+
+[[person]]
+name = "今井千尋"
+jockey = "今井千"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38084 (2026-10-14 確認)"
+
+[[person]]
+name = "今井茂雅"
+trainer = "今井茂"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18054 (2026-10-14 確認)"
+
+[[person]]
+name = "佐藤希世子"
+jockey = "佐藤希"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38061 (2026-10-14 確認)"
+
+[[person]]
+name = "入澤和也"
+jockey = "入澤和"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38065 (2026-10-14 確認)"
+
+[[person]]
+name = "前原和信"
+trainer = "前原和"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18035 (2026-10-14 確認)"
+
+[[person]]
+name = "前原陽介"
+trainer = "前原陽"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18060 (2026-10-14 確認)"
+
+[[person]]
+name = "千葉均"
+jockey = "千葉均"
+trainer = "千葉均"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38016 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18078 (2026-10-14 確認)"
+
+[[person]]
+name = "吉田理人"
+jockey = "吉田理"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38092 (2026-10-14 確認)"
+
+[[person]]
+name = "坂本東一"
+jockey = "坂本東"
+trainer = "坂本東"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38014 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18077 (2026-10-14 確認)"
+
+[[person]]
+name = "夏井功"
+jockey = "夏井功"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38017 (2026-10-14 確認)"
+
+[[person]]
+name = "大友一馬"
+jockey = "大友一"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38087 (2026-10-14 確認)"
+
+[[person]]
+name = "大口泰史"
+jockey = "大口泰"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38034 (2026-10-14 確認)"
+
+[[person]]
+name = "大橋和則"
+trainer = "大橋和"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18057 (2026-10-14 確認)"
+
+[[person]]
+name = "大河原和雄"
+jockey = "大河和"
+trainer = "大河和"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38006 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18080 (2026-10-14 確認)"
+
+[[person]]
+name = "安部憲二"
+jockey = "安部憲"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38039 (2026-10-14 確認)"
+
+[[person]]
+name = "小北栄一"
+trainer = "小北栄"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18066 (2026-10-14 確認)"
+
+[[person]]
+name = "小林勝二"
+trainer = "小林勝"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18052 (2026-10-14 確認)"
+
+[[person]]
+name = "小林長吉"
+trainer = "小林長"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18071 (2026-10-14 確認)"
+
+[[person]]
+name = "小野木隆幸"
+jockey = "小野隆"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38085 (2026-10-14 確認)"
+
+[[person]]
+name = "山本正彦"
+jockey = "山本正"
+trainer = "山本正"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38031 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18081 (2026-10-14 確認)"
+
+[[person]]
+name = "山田勇作"
+trainer = "山田勇"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18044 (2026-10-14 確認)"
+
+[[person]]
+name = "岡田定一"
+trainer = "岡田定"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18009 (2026-10-14 確認)"
+
+[[person]]
+name = "岩本利春"
+trainer = "岩本利"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18072 (2026-10-14 確認)"
+
+[[person]]
+name = "岩本正好"
+trainer = "岩本正"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18059 (2026-10-14 確認)"
+
+[[person]]
+name = "岩瀬和幸"
+trainer = "岩瀬和"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18061 (2026-10-14 確認)"
+
+[[person]]
+name = "島津新"
+jockey = "島津新"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38079 (2026-10-14 確認)"
+
+[[person]]
+name = "工藤篤"
+jockey = "工藤篤"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38038 (2026-10-14 確認)"
+
+[[person]]
+name = "平田義弘"
+trainer = "平田義"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18050 (2026-10-14 確認)"
+
+[[person]]
+name = "折口秀行"
+jockey = "折口秀"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38041 (2026-10-14 確認)"
+
+[[person]]
+name = "服部義幸"
+trainer = "服部義"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18029 (2026-10-14 確認)"
+
+[[person]]
+name = "村上慎一"
+trainer = "村上慎"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18070 (2026-10-14 確認)"
+
+[[person]]
+name = "村上章"
+jockey = "村上章"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38047 (2026-10-14 確認)"
+
+[[person]]
+name = "松本秀克"
+jockey = "松本秀"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38056 (2026-10-14 確認)"
+
+[[person]]
+name = "松田道明"
+jockey = "松田道"
+trainer = "松田道"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38033 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18082 (2026-10-14 確認)"
+
+[[person]]
+name = "林豊"
+trainer = "林　豊"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18053 (2026-10-14 確認)"
+
+[[person]]
+name = "林康文"
+jockey = "林康文"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38082 (2026-10-14 確認)"
+
+[[person]]
+name = "林義直"
+jockey = "林義直"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38075 (2026-10-14 確認)"
+
+[[person]]
+name = "梨本照夫"
+trainer = "梨本照"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18024 (2026-10-14 確認)"
+
+[[person]]
+name = "森芳浩"
+trainer = "森芳浩"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18063 (2026-10-14 確認)"
+
+[[person]]
+name = "槻舘重人"
+trainer = "槻舘重"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18064 (2026-10-14 確認)"
+
+[[person]]
+name = "浅田達矢"
+jockey = "浅田達"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38066 (2026-10-14 確認)"
+
+[[person]]
+name = "渡来心路"
+jockey = "渡来心"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38076 (2026-10-14 確認)"
+
+[[person]]
+name = "澁谷益久"
+jockey = "澁谷益"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38048 (2026-10-14 確認)"
+
+[[person]]
+name = "田上忠夫"
+trainer = "田上忠"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18018 (2026-10-14 確認)"
+
+[[person]]
+name = "皆川公二"
+trainer = "皆川公"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18068 (2026-10-14 確認)"
+
+[[person]]
+name = "福森浩"
+trainer = "福森浩"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18051 (2026-10-14 確認)"
+
+[[person]]
+name = "竹ケ原茉耶"
+jockey = "竹ケ茉"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38067 (2026-10-14 確認)"
+
+[[person]]
+name = "細川弘則"
+jockey = "細川弘"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38036 (2026-10-14 確認)"
+
+[[person]]
+name = "臼杵龍美"
+jockey = "臼杵龍"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38091 (2026-10-14 確認)"
+
+[[person]]
+name = "舘澤直央"
+jockey = "舘澤直"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38081 (2026-10-14 確認)"
+
+[[person]]
+name = "船山蔵人"
+jockey = "船山蔵"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38071 (2026-10-14 確認)"
+
+[[person]]
+name = "菅原響希"
+jockey = "菅原響"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38088 (2026-10-14 確認)"
+
+[[person]]
+name = "菊池一樹"
+jockey = "菊池一"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38073 (2026-10-14 確認)"
+
+[[person]]
+name = "藤島隆雅"
+jockey = "藤島隆"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38068 (2026-10-14 確認)"
+
+[[person]]
+name = "藤本匠"
+jockey = "藤本匠"
+trainer = "藤本匠"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38025 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18084 (2026-10-14 確認)"
+
+[[person]]
+name = "藤野俊一"
+jockey = "藤野俊"
+trainer = "藤野俊"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38024 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18083 (2026-10-14 確認)"
+
+[[person]]
+name = "西将太"
+jockey = "西将太"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38080 (2026-10-14 確認)"
+
+[[person]]
+name = "西康幸"
+trainer = "西康幸"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18076 (2026-10-14 確認)"
+
+[[person]]
+name = "西弘美"
+jockey = "西弘美"
+trainer = "西弘美"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38018 / https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18079 (2026-10-14 確認)"
+
+[[person]]
+name = "西謙一"
+jockey = "西謙一"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38070 (2026-10-14 確認)"
+
+[[person]]
+name = "西邑春夫"
+trainer = "西邑春"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18026 (2026-10-14 確認)"
+
+[[person]]
+name = "谷あゆみ"
+trainer = "谷あゆ"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18074 (2026-10-14 確認)"
+
+[[person]]
+name = "貝羽智生"
+jockey = "貝羽智"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38072 (2026-10-14 確認)"
+
+[[person]]
+name = "赤塚健仁"
+jockey = "赤塚健"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38077 (2026-10-14 確認)"
+
+[[person]]
+name = "辻本誠作"
+trainer = "辻本誠"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18019 (2026-10-14 確認)"
+
+[[person]]
+name = "辻本貴信"
+jockey = "辻本貴"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38064 (2026-10-14 確認)"
+
+[[person]]
+name = "金山明彦"
+trainer = "金山明"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18065 (2026-10-14 確認)"
+
+[[person]]
+name = "金田利貴"
+jockey = "金田利"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38083 (2026-10-14 確認)"
+
+[[person]]
+name = "金田勇"
+trainer = "金田勇"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18069 (2026-10-14 確認)"
+
+[[person]]
+name = "鈴木勝堤"
+jockey = "鈴木勝"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38015 (2026-10-14 確認)"
+
+[[person]]
+name = "鈴木恵介"
+jockey = "鈴木恵"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38054 (2026-10-14 確認)"
+
+[[person]]
+name = "鈴木邦哉"
+trainer = "鈴木邦"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18017 (2026-10-14 確認)"
+
+[[person]]
+name = "長澤幸太"
+jockey = "長澤幸"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38074 (2026-10-14 確認)"
+
+[[person]]
+name = "長部幸光"
+trainer = "長部幸"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18056 (2026-10-14 確認)"
+
+[[person]]
+name = "門脇税"
+trainer = "門脇税"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18049 (2026-10-14 確認)"
+
+[[person]]
+name = "阿部優哉"
+jockey = "阿部優"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38090 (2026-10-14 確認)"
+
+[[person]]
+name = "阿部武臣"
+jockey = "阿部武"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/RiderList?k_syozoku=21&k_genneki_flag=%2A 騎手 38052 (2026-10-14 確認)"
+
+[[person]]
+name = "高嶋紳一"
+trainer = "高嶋紳"
+source = "https://www.keiba.go.jp/KeibaWeb/DataRoom/TrainerList?k_syozoku=21&k_genneki_flag=%2A 調教師 18067 (2026-10-14 確認)"
