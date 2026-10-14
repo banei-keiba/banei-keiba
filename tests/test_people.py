@@ -247,3 +247,139 @@ class TestBuildRoles:
         # 役割ごとに シーズン全体 1 +「その他」1。個人の欄と通算は無い
         assert len(rows) == 4
         assert any("下限" in p for p in policy_violations("people", rows))
+
+
+def write_names(tmp_path, text):
+    path = tmp_path / "people.toml"
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def role_people(spec):
+    """build_pages に渡す役割の JSON（使う所だけ）。
+
+    spec は {略称: (個人の欄のシーズン, まとめたシーズン)}。
+    """
+    return {"seasons": [], "people": [
+        {"key": k, "seasons": [{"season": s} for s in pub], "pooled_seasons": list(pool),
+         "career": None}
+        for k, (pub, pool) in spec.items()]}
+
+
+class TestNames:
+    def test_reads_people(self, tmp_path):
+        path = write_names(tmp_path, """
+[[person]]
+name = "正式名一"
+jockey = "正式名"
+trainer = "正式名"
+source = "https://example.invalid/ (2026-10-14 確認)"
+""")
+        assert people.load_names(path) == ([people.Person("正式名一", "正式名", "正式名")], [])
+
+    @pytest.mark.parametrize("body", [
+        'name = "名"\njockey = "略"',  # 出典が無い（推測で埋めない）
+        'name = "名"\nsource = "s"',  # 略称が無い
+        'name = ""\njockey = "略"\nsource = "s"',  # 空の名前
+        'name = "名"\njokey = "略"\nsource = "s"',  # キーの綴り違い
+        'name = "名"\njockey = 1\nsource = "s"',  # 文字列でない
+    ])
+    def test_rejects_incomplete_rows(self, tmp_path, body):
+        names, problems = people.load_names(write_names(tmp_path, f"[[person]]\n{body}\n"))
+        assert names == [] and len(problems) == 1
+
+    def test_rejects_duplicate_keys(self, tmp_path):
+        path = write_names(tmp_path, """
+[[person]]
+name = "一"
+jockey = "略"
+source = "s"
+[[person]]
+name = "二"
+jockey = "略"
+source = "s"
+""")
+        _, problems = people.load_names(path)
+        assert len(problems) == 1 and "二重" in problems[0]
+
+    def test_same_key_in_two_roles_is_not_a_duplicate(self, tmp_path):
+        path = write_names(
+            tmp_path, '[[person]]\nname = "一"\njockey = "略"\ntrainer = "略"\nsource = "s"\n')
+        assert people.load_names(path)[1] == []
+
+    @pytest.mark.parametrize("text", ["[[person]\n", "person = 1\n"])
+    def test_unreadable_table_is_reported(self, tmp_path, text):
+        names, problems = people.load_names(write_names(tmp_path, text))
+        assert names == [] and len(problems) == 1 and "people.toml" in problems[0]
+
+    def test_missing_file_is_reported(self, tmp_path):
+        assert people.load_names(tmp_path / "none.toml")[1]
+
+    def test_empty_table_is_fine(self, tmp_path):
+        assert people.load_names(write_names(tmp_path, "# 空\n")) == ([], [])
+
+    def test_repository_table_is_valid(self):
+        # コミットする対応表が読めること（読めないと export が止まる）
+        assert people.load_names(people.NAMES_PATH)[1] == []
+
+
+class TestPages:
+    ROLES = {
+        "jockey": role_people({"鈴木恵": ([2024, 2025], []), "藤野俊": ([2025], []),
+                               "林　豊": ([2010], [])}),
+        "trainer": role_people({"藤野俊": ([2025], []), "西弘美": ([2020], [2025])}),
+    }
+
+    def build(self, names):
+        return people.build_pages(self.ROLES, names, 2025)
+
+    def test_listed_person_gets_one_page_for_both_roles(self):
+        pages, problems, warnings = self.build([people.Person("藤野俊介", "藤野俊", "藤野俊")])
+        assert problems == []
+        assert next(p for p in pages if p["slug"] == "藤野俊") == {
+            "slug": "藤野俊", "name": "藤野俊介", "name_confirmed": True,
+            "jockey": "藤野俊", "trainer": "藤野俊", "active": True}
+        assert not any("藤野俊" in w for w in warnings)
+
+    def test_unlisted_key_gets_a_page_under_the_abbreviation_with_a_warning(self):
+        pages, problems, warnings = self.build([])
+        assert problems == []
+        p = next(p for p in pages if p["slug"] == "鈴木恵")
+        assert (p["name"], p["name_confirmed"]) == ("鈴木恵", False)
+        assert any("「鈴木恵」" in w for w in warnings)
+
+    def test_unlisted_same_key_in_both_roles_is_one_page(self):
+        # 騎手から調教師に移った新人を表に足す前でも、URL が重複して export が止まらない
+        pages, problems, warnings = self.build([])
+        same = [p for p in pages if p["slug"] == "藤野俊"]
+        assert problems == [] and len(same) == 1
+        assert (same[0]["jockey"], same[0]["trainer"]) == ("藤野俊", "藤野俊")
+        assert sum("「藤野俊」" in w for w in warnings) == 1
+
+    def test_slug_drops_spaces(self):
+        pages, _, _ = self.build([])
+        assert "林豊" in {p["slug"] for p in pages}
+
+    def test_active_means_ran_in_the_latest_closed_season(self):
+        # 西弘美は 2025 に「その他」にまとめられたが、出走はしている
+        pages, _, _ = self.build([])
+        assert {p["slug"]: p["active"] for p in pages} == {
+            "鈴木恵": True, "藤野俊": True, "林豊": False, "西弘美": True}
+
+    def test_pages_are_sorted_by_slug(self):
+        pages, _, _ = self.build([])
+        assert [p["slug"] for p in pages] == sorted(p["slug"] for p in pages)
+
+    def test_slug_collision_is_reported(self):
+        # 表で騎手だけの人とした「藤野俊」と、表に無い調教師「藤野俊」が同じ URL になる
+        _, problems, _ = self.build([people.Person("騎手の人", "藤野俊", None)])
+        assert len(problems) == 1 and "/people/藤野俊/" in problems[0]
+
+    def test_table_entry_without_data_makes_no_page(self):
+        pages, _, _ = self.build([people.Person("未来の新人", "新人", None)])
+        assert "新人" not in {p["slug"] for p in pages}
+
+    def test_renaming_changes_only_the_name(self):
+        a, _, _ = self.build([people.Person("名前一", "鈴木恵", None)])
+        b, _, _ = self.build([people.Person("名前二", "鈴木恵", None)])
+        assert [p["slug"] for p in a] == [p["slug"] for p in b]

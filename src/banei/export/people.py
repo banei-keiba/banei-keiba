@@ -13,7 +13,10 @@
 """
 
 import sqlite3
+import tomllib
+from collections import Counter
 from dataclasses import dataclass
+from pathlib import Path
 
 from banei.export import explore
 from banei.export.aggregates import MIN_GROUP_SIZE
@@ -21,6 +24,8 @@ from banei.export.explore import WIN, N
 
 ROLES = ("jockey", "trainer")
 ROLE_NAMES = {"jockey": "騎手", "trainer": "調教師"}
+NAMES_PATH = Path(__file__).with_name("people.toml")
+NAME_FIELDS = frozenset({"name", "jockey", "trainer", "source"})
 
 # 1 欄の集計値: explore と同じ [N, WIN, TOP2, PLACE, WIN_PAY, PLACE_PAY] に続けて、人気 1〜10 の
 # 出走数。すべて整数で持つ（足し合わせても誤差が出ず、毎回同じ値になる。検査 3 の前提）
@@ -204,3 +209,109 @@ def flatten(payload: dict) -> list[dict]:
             if p["career"] is not None:
                 rows.append(p["career"])
     return rows
+
+
+@dataclass(frozen=True)
+class Person:
+    """対応表の 1 行。jockey / trainer は DB の略称（その役割でなければ None）。"""
+
+    name: str
+    jockey: str | None
+    trainer: str | None
+
+    def keys(self) -> dict[str, str]:
+        return {role: key for role, key in zip(ROLES, (self.jockey, self.trainer), strict=True)
+                if key}
+
+
+def load_names(path: Path) -> tuple[list[Person], list[str]]:
+    """対応表を読む。戻り値は (人, 違反)。違反があると表示が誤るので export を止める。
+
+    出典（source）の無い行は受け付けない。確かめていない名前を推測で入れないため。
+    """
+    try:
+        data = tomllib.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError) as e:
+        return [], [f"people.toml を読めない（{e!r}）"]
+    rows = data.get("person", [])
+    if not isinstance(rows, list):
+        return [], ["people.toml: [[person]] の並びになっていない"]
+    out: list[Person] = []
+    problems: list[str] = []
+    seen: set[tuple[str, str]] = set()
+    for i, row in enumerate(rows, start=1):
+        where = f"people.toml の {i} 人目"
+        if not isinstance(row, dict) or set(row) - NAME_FIELDS:
+            problems.append(f"{where}: 使えるキーは {sorted(NAME_FIELDS)} だけ")
+            continue
+        if not all(isinstance(v, str) and v.strip() for v in row.values()):
+            problems.append(f"{where}: 値は空でない文字列にする")
+            continue
+        if not {"name", "source"} <= set(row) or not {"jockey", "trainer"} & set(row):
+            problems.append(f"{where}: name と source、jockey か trainer の少なくとも一方が要る")
+            continue
+        person = Person(row["name"], row.get("jockey"), row.get("trainer"))
+        for role, key in person.keys().items():
+            if (role, key) in seen:
+                problems.append(
+                    f"people.toml: {ROLE_NAMES[role]}の略称「{key}」が二重に登録されている")
+            seen.add((role, key))
+        out.append(person)
+    return out, problems
+
+
+def slug_of(key: str) -> str:
+    """URL の名前。DB の略称から空白（全角を含む）を除いたもの。対応表を直しても変わらない。"""
+    return "".join(key.split())
+
+
+def build_pages(
+    roles: dict, names: list[Person], through: int
+) -> tuple[list[dict], list[str], list[str]]:
+    """表示用のページの一覧。戻り値は (ページ, 違反, 警告)。
+
+    対応表の人は 1 人 1 ページ（騎手と調教師を兼ねた人もまとめる）。表に無い略称は略称のまま
+    ページにして警告する（5/1 に新人が出ても export を止めない）。騎手と調教師で同じ略称が
+    表に無ければ同じ人として 1 ページにする（既知の兼任 8 人はすべてそう）。
+    現役（active）は、最新の締めたシーズンに出走がある（「その他」にまとめた場合も含む）こと。
+    """
+    present = {role: {p["key"]: p for p in roles[role]["people"]} for role in ROLES}
+
+    def ran_in(role: str, key: str) -> bool:
+        p = present[role][key]
+        return through in p["pooled_seasons"] or any(s["season"] == through for s in p["seasons"])
+
+    def page(name: str, confirmed: bool, keys: dict[str, str]) -> dict:
+        return {
+            "slug": slug_of(keys.get("jockey") or keys["trainer"]),
+            "name": name,
+            "name_confirmed": confirmed,
+            "jockey": keys.get("jockey"),
+            "trainer": keys.get("trainer"),
+            "active": any(ran_in(role, key) for role, key in keys.items()),
+        }
+
+    pages: list[dict] = []
+    claimed: set[tuple[str, str]] = set()
+    for person in names:
+        keys = {role: key for role, key in person.keys().items() if key in present[role]}
+        if keys:
+            claimed |= set(keys.items())
+            pages.append(page(person.name, True, keys))
+    unlisted: dict[str, dict[str, str]] = {}
+    for role in ROLES:
+        for key in present[role]:
+            if (role, key) not in claimed:
+                unlisted.setdefault(key, {})[role] = key
+    warnings = [
+        f"対応表に無い略称「{key}」（{'・'.join(ROLE_NAMES[r] for r in keys)}）。"
+        "略称のままページを作る"
+        for key, keys in sorted(unlisted.items())
+    ]
+    pages += [page(key, False, keys) for key, keys in sorted(unlisted.items())]
+    pages.sort(key=lambda p: p["slug"])
+    problems = [
+        f"people: URL「/people/{slug}/」が重複する。同一人物なら対応表で 1 行にまとめる"
+        for slug, n in sorted(Counter(p["slug"] for p in pages).items()) if n > 1
+    ]
+    return pages, problems, warnings
