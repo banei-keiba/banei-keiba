@@ -49,9 +49,9 @@ export interface PeopleData {
 
 export const PEOPLE = data as unknown as PeopleData;
 
-export const ROLES: { key: Role; name: string; runs: string; verb: string }[] = [
-  { key: 'jockey', name: '騎手', runs: '騎乗数', verb: '騎乗' },
-  { key: 'trainer', name: '調教師', runs: '出走数', verb: '出走' },
+export const ROLES: { key: Role; name: string; runs: string; verb: string; horses: string }[] = [
+  { key: 'jockey', name: '騎手', runs: '騎乗数', verb: '騎乗', horses: '乗った馬' },
+  { key: 'trainer', name: '調教師', runs: '出走数', verb: '出走', horses: '管理する馬' },
 ];
 export const roleOf = (role: Role) => ROLES.find((r) => r.key === role)!;
 

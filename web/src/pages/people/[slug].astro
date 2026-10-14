@@ -62,7 +62,7 @@ const sections = roles.map((role) => {
           <p class="lede">
             {/* 1 つの式にする。改行で区切ると Astro が空白 1 つにし、「勝 （勝率」「差は+3.6」になる */}
             {`${latest.season} シーズンは ${count(latest.n)} ${info.verb}で ${count(latest.wins)} 勝` +
-              `（勝率 ${pct(latest.win_rate)}）。乗った馬の人気から見込まれる勝ち数との差は ` +
+              `（勝率 ${pct(latest.win_rate)}）。${info.horses}の人気から見込まれる勝ち数との差は ` +
               `${signed(latest.wins_over_expected)} 勝。`}
           </p>
         )}
@@ -139,8 +139,9 @@ const sections = roles.map((role) => {
     </p>
     <p>
       あるシーズンの出走が 30 件に満たない人は、そのシーズンだけ個人の欄に載せず「その他」に
-      まとめています（<a href="/people/">騎手・調教師の一覧</a>）。勝率・回収率の定義は
-      <a href="/explore/">探索</a>と同じです。
+      まとめています（<a href="/people/">騎手・調教師の一覧</a>）。「その他」も 30 件に満たない
+      ときは、そのシーズンの出走が少ない人から順に加えるので、30 件以上の人がまとめられることも
+      あります。勝率・回収率の定義は<a href="/explore/">探索</a>と同じです。
     </p>
   </div>
 </Base>
