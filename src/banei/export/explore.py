@@ -144,7 +144,7 @@ def band_of(season: int) -> int:
 # 対象の出走: 取消・除外を除く（中止・失格は馬券が外れ扱いなので含める）。
 # 複勝の払戻が無いレースは複勝の指標が定義できないので除く（3〜4 頭立ての数レース）。
 # 重量差はこの範囲（取消・除外を除いた出走馬）の中で最も軽い馬との差。
-_STARTERS = """
+STARTERS = """
 WITH s AS (
   SELECT r.*,
          CAST(substr(r.race_date, 1, 4) AS INTEGER)
@@ -161,14 +161,26 @@ WITH s AS (
 """
 
 
-def _end(through: int) -> str:
+# 1 出走の集計値 [WIN, TOP2, PLACE, WIN_PAY, PLACE_PAY]（N を除く）。FROM s に PAYOUTS を付けて使う
+RUN_VALUES = """COALESCE(s.finish = 1, 0), COALESCE(s.finish <= 2, 0),
+       pp.amount IS NOT NULL, COALESCE(pw.amount, 0), COALESCE(pp.amount, 0)"""
+PAYOUTS = """
+LEFT JOIN payouts pw ON pw.race_date = s.race_date AND pw.race_no = s.race_no
+     AND pw.bet_type = '単勝' AND CAST(pw.combination AS INTEGER) = s.horse_no
+LEFT JOIN payouts pp ON pp.race_date = s.race_date AND pp.race_no = s.race_no
+     AND pp.bet_type = '複勝' AND CAST(pp.combination AS INTEGER) = s.horse_no
+"""
+
+
+def season_end(through: int) -> str:
+    """締めたシーズンの翌日（STARTERS の :end）。この日より前の出走が対象。"""
     return f"{through + 1}-{SEASON_START_MONTH:02d}-01"
 
 
 def population(con: sqlite3.Connection, through: int) -> dict[int, int]:
     """シーズンごとの対象出走数。軸の値に関係なく数える（検査 2 の基準）。"""
-    rows = con.execute(_STARTERS + "SELECT season, COUNT(*) FROM s GROUP BY season",
-                       {"end": _end(through)})
+    rows = con.execute(STARTERS + "SELECT season, COUNT(*) FROM s GROUP BY season",
+                       {"end": season_end(through)})
     return dict(rows.fetchall())
 
 
@@ -179,20 +191,15 @@ def load_cells(con: sqlite3.Connection, through: int) -> dict[tuple[int, ...], l
     検査 2（マスの合計 = 対象出走数）で止める。
     """
     axis_cols = ", ".join(f"{a.sql} AS {a.key}" for a in AXES)
-    sql = _STARTERS + f"""
-    SELECT s.season, {axis_cols},
-           COALESCE(s.finish = 1, 0), COALESCE(s.finish <= 2, 0),
-           pp.amount IS NOT NULL, COALESCE(pw.amount, 0), COALESCE(pp.amount, 0)
+    sql = STARTERS + f"""
+    SELECT s.season, {axis_cols}, {RUN_VALUES}
     FROM s
     JOIN races ra ON ra.race_date = s.race_date AND ra.race_no = s.race_no
-    LEFT JOIN payouts pw ON pw.race_date = s.race_date AND pw.race_no = s.race_no
-         AND pw.bet_type = '単勝' AND CAST(pw.combination AS INTEGER) = s.horse_no
-    LEFT JOIN payouts pp ON pp.race_date = s.race_date AND pp.race_no = s.race_no
-         AND pp.bet_type = '複勝' AND CAST(pp.combination AS INTEGER) = s.horse_no
+    {PAYOUTS}
     """
     cells: dict[tuple[int, ...], list[int]] = {}
     k = len(AXES)
-    for row in con.execute(sql, {"end": _end(through)}):
+    for row in con.execute(sql, {"end": season_end(through)}):
         season, idx, values = row[0], row[1:1 + k], row[1 + k:]
         if any(v is None for v in idx):
             continue
@@ -219,7 +226,8 @@ def _add(acc: list[int], m: list[int]) -> None:
         acc[i] += v
 
 
-def _metrics(m: list[int]) -> dict:
+def metrics(m: list[int]) -> dict:
+    """1 マスの指標。騎手・調教師ページ（people.py）も同じ定義を使う。"""
     n = m[N]
     return {
         "n": n,
@@ -239,10 +247,10 @@ def _period_payload(axes, groups, merged, lo: int, hi: int) -> dict:
     out = {
         "first_season": lo,
         "last_season": hi,
-        "total": _metrics(total) if total[N] else None,
+        "total": metrics(total) if total[N] else None,
         # 0 件のマスは入れない（画面では「—」）
         "cells": [
-            {**{a.key: a.label(groups[i][key[i]]) for i, a in enumerate(axes)}, **_metrics(m)}
+            {**{a.key: a.label(groups[i][key[i]]) for i, a in enumerate(axes)}, **metrics(m)}
             for key, m in sorted(merged.items())
         ],
     }
@@ -254,7 +262,7 @@ def _period_payload(axes, groups, merged, lo: int, hi: int) -> dict:
             for key, m in merged.items():
                 _add(side.setdefault(key[i], [0] * 6), m)
             out["margins"][a.key] = [
-                {a.key: a.label(groups[i][g]), **_metrics(m)} for g, m in sorted(side.items())]
+                {a.key: a.label(groups[i][g]), **metrics(m)} for g, m in sorted(side.items())]
     return out
 
 
