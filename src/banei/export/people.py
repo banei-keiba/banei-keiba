@@ -16,6 +16,7 @@ import sqlite3
 from dataclasses import dataclass
 
 from banei.export import explore
+from banei.export.aggregates import MIN_GROUP_SIZE
 from banei.export.explore import WIN, N
 
 ROLES = ("jockey", "trainer")
@@ -92,3 +93,114 @@ def metrics(m: list[int], exp: float) -> dict:
         "expected_wins": e,
         "wins_over_expected": round(m[WIN] - e, 1),
     }
+
+
+def pooled(counts: dict[str, int]) -> set[str]:
+    """1 シーズン分の {略称: 出走数} から「その他」にまとめる略称。
+
+    30 件未満の人を入れ、「その他」が 1〜29 件なら、残りで出走数の最も少ない人（同数なら略称の順）を
+    30 件以上になるまで移す。シーズン全体が 30 件以上なら、空でない「その他」は必ず 2 人以上になる
+    （1 人だとその人の値が出る）。全体が 30 件未満なら全員を入れても届かないが、そのまま返す
+    （公開ポリシーの検査で止まる）。
+    """
+    pool = {k for k, n in counts.items() if n < MIN_GROUP_SIZE}
+    while 0 < sum(counts[k] for k in pool) < MIN_GROUP_SIZE:
+        rest = [k for k in counts if k not in pool]
+        if not rest:
+            break
+        pool.add(min(rest, key=lambda k: (counts[k], k)))
+    return pool
+
+
+def build_role(cells: Cells, data: Loaded) -> dict:
+    """1 つの役割の JSON。シーズンごとの全体と「その他」、人ごとのシーズンの欄と通算。
+
+    まとめ方はシーズンごとに独立に決める。締めたシーズンの顔ぶれは、データが変わらない限り
+    後から変わらない。通算は個人の欄に載せたシーズンだけの合計（まとめたシーズンを含めると、
+    通算から個人の欄を引いて「その他」にまとめた値が出る）。
+    """
+    by_season: dict[int, dict[str, list[int]]] = {}
+    for (season, key), m in cells.items():
+        by_season.setdefault(season, {})[key] = m
+    seasons_out = []
+    acc: dict[str, dict] = {}
+    for season in sorted(data.seasons):
+        rates = data.rates[season]
+        here = by_season.get(season, {})
+        pool = pooled({k: m[N] for k, m in here.items()})
+        other = [0] * WIDTH
+        for k in pool:
+            _add(other, here[k])
+        total = data.seasons[season]
+        seasons_out.append({
+            "season": season,
+            "total": metrics(total, expected(total, rates)),
+            "other": ({"people_count": len(pool), **metrics(other, expected(other, rates))}
+                      if pool else None),
+        })
+        for key in sorted(here):
+            p = acc.setdefault(key, {"seasons": [], "pooled_seasons": [],
+                                     "sum": [0] * WIDTH, "expected": 0.0})
+            if key in pool:
+                p["pooled_seasons"].append(season)
+                continue
+            e = expected(here[key], rates)
+            p["seasons"].append({"season": season, **metrics(here[key], e)})
+            _add(p["sum"], here[key])
+            p["expected"] += e
+    people_out = []
+    for key in sorted(acc):
+        p = acc[key]
+        career = None
+        if p["seasons"]:
+            career = {"first_season": p["seasons"][0]["season"],
+                      "last_season": p["seasons"][-1]["season"],
+                      **metrics(p["sum"], p["expected"])}
+        people_out.append({"key": key, "seasons": p["seasons"],
+                           "pooled_seasons": p["pooled_seasons"], "career": career})
+    return {"seasons": seasons_out, "people": people_out}
+
+
+def completeness(role: str, cells: Cells, population: dict[int, int]) -> list[str]:
+    """検査 2: シーズンごとに、欄の出走数の合計が対象出走数と一致する（もれなく分けている）。"""
+    got: dict[int, int] = {}
+    for (season, _), m in cells.items():
+        got[season] = got.get(season, 0) + m[N]
+    name = ROLE_NAMES[role]
+    return [
+        f"people（{name}）: {season} シーズンの欄の合計 {got.get(season, 0)} が対象出走数 {n} と"
+        f"一致しない（人気が 1〜10 以外か、{name}の無い出走がある）"
+        for season, n in sorted(population.items()) if got.get(season, 0) != n
+    ]
+
+
+def build_roles(con: sqlite3.Connection, through: int) -> tuple[dict | None, list[str]]:
+    """締めたシーズン（through まで）の集計。戻り値は (役割 → JSON, 検査 2 の違反)。
+
+    締めたシーズンの出走が 1 件も無ければ (None, [])（テスト用の小さな DB など。探索 UI と同じ）。
+    """
+    population = explore.population(con, through)
+    if not population:
+        return None, []
+    data = load(con, through)
+    problems: list[str] = []
+    roles = {}
+    for role in ROLES:
+        problems += completeness(role, data.roles[role], population)
+        roles[role] = build_role(data.roles[role], data)
+    return roles, problems
+
+
+def flatten(payload: dict) -> list[dict]:
+    """公開ポリシーの検査（aggregates.policy_violations）にかける行。roles の全行。"""
+    rows: list[dict] = []
+    for role in payload["roles"].values():
+        for s in role["seasons"]:
+            rows.append(s["total"])
+            if s["other"] is not None:
+                rows.append(s["other"])
+        for p in role["people"]:
+            rows += p["seasons"]
+            if p["career"] is not None:
+                rows.append(p["career"])
+    return rows
