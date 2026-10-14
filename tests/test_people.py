@@ -1,11 +1,13 @@
 """騎手・調教師ページの集計（people.py）のテスト。合成データのみ（実データ・実ページは使わない）。"""
 
 import datetime as dt
+import json
 import random
 import sqlite3
 
 import pytest
 
+from banei import export
 from banei.db.schema import RACES_SCHEMA
 from banei.export import explore, people
 from banei.export.aggregates import MIN_GROUP_SIZE, policy_violations
@@ -383,3 +385,174 @@ class TestPages:
         a, _, _ = self.build([people.Person("名前一", "鈴木恵", None)])
         b, _, _ = self.build([people.Person("名前二", "鈴木恵", None)])
         assert [p["slug"] for p in a] == [p["slug"] for p in b]
+
+
+def add_season(con, season, n_races=40, start_no=1):
+    """1 シーズン分。騎手A・B と調教師甲・乙が n_races 回ずつ出走する。"""
+    for i in range(n_races):
+        add_race(con, f"{season}-05-{i % 28 + 1:02d}", start_no + i // 28,
+                 [run(1, 1, jockey="騎手A", trainer="調教師甲"),
+                  run(2, 2, jockey="騎手B", trainer="調教師乙")],
+                 win={1: 340}, place={1: 120, 2: 150})
+
+
+def add_extra_race(con, date):
+    """騎手A・B が 1 回ずつ出走するレースを 1 つ足す（締めたシーズンの補完の再現などに使う）。"""
+    add_race(con, date, 1, [run(1, 1), run(2, 2, jockey="騎手B", trainer="調教師乙")],
+             win={1: 340}, place={1: 120, 2: 150})
+
+
+@pytest.fixture
+def big(con):
+    for season in (2023, 2024, 2025):
+        add_season(con, season)
+    add_extra_race(con, "2026-05-10")  # 締めていない 2026 シーズン。入らないこと
+    return con
+
+
+@pytest.fixture
+def names(tmp_path, monkeypatch):
+    """騎手A と調教師甲だけ正式名を付けた対応表。export から使われるものも差し替える。"""
+    path = tmp_path / "people.toml"
+    path.write_text('[[person]]\nname = "正式名一"\njockey = "騎手A"\nsource = "テスト"\n'
+                    '[[person]]\nname = "正式名二"\ntrainer = "調教師甲"\nsource = "テスト"\n',
+                    encoding="utf-8")
+    monkeypatch.setattr(people, "NAMES_PATH", path)
+    return path
+
+
+def read(out_dir):
+    return json.loads((out_dir / "people.json").read_text(encoding="utf-8"))
+
+
+class TestBuild:
+    def test_payload(self, big, names):
+        payload, problems, warnings = people.build(big, TODAY)
+        assert problems == []
+        assert payload["through_season"] == 2025
+        jockeys = payload["roles"]["jockey"]
+        assert [s["season"] for s in jockeys["seasons"]] == [2023, 2024, 2025]
+        a = next(p for p in jockeys["people"] if p["key"] == "騎手A")
+        assert (a["career"]["n"], a["career"]["wins"]) == (120, 120)  # 締めていない 2026 は入らない
+        assert {p["slug"]: p["name"] for p in payload["pages"]} == {
+            "騎手A": "正式名一", "騎手B": "騎手B", "調教師甲": "正式名二", "調教師乙": "調教師乙"}
+        assert warnings == ["対応表に無い略称「調教師乙」（調教師）。略称のままページを作る",
+                            "対応表に無い略称「騎手B」（騎手）。略称のままページを作る"]
+        # 生成時刻を入れない。入れると毎日内容が変わり、検査 3 が成り立たない
+        assert "generated_at" not in json.dumps(payload, ensure_ascii=False)
+
+    def test_flatten_covers_every_row(self, big, names):
+        payload, _, _ = people.build(big, TODAY)
+        # 役割ごとに シーズン全体 3 + 2 人 ×（シーズン 3 + 通算 1）
+        assert len(people.flatten(payload)) == 2 * (3 + 2 * 4)
+
+    def test_nothing_without_closed_seasons(self, con, names):
+        add_extra_race(con, "2026-05-10")
+        assert people.build(con, TODAY) == (None, [], [])
+
+
+class TestExport:
+    """export に組み込まれ、締めたシーズンの変化（検査 3）と公開ポリシー違反で止まること。"""
+
+    def test_people_json_is_written(self, big, db_path, tmp_path, names):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        assert read(out_dir)["through_season"] == 2025
+
+    def test_rerun_on_same_data_passes_check_3(self, big, db_path, tmp_path, names):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        export.run(db_path, out_dir, today=dt.date(2026, 12, 1))  # 毎日回しても通る
+
+    def test_new_closed_season_passes_check_3(self, big, db_path, tmp_path, names):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        add_season(big, 2026, start_no=3)
+        export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+        assert read(out_dir)["through_season"] == 2026
+
+    def test_changed_closed_season_stops_export(self, big, db_path, tmp_path, names):
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        before = (out_dir / "people.json").read_text(encoding="utf-8")
+        add_extra_race(big, "2024-09-01")  # 締めた 2024 シーズンに、後から 1 レース補完された
+        with pytest.raises(export.PolicyError, match="people: 締めたシーズン（2025 まで）が同じ"):
+            export.run(db_path, out_dir, today=TODAY)
+        assert (out_dir / "people.json").read_text(encoding="utf-8") == before
+
+    def test_changed_closed_season_stops_export_when_through_advances(
+        self, big, db_path, tmp_path, names
+    ):
+        # 補完で止まったまま 5/1 を迎えても、締めの進んだ版に素通りしない
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        add_extra_race(big, "2024-09-01")
+        add_season(big, 2026, start_no=3)
+        with pytest.raises(export.PolicyError,
+                           match="people: 締めたシーズン（2025 まで）の内容が前回"):
+            export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+
+    def test_rewound_through_season_stops_export(self, big, db_path, tmp_path, names):
+        out_dir = tmp_path / "out"
+        add_season(big, 2026, start_no=3)
+        export.run(db_path, out_dir, today=dt.date(2027, 5, 1))
+        with pytest.raises(export.PolicyError, match="people: 締めが 2026 から 2025 に戻っている"):
+            export.run(db_path, out_dir, today=TODAY)
+
+    @pytest.mark.parametrize("text", [
+        "{壊れた",
+        '{"through_season": "2025", "roles": {}}',
+        '{"through_season": 2025}',
+        '{"through_season": 2025, "roles": []}',
+    ])
+    def test_unreadable_previous_output_stops_export(
+        self, big, db_path, tmp_path, names, text
+    ):
+        out_dir = tmp_path / "out"
+        out_dir.mkdir()
+        (out_dir / "people.json").write_text(text, encoding="utf-8")
+        with pytest.raises(export.PolicyError, match="people: 前回の出力を読めない"):
+            export.run(db_path, out_dir, today=TODAY)
+        assert (out_dir / "people.json").read_text(encoding="utf-8") == text
+
+    def test_renaming_in_the_table_passes_check_3(self, big, db_path, tmp_path, names):
+        # 表示名は比べない。対応表の修正で export を止めないため
+        out_dir = tmp_path / "out"
+        export.run(db_path, out_dir, today=TODAY)
+        names.write_text(names.read_text(encoding="utf-8").replace("正式名一", "正式名三"),
+                         encoding="utf-8")
+        export.run(db_path, out_dir, today=TODAY)
+        assert "正式名三" in {p["name"] for p in read(out_dir)["pages"]}
+
+    def test_broken_pooling_stops_export(self, big, db_path, tmp_path, names, monkeypatch):
+        # 2025 シーズンに 5 回だけ乗った騎手C
+        for i in range(5):
+            add_race(big, f"2025-07-{i + 1:02d}", 1,
+                     [run(1, 1, jockey="騎手C"), run(2, 2, jockey="騎手B", trainer="調教師乙")],
+                     win={1: 340}, place={1: 120, 2: 150})
+        export.run(db_path, tmp_path / "ok", today=TODAY)  # まとめる処理が正しければ通る
+        # まとめる処理が壊れても、書き出し前の公開ポリシーの検査で止まる
+        monkeypatch.setattr(people, "pooled", lambda counts: set())
+        with pytest.raises(export.PolicyError, match=r"people\[\d+\]: 集約件数 5 が下限"):
+            export.run(db_path, tmp_path / "out", today=TODAY)
+        assert not (tmp_path / "out").exists() or not any((tmp_path / "out").rglob("*.json"))
+
+    def test_pages_are_checked_for_identifying_keys(self, big, db_path, names, monkeypatch):
+        real = people.build_pages
+
+        def leaky(*args):
+            pages, problems, warnings = real(*args)
+            return [*pages, {"slug": "x", "horse_name": "馬"}], problems, warnings
+
+        monkeypatch.setattr(people, "build_pages", leaky)
+        with pytest.raises(export.PolicyError, match="horse_name"):
+            export.build(db_path, today=TODAY)
+
+    def test_broken_names_table_stops_export(self, big, db_path, names):
+        names.write_text("[[person]\n", encoding="utf-8")
+        with pytest.raises(export.PolicyError, match="people.toml"):
+            export.build(db_path, today=TODAY)
+
+    def test_warnings_are_printed(self, big, db_path, names, capsys):
+        export.build(db_path, today=TODAY)
+        assert "警告: 対応表に無い略称「騎手B」" in capsys.readouterr().err

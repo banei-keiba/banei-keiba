@@ -2,15 +2,17 @@
 
 出力先は既定で `web/src/data/`。Astro からは `import data from '~/data/xxx.json'` で
 読める。ここに出るのは集計値だけで、生データは含まれない（aggregates.py 参照）。
-探索 UI の表は `explore/` 以下に書く（explore.py 参照）。
+探索 UI の表は `explore/` 以下に（explore.py 参照）、騎手・調教師ページは `people.json` に
+書く（people.py 参照）。
 """
 
 import datetime as dt
 import json
+import sys
 from pathlib import Path
 
 from banei.config import RACES_DB
-from banei.export import explore
+from banei.export import explore, people
 from banei.export.aggregates import AGGREGATES, connect, policy_violations, summary
 
 DEFAULT_OUT_DIR = Path("web/src/data")
@@ -30,9 +32,11 @@ def build(
     公開ポリシーに反する内容があれば PolicyError を送出して書き出しを止める。
     生データが 1 度でも公開側へ出ると取り返しがつかないので、ここで落とす。
 
-    探索 UI の表（出力名 explore/…）は today（省略時は JST の今日）で締めを決め、
-    previous_dir にある前回の出力の区分からまとめ、前回と比べる（explore.build）。
+    探索 UI の表（出力名 explore/…）と騎手・調教師ページ（people）は today（省略時は JST の
+    今日）で締めを決め、previous_dir にある前回の出力と比べる（explore.build・people.build）。
     """
+    today = today or explore.today_jst()
+    previous = Path(previous_dir) if previous_dir is not None else None
     con = connect(db_path)
     try:
         out: dict[str, object] = {
@@ -43,12 +47,14 @@ def build(
         }
         for name, fn in AGGREGATES.items():
             out[name] = fn(con)
-        tables, problems = explore.build(
-            con, today or explore.today_jst(),
-            Path(previous_dir) if previous_dir is not None else None)
+        tables, problems = explore.build(con, today, previous)
+        person, found, warnings = people.build(con, today, previous)
+        problems += found
     finally:
         con.close()
 
+    for w in warnings:
+        print(f"警告: {w}", file=sys.stderr)
     for name, payload in out.items():
         rows = payload if isinstance(payload, list) else [payload]
         # summary の n_jockeys などはグループの大きさではなく実体の個数なので、
@@ -56,6 +62,12 @@ def build(
         problems += policy_violations(name, rows, check_group_size=(name != "summary"))
     for name, payload in tables.items():
         problems += policy_violations(name, explore.flatten(payload))
+    if person is not None:
+        problems += policy_violations(people.OUTPUT, people.flatten(person))
+        # ページの一覧は集計の行ではないので、個体特定キーの検査だけ当てる
+        problems += policy_violations(f"{people.OUTPUT}.pages", person["pages"],
+                                      check_group_size=False)
+        tables[people.OUTPUT] = person
     if problems:
         raise PolicyError(
             "公開ポリシー違反のため書き出しを中止した:\n  " + "\n  ".join(problems))

@@ -12,6 +12,8 @@
   内訳が連立方程式で割り出せるようになるので、2 つより増やさない
 """
 
+import datetime as dt
+import json
 import sqlite3
 import tomllib
 from collections import Counter
@@ -25,6 +27,7 @@ from banei.export.explore import WIN, N
 ROLES = ("jockey", "trainer")
 ROLE_NAMES = {"jockey": "騎手", "trainer": "調教師"}
 NAMES_PATH = Path(__file__).with_name("people.toml")
+OUTPUT = "people"  # 出力名（web/src/data/people.json）
 NAME_FIELDS = frozenset({"name", "jockey", "trainer", "source"})
 
 # 1 欄の集計値: explore と同じ [N, WIN, TOP2, PLACE, WIN_PAY, PLACE_PAY] に続けて、人気 1〜10 の
@@ -315,3 +318,79 @@ def build_pages(
         for slug, n in sorted(Counter(p["slug"] for p in pages).items()) if n > 1
     ]
     return pages, problems, warnings
+
+
+def _plain(obj):
+    """JSON に書いて読み戻したもの。前回の出力（JSON から読んだもの）と同じ形で比べるため。"""
+    return json.loads(json.dumps(obj, ensure_ascii=False))
+
+
+def _previous(previous_dir: Path | None) -> tuple[dict | None, list[str]]:
+    """前回の出力。無ければ（初回）None。読めない・形が想定外なら、上書きせず止めるため違反にする。"""
+    if previous_dir is None:
+        return None, []
+    path = previous_dir / f"{OUTPUT}.json"
+    if not path.exists():
+        return None, []
+    unreadable = f"{OUTPUT}: 前回の出力を読めない（{{}}）。中身を確かめるまで上書きしない"
+    try:
+        prev = json.loads(path.read_text(encoding="utf-8"))
+        through, roles = prev["through_season"], prev["roles"]
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        return None, [unreadable.format(repr(e))]
+    if type(through) is not int:
+        return None, [unreadable.format(f"締め {through!r} が整数でない")]
+    if not isinstance(roles, dict):
+        return None, [unreadable.format("roles が辞書でない")]
+    return prev, []
+
+
+def _history_problems(
+    con: sqlite3.Connection, roles: dict, through: int, prev: dict
+) -> list[str]:
+    """検査 3: 締めたシーズンの集計（roles）が前回の出力から変わっていない。
+
+    締めが同じなら roles が同じこと。締めが進んだときも、今の DB から前回の締めで作り直して
+    前回と比べる（止めて調べている最中に 5/1 が来ても、保留中の修正が素通りしない）。
+    変わっていれば修正・補完があったということで、その差は小さな集計の漏れになる。
+    表示（pages）は比べない。対応表の修正で止めないため。
+    """
+    prev_through = prev["through_season"]
+    if prev_through > through:
+        return [f"{OUTPUT}: 締めが {prev_through} から {through} に戻っている"]
+    if prev_through == through:
+        if _plain(roles) != prev["roles"]:
+            return [f"{OUTPUT}: 締めたシーズン（{through} まで）が同じなのに内容が変わった。"
+                    "過去のデータが修正・補完された可能性がある"]
+        return []
+    again, _ = build_roles(con, prev_through)
+    if again is None or _plain(again) != prev["roles"]:
+        return [f"{OUTPUT}: 締めたシーズン（{prev_through} まで）の内容が前回の出力と違う。"
+                "過去のデータが修正・補完された可能性がある"]
+    return []
+
+
+def build(
+    con: sqlite3.Connection,
+    today: dt.date,
+    previous_dir: Path | None = None,
+    names_path: Path | None = None,
+) -> tuple[dict | None, list[str], list[str]]:
+    """人のページの JSON を作る。戻り値は (中身, 違反, 警告)。
+
+    締めたシーズンの出走が無ければ中身は None。previous_dir に前回の出力があれば検査 3。
+    names_path を省くと NAMES_PATH（呼ぶときに読むので、テストは monkeypatch で差し替えられる）。
+    """
+    through = explore.through_season(today)
+    roles, problems = build_roles(con, through)
+    if roles is None:
+        return None, problems, []
+    prev, found = _previous(previous_dir)
+    problems += found
+    if prev is not None:
+        problems += _history_problems(con, roles, through, prev)
+    names, found = load_names(names_path or NAMES_PATH)
+    problems += found
+    pages, found, warnings = build_pages(roles, names, through)
+    problems += found
+    return {"through_season": through, "roles": roles, "pages": pages}, problems, warnings

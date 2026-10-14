@@ -24,11 +24,12 @@ def add_race(con, date, race_no, horses, win=None, place=None, moisture=1.2, wea
     con.execute("INSERT INTO races VALUES (?,?,?,?,?,?,?)",
                 (date, race_no, "テスト", 200, weather, moisture, "条件"))
     for h in horses:
+        # 騎手・調教師も入れる。export は人のページ（people.py）も作り、無いと検査 2 で止まる
         con.execute(
             "INSERT INTO results (race_date,race_no,horse_no,finish,status,horse_name,sex,age,"
-            "weight_carried,popularity) VALUES (?,?,?,?,?,?,?,?,?,?)",
+            "weight_carried,popularity,jockey,trainer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             (date, race_no, h["no"], h["finish"], h["status"], f"馬{h['no']}", h["sex"],
-             h["age"], h["weight"], h["popularity"]))
+             h["age"], h["weight"], h["popularity"], "騎手", "調教師"))
     for bet, pays in (("単勝", win or {}), ("複勝", place or {})):
         for no, amount in pays.items():
             con.execute("INSERT INTO payouts VALUES (?,?,?,?,?,NULL)",
