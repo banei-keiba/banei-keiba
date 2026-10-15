@@ -512,7 +512,7 @@ gunzip -f data/banei.db.gz data/odds.db.gz
 - [x] シーズンごとの成績と派生指標（人気から見込まれる勝ち数との差）を export で集計（`people.json`）
 - [x] 正式名の対応表（`src/banei/export/people.toml`）。出典で確かめた人だけ。URL は略称から作る
 - [x] 一覧と 1 人 1 ページ。SVG のはみ出し検査（`python -m banei.svgcheck web/dist`）
-- [ ] ブラウザでの目視（ダークモード・幅 375px）と公開。公開後に日本語の URL が Cloudflare Pages で開けることを確かめる
+- [x] ブラウザでの目視（ダークモード・幅 375px）と公開（2026-10-15）。日本語の URL が Cloudflare Pages で開けることを確認済み
 
 **馬ページ** — 今の公開ルールではほぼ作れない（2025 シーズンに 30 回以上走った馬は 0 頭）。作るなら、
 版の差の単位を「馬 1 頭の 1 シーズン成績」まで認めるか（公開方針の変更）を先に決める
