@@ -1,37 +1,37 @@
 [
   {
     "weight_diff_kg": 0,
-    "n": 84702,
+    "n": 84729,
     "win_rate": 11.0
   },
   {
     "weight_diff_kg": 5,
-    "n": 3645,
+    "n": 3647,
     "win_rate": 11.4
   },
   {
     "weight_diff_kg": 10,
-    "n": 47541,
+    "n": 47577,
     "win_rate": 10.9
   },
   {
     "weight_diff_kg": 15,
-    "n": 3569,
-    "win_rate": 12.5
+    "n": 3575,
+    "win_rate": 12.4
   },
   {
     "weight_diff_kg": 20,
-    "n": 107863,
+    "n": 107889,
     "win_rate": 11.2
   },
   {
     "weight_diff_kg": 25,
-    "n": 5001,
+    "n": 5005,
     "win_rate": 12.9
   },
   {
     "weight_diff_kg": 30,
-    "n": 48253,
+    "n": 48269,
     "win_rate": 10.4
   },
   {
